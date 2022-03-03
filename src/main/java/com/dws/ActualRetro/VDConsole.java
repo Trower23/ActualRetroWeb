@@ -1,6 +1,6 @@
 package com.dws.ActualRetro;
 
-public class VDConsole extends Product{
+public class VDConsole {
     private int maxcontrollers;
 
 }

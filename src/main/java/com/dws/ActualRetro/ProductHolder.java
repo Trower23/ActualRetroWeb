@@ -103,6 +103,7 @@ public class ProductHolder {
     }
     public void put(long id, Videogame videogame){
        games.replace(id, videogame);
+
     }
     public Collection<Videogame> getVideogames(){
        return this.games.values();

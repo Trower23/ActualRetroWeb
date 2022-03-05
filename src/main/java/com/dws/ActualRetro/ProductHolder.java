@@ -16,13 +16,13 @@ public class ProductHolder {
     private AtomicLong conId = new AtomicLong();
     private AtomicLong gaId = new AtomicLong();
 
-   public void addProduct(VDConsole vdconsole){
+   public void addProduct(VDConsole vdConsole){
        //Cojo el valor que me devuelve el método containsProduct
-       long cond = this.containsProduct(vdconsole);
+       long cond = this.containsProduct(vdConsole);
        if (cond == -1) {
            //Si no contiene el producto, lo añado al mapa
-           vdconsole.setId(conId.incrementAndGet());
-           this.consoles.put(vdconsole.getId(), vdconsole);
+           vdConsole.setId(conId.incrementAndGet());
+           this.consoles.put(vdConsole.getId(), vdConsole);
        }else{
            //Si lo contiene, incremento el Stock que tenemos
            this.consoles.get(cond).addStock();
@@ -40,14 +40,14 @@ public class ProductHolder {
        }
     }
 
-    public long containsProduct(VDConsole vdconsole){
+    public long containsProduct(VDConsole vdConsole){
        //Miro a ver si contiene el producto
-       if (this.consoles.containsValue(vdconsole)){
+       if (this.consoles.containsValue(vdConsole)){
            //Si lo contiene, hago una lista auxiliar de todos los productos que tenemos
            List<VDConsole> auxlist = new ArrayList<>(consoles.values());
            //Y devolveré el id (.getId()) de el objeto (.get()) que encaje con el producto que
            //le pasamos por parámetro (.indexOf())
-           return auxlist.get(auxlist.indexOf(vdconsole)).getId();
+           return auxlist.get(auxlist.indexOf(vdConsole)).getId();
        }else{
            //Si no lo contiene, le devuelvo un -1
            return -1;
@@ -69,11 +69,32 @@ public class ProductHolder {
         return this.games.containsKey(id);
     }
 
+    //Modifico el delete de forma que sólo se borren los productos que tienen un
+    //stock menor o igual a 1
     public VDConsole delete(VDConsole vdConsole){
-        return this.consoles.remove(vdConsole.getId());
-    }
+        long cond = this.containsProduct(vdConsole);
+       if (cond == -1) {
+           //No encuentra el producto
+           return null;
+       }else{
+           this.consoles.get(cond).removeStock();
+           if (!this.consoles.get(cond).isStock()) {
+               return this.consoles.remove(vdConsole.getId());
+           }
+           return vdConsole;
+       }
+   }
     public Videogame delete(Videogame videogame){
-        return this.games.remove(videogame.getId());
+        long cond = this.containsProduct(videogame);
+        if (cond == -1) {
+            return null;
+        }else{
+            this.games.get(cond).removeStock();
+            if (!this.games.get(cond).isStock()) {
+                return this.games.remove(videogame.getId());
+            }
+            return videogame;
+        }
     }
     //No devuelvo nada ni compruebo nada porque la comprobación
     //ya la hace la api REST y el producto se la pasan a la api

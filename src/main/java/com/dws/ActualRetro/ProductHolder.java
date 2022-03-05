@@ -25,11 +25,18 @@ public class ProductHolder {
         this.games.put(videogame.getId(), videogame);
     }
 
-   public void delete(VDConsole vdConsole){
-       this.consoles.remove(vdConsole.getId());
+    public boolean containsConsole(long id){
+       return this.consoles.containsKey(id);
+    }
+    public boolean containsVideoame(long id){
+        return this.games.containsKey(id);
+    }
+
+   public VDConsole delete(VDConsole vdConsole){
+       return this.consoles.remove(vdConsole.getId());
    }
-    public void delete(Videogame videogame){
-        this.consoles.remove(videogame.getId());
+    public Videogame delete(Videogame videogame){
+       return this.games.remove(videogame.getId());
     }
     public Collection<Videogame> getVideogames(){
        return this.games.values();

@@ -2,7 +2,6 @@ package com.dws.ActualRetro;
 
 import lombok.*;
 
-import java.util.Date;
 import java.util.Objects;
 
 @Data
@@ -14,18 +13,21 @@ public class VDConsole {
     private float price;
     private int stock;
     private int maxcontrollers;
-    private Fecha fecha;
+    private Date date;
 
-    public VDConsole(String na, float pri, int maxcon, Fecha fecha){
+    public VDConsole(String na, float pri, int maxcon, Date date){
         this.name = na;
         this.price = pri;
         this.maxcontrollers = maxcon;
         this.stock = 1;
-        this.fecha= fecha;
+        this.date = date;
     }
 
     public void setId(long num){
         this.id = num;
+    }
+    public long getId(){
+        return this.id;
     }
 
     public boolean isStock(){

@@ -13,13 +13,14 @@ public class VDConsole {
     private float price;
     private int stock;
     private int maxcontrollers;
-    //Cómo añadimos la fecha? Podemos usar una clase Fecha
+    private Fecha fecha;
 
-    public VDConsole(String na, float pri, int maxcon){
+    public VDConsole(String na, float pri, int maxcon, Fecha fecha){
         this.name = na;
         this.price = pri;
         this.maxcontrollers = maxcon;
         this.stock = 1;
+        this.fecha= fecha;
     }
 
     public void setId(int num){

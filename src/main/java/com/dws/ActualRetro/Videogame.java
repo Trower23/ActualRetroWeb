@@ -13,13 +13,14 @@ public class Videogame {
     private float price;
     private int stock;
     private int pegi;
-    //Me gustaría añadir también un atributo Género. Os parece si hago un enumerado con los posibles géneros?
+    private Fecha fecha;
 
-    public Videogame(String na, float pri, int pe){
+    public Videogame(String na, float pri, int pe, Fecha fecha){
         this.name = na;
         this.price = pri;
         this.pegi = pe;
         this.stock = 1;
+        this.fecha= fecha;
     }
 
     public void setId(int num){

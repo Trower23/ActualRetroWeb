@@ -2,6 +2,7 @@ package com.dws.ActualRetro;
 
 import lombok.*;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Data
@@ -9,11 +10,12 @@ import java.util.Objects;
 @NoArgsConstructor
 public class VDConsole {
     private String name;
-    private int id;
+    private long id;
     private float price;
     private int stock;
     private int maxcontrollers;
-    //Cómo añadimos la fecha? Podemos usar una clase Fecha
+    //Crear clase fecha.
+
 
     public VDConsole(String na, float pri, int maxcon){
         this.name = na;
@@ -22,7 +24,7 @@ public class VDConsole {
         this.stock = 1;
     }
 
-    public void setId(int num){
+    public void setId(long num){
         this.id = num;
     }
 

@@ -9,7 +9,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Videogame {
     private String name;
-    private int id;
+    private long id;
     private float price;
     private int stock;
     private int pegi;
@@ -23,8 +23,11 @@ public class Videogame {
         this.fecha= fecha;
     }
 
-    public void setId(int num){
+    public void setId(long num){
         this.id = num;
+    }
+    public long getId(){
+        return this.id;
     }
 
     public boolean isStock(){

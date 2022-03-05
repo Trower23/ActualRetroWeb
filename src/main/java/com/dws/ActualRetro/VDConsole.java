@@ -2,6 +2,7 @@ package com.dws.ActualRetro;
 
 import lombok.*;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Data
@@ -9,7 +10,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class VDConsole {
     private String name;
-    private int id;
+    private long id;
     private float price;
     private int stock;
     private int maxcontrollers;
@@ -23,7 +24,7 @@ public class VDConsole {
         this.fecha= fecha;
     }
 
-    public void setId(int num){
+    public void setId(long num){
         this.id = num;
     }
 

@@ -20,8 +20,4 @@ public class User {
         this.phone= phone;
     }
 
-
-
-
-
 }

@@ -13,14 +13,16 @@ public class Videogame {
     private float price;
     private int stock;
     private int pegi;
-    private Fecha fecha;
+    private Date date;
+    private VDGenre genre;
 
-    public Videogame(String na, float pri, int pe, Fecha fecha){
+    public Videogame(String na, float pri, int pe, Date date, VDGenre gen){
         this.name = na;
         this.price = pri;
         this.pegi = pe;
         this.stock = 1;
-        this.fecha= fecha;
+        this.date = date;
+        this.genre = gen;
     }
 
     public void setId(long num){
@@ -43,6 +45,13 @@ public class Videogame {
     }
     public void removeStock(){
         this.stock--;
+    }
+
+    //Para poder acceder al género de los juegos, ya que querremos clasificarlos
+    //por género
+
+    public String genre(){
+        return this.genre.toString();
     }
 
     @Override

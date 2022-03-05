@@ -5,10 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -33,9 +31,53 @@ public class ProductRESTController{
     public ResponseEntity<Videogame> showGame(@PathVariable long id){
         return new ResponseEntity<>(prodholder.getVideogame(id), HttpStatus.OK);
     }
-    //@PostMapping("/products/consoles")
-   // public ResponseEntity<VDConsole> addVConsole(){
-     //
-    //}
 
+    @PostMapping("/products/consoles")
+    public ResponseEntity<VDConsole> addVConsole(@RequestBody VDConsole vdConsole){
+        prodholder.addProduct(vdConsole);
+        return new ResponseEntity<>(vdConsole, HttpStatus.CREATED);
+    }
+    @PostMapping("/products/games")
+    public ResponseEntity<Videogame> addVideogame(@RequestBody Videogame videogame){
+        prodholder.addProduct(videogame);
+        return new ResponseEntity<>(videogame, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/products/consoles/{id}")
+    public ResponseEntity<VDConsole> deleteVDConsole(@PathVariable long id){
+        if (prodholder.containsConsole(id)) {
+            VDConsole vdConsole= prodholder.delete(prodholder.getConsole(id));
+            return new ResponseEntity<>(vdConsole, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @DeleteMapping("/products/games/{id}")
+    public ResponseEntity<Videogame> deleteVideogame(@PathVariable long id){
+        if (prodholder.containsVideogame(id)) {
+            Videogame videogame= prodholder.delete(prodholder.getVideogame(id));
+            return new ResponseEntity<>(videogame, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/products/consoles/{id}")
+    public ResponseEntity<VDConsole> putVDConsole(@PathVariable long id, @RequestBody VDConsole vdConsole){
+        if (prodholder.containsConsole(id)){
+            prodholder.put(id, vdConsole);
+            return new ResponseEntity<>(vdConsole, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @PutMapping("/products/games/{id}")
+    public ResponseEntity<Videogame> putVideogame(@PathVariable long id, @RequestBody Videogame videogame){
+        if (prodholder.containsVideogame(id)){
+            prodholder.put(id, videogame);
+            return new ResponseEntity<>(videogame, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

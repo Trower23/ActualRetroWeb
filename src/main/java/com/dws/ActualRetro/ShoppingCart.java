@@ -1,13 +1,11 @@
 package com.dws.ActualRetro;
-
-
-
 import lombok.Data;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+// NECESITAMOS ACORDAR ESTO..
 @Data
 public class ShoppingCart {
     private static long totalProducts= 0;

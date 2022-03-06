@@ -49,37 +49,6 @@ public class ProductRESTController{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PostMapping("/products/consoles")
-    public ResponseEntity<VDConsole> addVConsole(@RequestBody VDConsole vdConsole){
-        prodholder.addProduct(vdConsole);
-        return new ResponseEntity<>(vdConsole, HttpStatus.CREATED);
-    }
-    @PostMapping("/products/games")
-    public ResponseEntity<Videogame> addVideogame(@RequestBody Videogame videogame){
-        prodholder.addProduct(videogame);
-        return new ResponseEntity<>(videogame, HttpStatus.CREATED);
-    }
-
-    @DeleteMapping("/products/consoles/{id}")
-    public ResponseEntity<VDConsole> deleteVDConsole(@PathVariable long id){
-        if (prodholder.containsConsole(id)) {
-            VDConsole vdConsole= prodholder.delete(prodholder.getConsole(id));
-            return new ResponseEntity<>(vdConsole, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }
-    @DeleteMapping("/products/games/{id}")
-    public ResponseEntity<Videogame> deleteVideogame(@PathVariable long id){
-        if (prodholder.containsVideoame(id)) {
-            Videogame videogame= prodholder.delete(prodholder.getVideogame(id));
-            return new ResponseEntity<>(videogame, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }
 
     @PostMapping("/products/consoles")
     public ResponseEntity<VDConsole> addVConsole(@RequestBody VDConsole vdConsole){

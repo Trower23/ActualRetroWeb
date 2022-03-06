@@ -34,10 +34,16 @@ public class ProductWebController{
         return "console";
     }
     @GetMapping("/products/videogames/{id}")
-    public String showVideogame(Model model, @PathVariable long id){
+    public String showVideogame(Model model, @PathVariable long id) {
         model.addAttribute("videogame", prodholder.getVideogame(id));
         return "videogame";
     }
+    @GetMapping("/product/sell")
+    public String sellProduct(Model model){
+
+        return "sell_product";
+    }
+
     @PostMapping("/products/consoles/sell")
     public String sellVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam Date date){
         prodholder.addProduct(new VDConsole(name, price, maxcon, date));

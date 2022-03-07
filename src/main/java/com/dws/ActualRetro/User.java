@@ -20,4 +20,11 @@ public class User {
         this.phone= phone;
     }
 
+    public String toString(){
+        return "Name and surname: "+this.name+" "+this.surname+"\n"+"Mail: "+this.mail+"\n"+"Phone: "+this.phone;
+    }
+
+    public boolean exitUser (User user){
+        return this.id == user.id;
+    }
 }

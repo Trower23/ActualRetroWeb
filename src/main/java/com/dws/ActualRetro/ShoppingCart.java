@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-// NECESITAMOS ACORDAR ESTO..
+//No es un holder, es una parte de User. Cada User tendrá un carrito de la compra
 @Data
 public class ShoppingCart {
     private  long totalProducts;
@@ -55,6 +55,14 @@ public class ShoppingCart {
         }
     }
 
+    //Como no tenemos una clase "Producto" de la que hereden VDConsole y Videogame
+    //Deberíamos implementar esa clase...
+    public List<Object> getProducts(){
+        List<Object> auxlist = new ArrayList<>();
+        auxlist.addAll(this.consoleList);
+        auxlist.addAll(this.videogameList);
+        return auxlist;
+    }
 
 }
 

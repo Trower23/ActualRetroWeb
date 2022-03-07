@@ -34,17 +34,31 @@ public class ProductWebController{
         return "console";
     }
     @GetMapping("/products/videogames/{id}")
-    public String showVideogame(Model model, @PathVariable long id){
+    public String showVideogame(Model model, @PathVariable long id) {
         model.addAttribute("videogame", prodholder.getVideogame(id));
         return "videogame";
     }
+
+    @GetMapping("/product/sell")
+    public String sellProduct(Model model){
+        return "sell_products";
+    }
+    @GetMapping("/product/sell/console")
+    public String sellVDConsole(Model model){
+        return "sell_console_form";
+    }
+    @GetMapping("/product/sell/videogame")
+    public String sellVideogame(Model model){
+        return "sell_videogame_form";
+    }
+
     @PostMapping("/products/consoles/sell")
-    public String sellVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam Date date){
+    public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam Date date){
         prodholder.addProduct(new VDConsole(name, price, maxcon, date));
         return "saved_console";
     }
     @PostMapping("/products/videogames/sell")
-    public String sellVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pe, @RequestParam Date date, @RequestParam VDGenre genre){
+    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pe, @RequestParam Date date, @RequestParam VDGenre genre){
         prodholder.addProduct(new Videogame(name, price, pe, date, genre));
         return "saved_videogame";
     }

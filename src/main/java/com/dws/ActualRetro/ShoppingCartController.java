@@ -22,7 +22,7 @@ public class ShoppingCartController {
     //En verdad, debería ser algo como @GetMapping("/products/cart/{user}) y le pasamos un
     //identificador de user. Todos los métodos tendremos que añadirles eso más adelante
     public String showCart(Model model){
-        model.addAttribute("products", testcart.getConsoleList());
+        model.addAttribute("consoles", testcart.getConsoleList());
         model.addAttribute("videogames", testcart.getVideogameList());
         return "cart_products";
     }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selling game</title>
+    <link href="forms.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<div class="sell-box">
+    <h2>Sell product</h2>
+    <form action="/products/consoles/sell" method="post">
+        <div class="user-box">
+            <input type="text"  name="name" required="">
+            <label>Name</label>
+        </div>
+
+        <div class="user-box">
+            <input type="number" min="0" name="maxcontrollers" required="">
+            <label>Controllers</label>
+        </div>
+
+        <div class="user-box"> <input type="date" name="date"> </div>
+
+        <input type="submit" value="Submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        </input>
+    </form>
+</div>
+
+</body>
+</html>

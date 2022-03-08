@@ -39,18 +39,8 @@ public class ProductWebController{
         return "videogame";
     }
 
-    @GetMapping("/product/sell")
-    public String sellProduct(Model model){
-        return "sell_products";
-    }
-    @GetMapping("/product/sell/console")
-    public String sellVDConsole(Model model){
-        return "sell_console_form";
-    }
-    @GetMapping("/product/sell/videogame")
-    public String sellVideogame(Model model){
-        return "sell_videogame_form";
-    }
+
+
 
     @PostMapping("/products/consoles/sell")
     public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam Date date){

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Selling game</title>
+    <link href="forms.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<div class="sell-box">
+    <h2>Sell product</h2>
+    <form action="/products/videogames/sell" method="post">
+        <div class="user-box">
+            <input type="text" name="name" required="">
+            <label>Name:</label>
+        </div>
+        <div class="user-box">
+            <input type="number" min="1" name="price" required="">
+            <label>€</label>
+        </div>
+        <div class="user-box">
+            <select style="background-color: blue" name="pegi">
+                <option value="1">NO-PEGI</option>
+                <option value="2">3+</option>
+                <option value="3">6+</option>
+                <option value="4">7+</option>
+                <option value="5">12+</option>
+                <option value="6">18+</option>
+            </select>
+        </div>
+        <div class="user-box"> <input type="date" name="date"> </div>
+        <div class="user-box">
+            <select style="background-color: blue" name="genre">
+                <option value="1">ACTION</option>
+                <option value="2">ADVENTURE</option>
+                <option value="3">CASUAL</option>
+                <option value="4">FIGHTING</option>
+                <option value="5">RACING</option>
+                <option value="6">STRATEGY</option>
+                <option value="7">PUZZLES</option>
+                <option value="8">SPORTS</option>
+            </select></div>
+        <input type="submit" value="Submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </input>
+    </form>
+</div>
+
+</body>
+</html>

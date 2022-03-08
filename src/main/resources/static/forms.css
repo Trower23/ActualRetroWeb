@@ -63,11 +63,12 @@ body {
     font-size: 12px;
 }
 
-.sell-box form a {
+.sell-box form input {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
     color: #03e9f4;
+    background-color: black;
     font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
@@ -77,7 +78,7 @@ body {
     letter-spacing: 4px
 }
 
-.sell-box a:hover {
+.sell-box input:hover {
     background: #03e9f4;
     color: #fff;
     border-radius: 5px;
@@ -87,12 +88,12 @@ body {
     0 0 100px #03e9f4;
 }
 
-.sell-box a span {
+.sell-box input span {
     position: absolute;
     display: block;
 }
 
-.sell-box a span:nth-child(1) {
+.sell-box input span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -110,7 +111,7 @@ body {
     }
 }
 
-.sell-box a span:nth-child(2) {
+.sell-box input span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
@@ -129,7 +130,7 @@ body {
     }
 }
 
-.sell-box a span:nth-child(3) {
+.sell-box input span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -148,7 +149,7 @@ body {
     }
 }
 
-.sell-box a span:nth-child(4) {
+.sell-box input span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;

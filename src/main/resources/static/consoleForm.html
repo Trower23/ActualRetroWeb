@@ -7,9 +7,10 @@
 
 </head>
 <body>
+
 <div class="sell-box">
     <h2>Sell product</h2>
-    <form>
+    <form action="/products/consoles/sell" method="post">
         <div class="user-box">
             <input type="text"  name="name" required="">
             <label>Name</label>
@@ -22,13 +23,12 @@
 
         <div class="user-box"> <input type="date" name="date"> </div>
 
-        <a href="link">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-        </a>
+        <input type="submit" value="Submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        </input>
     </form>
 </div>
 

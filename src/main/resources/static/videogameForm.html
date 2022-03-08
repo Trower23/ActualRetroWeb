@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Selling game</title>
@@ -9,7 +9,7 @@
 <body>
 <div class="sell-box">
     <h2>Sell product</h2>
-    <form>
+    <form action="/products/videogames/sell" method="post">
         <div class="user-box">
             <input type="text" name="name" required="">
             <label>Name:</label>
@@ -40,13 +40,12 @@
                 <option value="7">PUZZLES</option>
                 <option value="8">SPORTS</option>
             </select></div>
-        <a href="link">
+        <input type="submit" value="Submit">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            Submit
-        </a>
+        </input>
     </form>
 </div>
 

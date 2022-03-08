@@ -55,14 +55,5 @@ public class ShoppingCart {
         }
     }
 
-    //Como no tenemos una clase "Producto" de la que hereden VDConsole y Videogame
-    //Deberíamos implementar esa clase...
-    public List<Object> getProducts(){
-        List<Object> auxlist = new ArrayList<>();
-        auxlist.addAll(this.consoleList);
-        auxlist.addAll(this.videogameList);
-        return auxlist;
-    }
-
 }
 

@@ -22,20 +22,9 @@ public class ShoppingCartController {
     //En verdad, debería ser algo como @GetMapping("/products/cart/{user}) y le pasamos un
     //identificador de user. Todos los métodos tendremos que añadirles eso más adelante
     public String showCart(Model model){
-        model.addAttribute("products", testcart.getProducts());
-        return "cart_products";
-    }
-
-    @GetMapping("/products/cart/consoles")
-    public String showCartConsoles(Model model){
         model.addAttribute("products", testcart.getConsoleList());
-        //Lo llamo products también para poder reciclar el html sin tener  que hacer cambios
-        return "cart_consoles";
-    }
-    @GetMapping("/products/cart/videogames")
-    public String showCartVideogames(Model model){
-        model.addAttribute("products", testcart.getVideogameList());
-        return "cart_videogames";
+        model.addAttribute("videogames", testcart.getVideogameList());
+        return "cart_products";
     }
 
     //Para añadir cosas al carrito, primero lo tendremos que tener disponible, es decir,

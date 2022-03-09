@@ -22,6 +22,7 @@ public class ShoppingCartController {
     public String showCart(Model model){
         model.addAttribute("consoles", testcart.getConsoleList());
         model.addAttribute("videogames", testcart.getVideogameList());
+        model.addAttribute("totalprice", testcart.getTotalPrice());
         return "cart_products";
     }
 

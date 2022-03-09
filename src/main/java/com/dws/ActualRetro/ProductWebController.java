@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -39,18 +40,24 @@ public class ProductWebController{
         return "videogame";
     }
 
+
     @PostMapping("/products/consoles/sell")
     public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String date){
         Date newdate = new Date();
         newdate.parseDate(date, "-");
-        prodholder.addProduct(new VDConsole(name, price, maxcon, newdate));
+        VDConsole console = new VDConsole(name, price, maxcon, newdate);
+        model.addAttribute(console);
+        prodholder.addProduct(console);
         return "saved_console";
     }
     @PostMapping("/products/videogames/sell")
-    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pe, @RequestParam String date, @RequestParam VDGenre genre){
+    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String date, @RequestParam String genre){
         Date newdate = new Date();
         newdate.parseDate(date, "-");
-        prodholder.addProduct(new Videogame(name, price, pe, newdate, genre));
+        VDGenre gen = VDGenre.valueOf(genre);
+        Videogame videogame = new Videogame(name, price, pegi, newdate, gen);
+        model.addAttribute("videogame", videogame);
+        prodholder.addProduct(videogame);
         return "saved_videogame";
     }
 

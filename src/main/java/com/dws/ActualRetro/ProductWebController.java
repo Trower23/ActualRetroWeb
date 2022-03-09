@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -26,7 +27,7 @@ public class ProductWebController{
     public String showVideogames(Model model){
         List<Videogame> videogames= new ArrayList<>(prodholder.getVideogames());
         model.addAttribute("videogames", videogames);
-        return "videogames";
+        return "videogames_prueba";
     }
     @GetMapping("/products/consoles/{id}")
     public String showVDConsole(Model model, @PathVariable long id){
@@ -40,23 +41,25 @@ public class ProductWebController{
     }
 
 
-
-
     @PostMapping("/products/consoles/sell")
-    public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam Date date){
-        prodholder.addProduct(new VDConsole(name, price, maxcon, date));
+    public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String date){
+        Date newdate = new Date();
+        newdate.parseDate(date, "-");
+        VDConsole console = new VDConsole(name, price, maxcon, newdate);
+        model.addAttribute("console",console);
+        prodholder.addProduct(console);
         return "saved_console";
     }
     @PostMapping("/products/videogames/sell")
-    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pe, @RequestParam Date date, @RequestParam VDGenre genre){
-        prodholder.addProduct(new Videogame(name, price, pe, date, genre));
+    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String date, @RequestParam String genre){
+        Date newdate = new Date();
+        newdate.parseDate(date, "-");
+        VDGenre gen = VDGenre.valueOf(genre);
+        Videogame videogame = new Videogame(name, price, pegi, newdate, gen);
+        model.addAttribute("videogame", videogame);
+        prodholder.addProduct(videogame);
         return "saved_videogame";
     }
 
-
-
-
-
-    
 
 }

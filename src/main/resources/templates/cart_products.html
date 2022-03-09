@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link href="" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <h1>YOUR PRODUCTS ARE:</h1>
+    <ul>
+{{#consoles}}
+<li>{{.}} <input type="submit" formaction="/" value="Delete"></li>
+    {{/consoles}}
+    </ul>
+    <ul>
+        {{#videogames}}
+<li>{{.}} <input type="submit" formaction="/" value="Delete"></li>
+{{/videogames}}
+        </ul>
+
+</body>
+</html>

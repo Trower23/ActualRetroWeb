@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ShoppingCartController {
@@ -38,12 +36,18 @@ public class ShoppingCartController {
         testcart.addConsole(console);
         return "added_console";
     }
-    @PostMapping("/product/buy/videogame")
-    public String buyCartVideogame(Model model, @RequestParam long id){
+    @PostMapping("/product/buy/videogame/{id}")
+    public String buyCartVideogame(Model model, @PathVariable long id){
         Videogame videogame = prodHolder.getVideogame(id);
         model.addAttribute("videogame", videogame);
         testcart.addVideogame(videogame);
         return "added_videogame";
+    }
+    @DeleteMapping("/product/buy/videogame/{id}")
+    public String removeCartVideoGame(Model model, @PathVariable long id){
+        testcart.deleteVideogame(prodHolder.getVideogame(id));
+        model.addAttribute(prodHolder.getVideogame(id));
+        return "deleted_success_cart";
     }
     @GetMapping("/product/buy")
     public String buyCart(Model model){
@@ -53,6 +57,8 @@ public class ShoppingCartController {
         //stock de los productos, o puedo hacer un bucle
         model.addAttribute("totalprod", testcart.getTotalProducts());
         model.addAttribute("totalprice", testcart.getTotalPrice());
+        model.addAttribute("videogames", testcart.getVideogameList());
+        model.addAttribute("consoles", testcart.getConsoleList());
         for (int i = 0; i < testcart.getConsoleList().size(); i++){
             prodHolder.delete(testcart.getConsoleList().get(i));
         }
@@ -64,6 +70,8 @@ public class ShoppingCartController {
         //Más adelante tendremos que volver a este método probablemente, para hacer el pago más realista
         return "payment";
     }
+
+
 
 
 }

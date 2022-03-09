@@ -11,7 +11,8 @@ public class Videogame {
     private String name;
     private long id;
     private float price;
-    private int stock;
+    //Inicializo aquí el atributo porque si no, la API REST lo inicializa a 0
+    private int stock = 1;
     private int pegi;
     private Date date;
     private VDGenre genre;
@@ -20,7 +21,6 @@ public class Videogame {
         this.name = na;
         this.price = pri;
         this.pegi = pe;
-        this.stock = 1;
         this.date = date;
         this.genre = gen;
     }

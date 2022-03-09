@@ -1,6 +1,9 @@
 
 package com.dws.ActualRetro;
+import lombok.*;
 
+@Data
+@NoArgsConstructor
 public class Date {
         private int day;
         private int month;

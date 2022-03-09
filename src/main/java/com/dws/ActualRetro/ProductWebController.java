@@ -27,7 +27,7 @@ public class ProductWebController{
     public String showVideogames(Model model){
         List<Videogame> videogames= new ArrayList<>(prodholder.getVideogames());
         model.addAttribute("videogames", videogames);
-        return "videogames";
+        return "videogames_prueba";
     }
     @GetMapping("/products/consoles/{id}")
     public String showVDConsole(Model model, @PathVariable long id){

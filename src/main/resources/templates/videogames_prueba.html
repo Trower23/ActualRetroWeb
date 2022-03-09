@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VIDEOGAMES LIST CUTRE</title>
+</head>
+<body>
+<ul>
+    {{#videogames}}
+    <li>
+        <a href="products/videogames/{{-index}}">{{name}}</a> <input type="submit" value="BUY!" formmethod="post" formaction="product/buy/videogame/{{id}}">
+    </li>
+    {{/videogames}}
+</ul>
+</body>
+</html>

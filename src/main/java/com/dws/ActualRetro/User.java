@@ -19,12 +19,7 @@ public class User {
         this.password= password;
         this.phone= phone;
     }
-
-    public String toString(){
-        return "Name and surname: "+this.name+" "+this.surname+"\n"+"Mail: "+this.mail+"\n"+"Phone: "+this.phone;
-    }
-
-    public boolean exitUser (User user){
-        return this.id == user.id;
+    public void setId(long id){
+        this.id = id;
     }
 }

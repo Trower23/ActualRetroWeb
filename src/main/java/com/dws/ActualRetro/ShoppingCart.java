@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-// NECESITAMOS ACORDAR ESTO..
+//No es un holder, es una parte de User. Cada User tendrá un carrito de la compra
 @Data
 public class ShoppingCart {
     private  long totalProducts;
@@ -54,7 +54,6 @@ public class ShoppingCart {
             return false;
         }
     }
-
 
 }
 

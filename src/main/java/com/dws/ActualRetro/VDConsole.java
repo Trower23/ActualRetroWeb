@@ -23,6 +23,7 @@ public class VDConsole {
         this.date = date;
     }
 
+
     public void setId(long num){
         this.id = num;
     }

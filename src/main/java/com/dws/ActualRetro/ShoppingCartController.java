@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +54,8 @@ public class ShoppingCartController {
         //stock de los productos, o puedo hacer un bucle
         model.addAttribute("totalprod", testcart.getTotalProducts());
         model.addAttribute("totalprice", testcart.getTotalPrice());
+        model.addAttribute("videogames", testcart.getVideogameList());
+        model.addAttribute("consoles", testcart.getConsoleList());
         for (int i = 0; i < testcart.getConsoleList().size(); i++){
             prodHolder.delete(testcart.getConsoleList().get(i));
         }
@@ -64,6 +67,8 @@ public class ShoppingCartController {
         //Más adelante tendremos que volver a este método probablemente, para hacer el pago más realista
         return "payment";
     }
+
+
 
 
 }

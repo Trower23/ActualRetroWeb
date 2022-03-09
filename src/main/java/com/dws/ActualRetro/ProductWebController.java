@@ -46,7 +46,7 @@ public class ProductWebController{
         Date newdate = new Date();
         newdate.parseDate(date, "-");
         VDConsole console = new VDConsole(name, price, maxcon, newdate);
-        model.addAttribute(console);
+        model.addAttribute("console",console);
         prodholder.addProduct(console);
         return "saved_console";
     }

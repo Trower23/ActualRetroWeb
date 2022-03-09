@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PAYMENT</title>
+</head>
+<body>
+<p>You've payed {{totalprod}} products.</p>
+<p>The price is: {{totalprice}}€</p>
+<p>YOUR PRODUCTS ARE:</p>
+<p>1. Consoles:</p>
+{{#consoles}}
+<p>{{.}}</p>
+{{/consoles}}
+
+<p>2. Videogames:</p>
+{{#videogames}}
+<p>{{.}}</p>
+{{/videogames}}
+<p> THANKS!</p>
+</body>
+</html>

@@ -9,12 +9,12 @@
     <h1>YOUR PRODUCTS ARE:</h1>
     <ul>
 {{#consoles}}
-<li>{{.}} <input type="submit" formaction="/" value="Delete"></li>
+<li>{{name}} {{price}}€ <form action="../product/buy/videogame/{{id}}" method="get"><input type="submit" value="Delete"></form></li>
     {{/consoles}}
     </ul>
     <ul>
         {{#videogames}}
-<li>{{.}} <input type="submit" formaction="/" value="Delete"></li>
+<li>{{name}} {{price}}€ <form action="../product/buy/videogame/{{id}}" method="get"><input type="submit" value="Delete"></form></li>
 {{/videogames}}
         </ul>
 

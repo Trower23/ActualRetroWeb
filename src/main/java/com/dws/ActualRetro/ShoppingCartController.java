@@ -43,10 +43,10 @@ public class ShoppingCartController {
         testcart.addVideogame(videogame);
         return "added_videogame";
     }
-    @DeleteMapping("/product/buy/videogame/{id}")
+    @GetMapping("/product/buy/videogame/{id}")
     public String removeCartVideoGame(Model model, @PathVariable long id){
+        model.addAttribute("videogame",prodHolder.getVideogame(id));
         testcart.deleteVideogame(prodHolder.getVideogame(id));
-        model.addAttribute(prodHolder.getVideogame(id));
         return "deleted_success_cart";
     }
     @GetMapping("/product/buy")

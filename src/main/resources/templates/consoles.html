@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> </title>
-  <link href="consoles.css" rel="stylesheet" type="text/css">
+  <title>Light Theme</title>
+  <link href="videogames.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -31,13 +31,13 @@
   <section class="about" id="about">
     <h2 class="hidden">About</h2>
     <div style="text-align: justify;">
-      {{#vdConsoles}}
+      {{#videogames}}
 
-      <br><a href= "/products/consoles/{{-index}}"></a> <strong>{{name}}</strong> <br>{{price}}
+      <a href="products/consoles/{{-index}}">{{name}}</a> <input type="submit" value="BUY!" formmethod="post" formaction="product/buy/consoles/{{id}}">
 
-      {{/vdConsoles}}
+      {{/videogames}}
 
-      </div>
+    </div>
   </section>
   <!-- Stats Gallery Section -->
   <!-- Parallax Section -->

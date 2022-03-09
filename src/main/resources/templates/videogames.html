@@ -33,7 +33,7 @@
         <div style="text-align: justify;">
             {{#videogames}}
 
-            <br><a href= "/products/videogames/{{-index}}"></a> <strong>{{name}}</strong> <br>{{price}}
+            <a href="products/videogames/{{-index}}">{{name}}</a> <input type="submit" value="BUY!" formmethod="post" formaction="product/buy/videogame/{{id}}">
 
             {{/videogames}}
 

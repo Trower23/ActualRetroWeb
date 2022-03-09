@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> </title>
-  <link href="consoles.css" rel="stylesheet" type="text/css">
+  <link href="../css/consoles.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -13,7 +13,8 @@
 <div class="container">
   <!-- Navigation -->
   <header> <a href="">
-    <h4 class="logo"><img src="https://www.crushpixel.com/big-static20/preview4/console-joystick-icon-cartoon-3876206.jpg" width="40" height="35"> </h4>
+    <!-- Antigua imagen: https://www.crushpixel.com/big-static20/preview4/console-joystick-icon-cartoon-3876206.jpg-->
+    <h4 class="logo"><img src="https://cdn-icons-png.flaticon.com/512/2004/2004993.png" width="40" height="35"> </h4>
   </a>
     <nav>
       <ul>
@@ -33,7 +34,7 @@
     <div style="text-align: justify;">
       {{#vdConsoles}}
 
-      <br><a href= "/products/consoles/{{-index}}"></a> <strong>{{name}}</strong> <br>{{price}}
+      <br><a href= "/products/consoles/{{-index}}"><strong>{{name}}</strong></a> Price: {{price}}<br>
 
       {{/vdConsoles}}
 

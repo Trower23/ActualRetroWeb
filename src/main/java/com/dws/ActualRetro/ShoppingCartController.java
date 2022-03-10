@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ShoppingCartController {
     @Autowired
@@ -47,26 +50,26 @@ public class ShoppingCartController {
     }
     @GetMapping("/product/buy")
     public String buyCart(Model model){
-        //Compra todos los produtos que haya añadido, por lo que tenemos que sustraer productos
-        //de nuestro holder y borrar los productos que haya en el carrito
-        //Puedo implementar un método nuevo que sea "deleteAll" para trabajar con el atributo
-        //stock de los productos, o puedo hacer un bucle
         model.addAttribute("totalprod", testcart.getTotalProducts());
         model.addAttribute("totalprice", testcart.getTotalPrice());
-        model.addAttribute("videogames", testcart.getVideogameList());
-        model.addAttribute("consoles", testcart.getConsoleList());
-        for (int i = 0; i < testcart.getConsoleList().size(); i++){
-            prodHolder.delete(testcart.getConsoleList().get(i));
-            testcart.deleteConsole(testcart.getConsoleList().get(i));
+        List<VDConsole> auxconsolelist = new ArrayList<>();
+        List<Videogame> auxvideogamelist = new ArrayList<>();
+        int size = testcart.getConsoleList().size();
+        for (int i = size - 1; i >= 0; i--){
+            VDConsole console = testcart.getConsoleList().get(i);
+            prodHolder.delete(console);
+            auxconsolelist.add(console);
+            testcart.deleteConsole(console);
         }
-        //testcart.getConsoleList().clear();
-        for (int i = 0; i < testcart.getVideogameList().size(); i++){
-            prodHolder.delete(testcart.getVideogameList().get(i));
-            testcart.deleteVideogame(testcart.getVideogameList().get(i));
+        size = testcart.getVideogameList().size();
+        for (int i = size - 1; i >= 0; i--){
+            Videogame videogame = testcart.getVideogameList().get(i);
+            prodHolder.delete(videogame);
+            auxvideogamelist.add(videogame);
+            testcart.deleteVideogame(videogame);
         }
-        //Cuidado, con clear el precio no se baja. Mejor borrar cada elemento en los for. Podrían mejorarse...
-        //testcart.getVideogameList().clear();
-        //Más adelante tendremos que volver a este método probablemente, para hacer el pago más realista
+        model.addAttribute("consoles", auxconsolelist);
+        model.addAttribute("videogames", auxvideogamelist);
         return "payment";
     }
 

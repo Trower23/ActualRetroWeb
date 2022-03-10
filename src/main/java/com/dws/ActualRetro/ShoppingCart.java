@@ -24,13 +24,13 @@ public class ShoppingCart {
     public void addConsole (VDConsole console){
         consoleList.add(console);
         totalProducts++;
-        totalPrice= (long) (totalPrice+console.getPrice());
+        totalPrice= totalPrice+console.getPrice();
     }
 
     public void addVideogame (Videogame videogame){
         videogameList.add(videogame);
         totalProducts++;
-        totalPrice= (long) (totalPrice+ videogame.getPrice());
+        totalPrice= totalPrice+ videogame.getPrice();
     }
 
     public boolean deleteConsole (VDConsole console){

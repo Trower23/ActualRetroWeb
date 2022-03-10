@@ -5,6 +5,13 @@
     <title>LOGIN</title>
   <link href="login.css" rel="stylesheet" type="text/css">
 </head>
+<script type="javascript">
+  function hello(){
+    var user=document.getElementsByName("email");
+    var name=user.value;
+    alert("Login success - Hello" + name +"!!");
+  }
+</script>
 <body>
 <form class="login-form">
   <p class="login-text">
@@ -13,11 +20,12 @@
       <i class="fa fa-lock fa-stack-1x"></i>
     </span>
   </p>
-  <input type="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
+  <input type="email" id="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
   <input type="password" class="login-password" required="true" placeholder="Password" />
-  <input type="submit" name="Login" value="Login" class="login-submit" />
+  <input type="submit"  name="Login" value="Login" class="login-submit" onclick="hello();"/>
 </form>
 <div class="underlay-photo"></div>
 <div class="underlay-black"></div>
 </body>
+
 </html>

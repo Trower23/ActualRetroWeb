@@ -10,7 +10,14 @@ import org.springframework.web.bind.annotation.*;
 public class ShoppingCartController {
     @Autowired
     ProductHolder prodHolder;
+    //Tenemos que pasarle a este controller, de alguna forma, el usuario, con su carrito.
+    //Hay que guardar a los usuarios en algún lado... hacemos un UserHolder? Y... esto nos
+    //llevaría a hacer un ShoppingCartRESTController?
     ShoppingCart testcart = new ShoppingCart();
+
+    @GetMapping("/products/cart")
+    //En verdad, debería ser algo como @GetMapping("/products/cart/{user}) y le pasamos un
+    //identificador de user. Todos los métodos tendremos que añadirles eso más adelante
 
     @GetMapping("/products/cart")
     public String showCart(Model model){
@@ -20,26 +27,28 @@ public class ShoppingCartController {
         return "cart_products";
     }
 
-    @GetMapping("/product/buy/console/{id}")
+    //Para añadir cosas al carrito, primero lo tendremos que tener disponible, es decir,
+    //añadido al productHolder
+    @PostMapping("/product/buy/console/{id}")
     public String buyCartConsole( @RequestParam long id){
+        //Sólo pasamos el id de lo que quiere comprar el User y listo
         VDConsole console = prodHolder.getConsole(id);
         testcart.addConsole(console);
         return "added_success";
     }
     @GetMapping("/product/buy/videogame/{id}")
-    public String buyCartVideogame( @RequestParam long id){
+    public String buyCartVideogame( @PathVariable long id){
         Videogame videogame = prodHolder.getVideogame(id);
         testcart.addVideogame(videogame);
         return "added_success";
     }
-
-    @GetMapping("/product/remove/console/{id}")
+    @GetMapping("/product/buy/console/{id}")
     public String removeCartConsole(Model model, @PathVariable long id){
         model.addAttribute("videogame",prodHolder.getConsole(id));
         testcart.deleteConsole(prodHolder.getConsole(id));
         return "deleted_success_cart";
     }
-    @GetMapping("/product/remove/videogame/{id}")
+    @GetMapping("/product/buy/videogame/{id}")
     public String removeCartVideoGame(Model model, @PathVariable long id){
         model.addAttribute("videogame",prodHolder.getVideogame(id));
         testcart.deleteVideogame(prodHolder.getVideogame(id));

@@ -34,7 +34,7 @@
     <div style="text-align: justify;">
       {{#vdConsoles}}
 
-      <br><a href= "consoles/{{-index}}"><strong>{{name}}</strong></a> Price: {{price}}<br>
+      <a href="consoles/{{-index}}">{{name}}</a> Price: {{price}}€ <form method="post" action="/product/buy/console/{{id}}"><input type="submit" value="BUY!"></form><br>
 
       {{/vdConsoles}}
 

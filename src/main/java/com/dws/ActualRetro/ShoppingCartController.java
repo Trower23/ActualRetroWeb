@@ -29,26 +29,22 @@ public class ShoppingCartController {
     //Para añadir cosas al carrito, primero lo tendremos que tener disponible, es decir,
     //añadido al productHolder
     @PostMapping("/product/buy/console/{id}")
-    public String buyCartConsole(Model model, @RequestParam long id){
+    public String buyCartConsole( @RequestParam long id){
         //Sólo pasamos el id de lo que quiere comprar el User y listo
         VDConsole console = prodHolder.getConsole(id);
-        //Para usarlo en el html que hagamos
-        model.addAttribute("console", console);
         testcart.addConsole(console);
-        return "added_console";
+        return "added_success";
     }
     @PostMapping("/product/buy/videogame/{id}")
-    public String buyCartVideogame(Model model, @PathVariable long id){
+    public String buyCartVideogame( @PathVariable long id){
         Videogame videogame = prodHolder.getVideogame(id);
-        model.addAttribute("videogame", videogame);
         testcart.addVideogame(videogame);
-        return "added_videogame";
+        return "added_success";
     }
     @GetMapping("/product/buy/console/{id}")
     public String removeCartConsole(Model model, @PathVariable long id){
         model.addAttribute("videogame",prodHolder.getConsole(id));
         testcart.deleteConsole(prodHolder.getConsole(id));
-        //No puedes usar el mismo HTML, tienes que usar otro... por mustache
         return "deleted_success_cart";
     }
     @GetMapping("/product/buy/videogame/{id}")

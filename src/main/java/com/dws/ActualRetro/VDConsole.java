@@ -11,7 +11,6 @@ public class VDConsole {
     private String name;
     private long id;
     private float price;
-    //Inicializo aquí el atributo porque si no, la API REST lo inicializa a 0
     private int stock = 1;
     private int maxcontrollers;
     private Date date;

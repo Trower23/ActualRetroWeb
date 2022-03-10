@@ -21,13 +21,13 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/product/buy/console/{id}")
-    public String buyCartConsole( @RequestParam long id){
+    public String buyCartConsole( @PathVariable long id){
         VDConsole console = prodHolder.getConsole(id);
         testcart.addConsole(console);
         return "added_success";
     }
     @GetMapping("/product/buy/videogame/{id}")
-    public String buyCartVideogame( @RequestParam long id){
+    public String buyCartVideogame( @PathVariable long id){
         Videogame videogame = prodHolder.getVideogame(id);
         testcart.addVideogame(videogame);
         return "added_success";
@@ -47,10 +47,6 @@ public class ShoppingCartController {
     }
     @GetMapping("/product/buy")
     public String buyCart(Model model){
-        //Compra todos los produtos que haya añadido, por lo que tenemos que sustraer productos
-        //de nuestro holder y borrar los productos que haya en el carrito
-        //Puedo implementar un método nuevo que sea "deleteAll" para trabajar con el atributo
-        //stock de los productos, o puedo hacer un bucle
         model.addAttribute("totalprod", testcart.getTotalProducts());
         model.addAttribute("totalprice", testcart.getTotalPrice());
         model.addAttribute("videogames", testcart.getVideogameList());
@@ -59,14 +55,10 @@ public class ShoppingCartController {
             prodHolder.delete(testcart.getConsoleList().get(i));
             testcart.deleteConsole(testcart.getConsoleList().get(i));
         }
-        //testcart.getConsoleList().clear();
         for (int i = 0; i < testcart.getVideogameList().size(); i++){
             prodHolder.delete(testcart.getVideogameList().get(i));
             testcart.deleteVideogame(testcart.getVideogameList().get(i));
         }
-        //Cuidado, con clear el precio no se baja. Mejor borrar cada elemento en los for. Podrían mejorarse...
-        //testcart.getVideogameList().clear();
-        //Más adelante tendremos que volver a este método probablemente, para hacer el pago más realista
         return "payment";
     }
 

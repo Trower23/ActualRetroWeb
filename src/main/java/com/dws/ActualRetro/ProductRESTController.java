@@ -50,7 +50,6 @@ public class ProductRESTController{
         }
     }
 
-    //Recordad que el método addProduct ya tiene en cuenta el atributo Stock de por sí
     @PostMapping("/products/consoles")
     public ResponseEntity<VDConsole> addVConsole(@RequestBody VDConsole vdConsole){
         prodholder.addProduct(vdConsole);
@@ -85,7 +84,6 @@ public class ProductRESTController{
 
     @PutMapping("/products/consoles/{id}")
     public ResponseEntity<VDConsole> putVDConsole(@PathVariable long id, @RequestBody VDConsole vdConsole){
-        //Tengo que ponerle el ID, porque si no la API se confunde y pone el id de la nueva instancia a 0
         if (prodholder.containsConsole(id)){
             vdConsole.setId(id);
             vdConsole.setStock(prodholder.getConsole(id).getStock());

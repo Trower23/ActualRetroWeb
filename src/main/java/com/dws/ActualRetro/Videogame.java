@@ -11,7 +11,6 @@ public class Videogame {
     private String name;
     private long id;
     private float price;
-    //Inicializo aquí el atributo porque si no, la API REST lo inicializa a 0
     private int stock = 1;
     private int pegi;
     private Date date;
@@ -46,9 +45,6 @@ public class Videogame {
     public void removeStock(){
         this.stock--;
     }
-
-    //Para poder acceder al género de los juegos, ya que querremos clasificarlos
-    //por género
 
     public String genre(){
         return this.genre.toString();

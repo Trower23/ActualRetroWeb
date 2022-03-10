@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Light Theme</title>
-  <link href="videogames.css" rel="stylesheet" type="text/css">
+  <title> </title>
+  <link href="../css/consoles.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -13,7 +13,8 @@
 <div class="container">
   <!-- Navigation -->
   <header> <a href="">
-    <h4 class="logo"><img src="https://www.crushpixel.com/big-static20/preview4/console-joystick-icon-cartoon-3876206.jpg" width="40" height="35"> </h4>
+    <!-- Antigua imagen: https://www.crushpixel.com/big-static20/preview4/console-joystick-icon-cartoon-3876206.jpg-->
+    <h4 class="logo"><img src="https://cdn-icons-png.flaticon.com/512/2004/2004993.png" width="40" height="35"> </h4>
   </a>
     <nav>
       <ul>
@@ -31,13 +32,13 @@
   <section class="about" id="about">
     <h2 class="hidden">About</h2>
     <div style="text-align: justify;">
-      {{#videogames}}
+      {{#vdConsoles}}
 
-      <a href="products/consoles/{{-index}}">{{name}}</a> <input type="submit" value="BUY!" formmethod="post" formaction="product/buy/consoles/{{id}}">
+      <br><a href= "consoles/{{-index}}"><strong>{{name}}</strong></a> Price: {{price}}<br>
 
-      {{/videogames}}
+      {{/vdConsoles}}
 
-    </div>
+      </div>
   </section>
   <!-- Stats Gallery Section -->
   <!-- Parallax Section -->

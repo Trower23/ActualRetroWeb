@@ -3,20 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
-    <link href="" rel="stylesheet" type="text/css">
+    <link href="../css/cart.css" rel="stylesheet" type="text/css">
 </head>
+<header></header>
 <body>
-    <h1>YOUR PRODUCTS ARE:</h1>
+<div class="bg-7">
+    <h1 class="t-stroke"></h1>
+</div>
+
+<br>
+<br>
+<br>
+<br><br>
+
+<div>
     <ul>
 {{#consoles}}
-<li>{{.}} <input type="submit" formaction="/" value="Delete"></li>
+<li>{{name}} {{price}}€ <form action="../product/buy/videogame/{{id}}" method="get"><input type="submit" value="Delete"></form></li>
     {{/consoles}}
     </ul>
     <ul>
         {{#videogames}}
-<li>{{.}} <input type="submit" formaction="/" value="Delete"></li>
+<li>{{name}} {{price}}€ <form action="../product/buy/videogame/{{id}}" method="get"><input type="submit" value="Delete"></form></li>
 {{/videogames}}
         </ul>
-
+    <ul>
+        <li>TOTAL PRICE: {{totalprice}} €</li>
+    </ul>
+</div>
+<form action="/product/buy" method="get"> <input type="submit" value="PAY!"></form>
 </body>
 </html>

@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"New Super Mario Bros.\",\r\n    \"price\": 14.99,\r\n    \"pegi\": 3,\r\n    \"date\": {\r\n        \"day\": 15,\r\n        \"month\": 5,\r\n        \"year\": 2006\r\n    },\r\n    \"genre\": \"PLATFORM\"\r\n}",
+					"raw": "{\r\n    \"name\": \"New Super Mario Bros.\",\r\n    \"price\": 14.99,\r\n    \"pegi\": 3,\r\n    \"date\": {\r\n        \"day\": 15,\r\n        \"month\": 5,\r\n        \"year\": 2006\r\n    },\r\n    \"genre\": \"PLATFORMS\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

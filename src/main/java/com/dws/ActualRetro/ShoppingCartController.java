@@ -26,7 +26,7 @@ public class ShoppingCartController {
         testcart.addConsole(console);
         return "added_success";
     }
-    @PostMapping("/product/buy/videogame/{id}")
+    @GetMapping("/product/buy/videogame/{id}")
     public String buyCartVideogame( @RequestParam long id){
         Videogame videogame = prodHolder.getVideogame(id);
         testcart.addVideogame(videogame);

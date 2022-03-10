@@ -28,7 +28,7 @@ public class ShoppingCartController {
 
     //Para añadir cosas al carrito, primero lo tendremos que tener disponible, es decir,
     //añadido al productHolder
-    @PostMapping("/product/buy/console")
+    @PostMapping("/product/buy/console/{id}")
     public String buyCartConsole(Model model, @RequestParam long id){
         //Sólo pasamos el id de lo que quiere comprar el User y listo
         VDConsole console = prodHolder.getConsole(id);
@@ -43,6 +43,13 @@ public class ShoppingCartController {
         model.addAttribute("videogame", videogame);
         testcart.addVideogame(videogame);
         return "added_videogame";
+    }
+    @GetMapping("/product/buy/console/{id}")
+    public String removeCartConsole(Model model, @PathVariable long id){
+        model.addAttribute("videogame",prodHolder.getConsole(id));
+        testcart.deleteConsole(prodHolder.getConsole(id));
+        //No puedes usar el mismo HTML, tienes que usar otro... por mustache
+        return "deleted_success_cart";
     }
     @GetMapping("/product/buy/videogame/{id}")
     public String removeCartVideoGame(Model model, @PathVariable long id){
@@ -62,12 +69,15 @@ public class ShoppingCartController {
         model.addAttribute("consoles", testcart.getConsoleList());
         for (int i = 0; i < testcart.getConsoleList().size(); i++){
             prodHolder.delete(testcart.getConsoleList().get(i));
+            testcart.deleteConsole(testcart.getConsoleList().get(i));
         }
-        testcart.getConsoleList().clear();
+        //testcart.getConsoleList().clear();
         for (int i = 0; i < testcart.getVideogameList().size(); i++){
             prodHolder.delete(testcart.getVideogameList().get(i));
+            testcart.deleteVideogame(testcart.getVideogameList().get(i));
         }
-        testcart.getVideogameList().clear();
+        //Cuidado, con clear el precio no se baja. Mejor borrar cada elemento en los for. Podrían mejorarse...
+        //testcart.getVideogameList().clear();
         //Más adelante tendremos que volver a este método probablemente, para hacer el pago más realista
         return "payment";
     }

@@ -31,9 +31,19 @@ div, p{
 }
 
 .box-text a{
-	text-shadow: 5px 5px 5px -webkit-link;
+	/*text-shadow: 5px 5px 5px -webkit-link;*/
 }
 
+a:-webkit-any-link {
+    color: -webkit-link;
+	text-shadow: 5px 5px 5px -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-line: underline;
+    text-decoration-thickness: initial;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
 .appear{
 	opacity: 0;
 	animation: fade-in 0.85s 0.8s forwards cubic-bezier(0,0,0,0);

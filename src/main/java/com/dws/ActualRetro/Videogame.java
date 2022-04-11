@@ -7,6 +7,7 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Videogame {
     private String name;

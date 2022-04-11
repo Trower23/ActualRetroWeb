@@ -2,16 +2,22 @@ package com.dws.ActualRetro;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class VDConsole {
     private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private float price;
     private int stock = 1;
     private int maxcontrollers;
+    @Transient
     private Date date;
 
 

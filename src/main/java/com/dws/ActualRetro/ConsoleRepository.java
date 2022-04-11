@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 
+@Component
 public interface ConsoleRepository extends JpaRepository<VDConsole, Long> {
 
 }

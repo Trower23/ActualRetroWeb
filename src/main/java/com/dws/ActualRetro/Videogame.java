@@ -20,13 +20,15 @@ public class Videogame {
     @Transient
     private Date date;
     private VDGenre genre;
+    private String description;
 
-    public Videogame(String na, float pri, int pe, Date date, VDGenre gen){
+    public Videogame(String na, float pri, int pe, Date date, VDGenre gen, String description){
         this.name = na;
         this.price = pri;
         this.pegi = pe;
         this.date = date;
         this.genre = gen;
+        this.description= description;
     }
 
     public void setId(long num){

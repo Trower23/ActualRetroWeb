@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Console;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -16,31 +17,34 @@ import java.util.List;
 @Controller
 public class ProductWebController{
     @Autowired
-    ProductHolder prodholder;
+    VideoconsoleService videoconsoleService;
+    @Autowired
+    VideogameService videogameService;
 
     @GetMapping("/products/consoles")
     public String showVDConsoles(Model model){
-        List<VDConsole> vdConsoles= new ArrayList<>(prodholder.getConsoles());
+        //List<VDConsole> vdConsoles= new ArrayList<>(prodholder.getConsoles());
+        List<VDConsole> vdConsoles=videoconsoleService.consoleRepository.findAll();
         model.addAttribute("vdConsoles", vdConsoles);
         return "consoles";
     }
     @GetMapping("/products/videogames")
     public String showVideogames(Model model){
-        List<Videogame> videogames= new ArrayList<>(prodholder.getVideogames());
+        //List<Videogame> videogames= new ArrayList<>(prodholder.getVideogames());
+        List<Videogame> videogames= videogameService.videogameRepository.findAll();
         model.addAttribute("videogames", videogames);
         return "videogames";
     }
     @GetMapping("/products/consoles/{id}")
     public String showVDConsole(Model model, @PathVariable long id){
-        model.addAttribute("vdConsole", prodholder.getConsole(id));
+        model.addAttribute("vdConsole",videoconsoleService.consoleRepository.getById(id));
         return "console";
     }
     @GetMapping("/products/videogames/{id}")
     public String showVideogame(Model model, @PathVariable long id) {
-        model.addAttribute("videogame", prodholder.getVideogame(id));
+        model.addAttribute("videogame", videogameService.videogameRepository.getById(id));
         return "videogame";
     }
-
 
     @PostMapping("/products/consoles/sell")
     public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String date, @RequestParam String description){
@@ -48,7 +52,7 @@ public class ProductWebController{
         newdate.parseDate(date, "-");
         VDConsole console = new VDConsole(name, price, maxcon, newdate, description);
         model.addAttribute("console",console);
-        prodholder.addProduct(console);
+        videoconsoleService.consoleRepository.save(console);
         return "saved_console";
     }
     @PostMapping("/products/videogames/sell")
@@ -58,7 +62,7 @@ public class ProductWebController{
         VDGenre gen = VDGenre.valueOf(genre);
         Videogame videogame = new Videogame(name, price, pegi, newdate, gen, description);
         model.addAttribute("videogame", videogame);
-        prodholder.addProduct(videogame);
+        videogameService.videogameRepository.save(videogame);
         return "saved_videogame";
     }
 

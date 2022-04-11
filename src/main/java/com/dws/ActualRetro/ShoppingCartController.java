@@ -11,11 +11,13 @@ import java.util.List;
 
 @Controller
 public class ShoppingCartController {
-    @Autowired
-    ProductHolder prodHolder;
-    ShoppingCart testcart = new ShoppingCart();
+    //@Autowired
+    //ProductHolder prodHolder;
+    //CartService cartService;
 
-    @GetMapping("/products/cart")
+    ShoppingCart testcart = new ShoppingCart();   //De momento no tenemos usuarios (Fase III) para el carro.
+
+   /* @GetMapping("/products/cart")
     public String showCart(Model model){
         model.addAttribute("consoles", testcart.getConsoleList());
         model.addAttribute("videogames", testcart.getVideogameList());
@@ -75,5 +77,5 @@ public class ShoppingCartController {
 
 
 
-
+*/
 }

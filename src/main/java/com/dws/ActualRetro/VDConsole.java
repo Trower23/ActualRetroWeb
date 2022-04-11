@@ -12,7 +12,7 @@ import java.util.Objects;
 public class VDConsole {
     private String name;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private float price;
     private int stock = 1;

@@ -11,7 +11,5 @@ import javax.transaction.Transactional;
 
 @Component
 public interface VideogameRepository extends JpaRepository<Videogame, Long> {
-
-
-
+    Videogame findById(long id);
 }

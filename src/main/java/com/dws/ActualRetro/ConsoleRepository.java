@@ -10,5 +10,5 @@ import javax.transaction.Transactional;
 
 @Component
 public interface ConsoleRepository extends JpaRepository<VDConsole, Long> {
-
+    VDConsole findById(long id);
 }

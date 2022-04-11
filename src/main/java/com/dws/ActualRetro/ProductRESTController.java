@@ -40,7 +40,7 @@ public class ProductRESTController{
     @GetMapping("/products/consoles/{id}")
     public ResponseEntity<VDConsole> showConsole(@PathVariable long id){
         if (videoconsoleService.consoleRepository.existsById(id)){
-            return new ResponseEntity<>(videoconsoleService.consoleRepository.getById(id), HttpStatus.OK);
+            return new ResponseEntity<>(videoconsoleService.consoleRepository.findById(id), HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -49,7 +49,7 @@ public class ProductRESTController{
     @GetMapping("/products/games/{id}")
     public ResponseEntity<Videogame> showGame(@PathVariable long id){
         if (videogameService.videogameRepository.existsById(id)) {
-            return new ResponseEntity<>(videogameService.videogameRepository.getById(id), HttpStatus.OK);
+            return new ResponseEntity<>(videogameService.videogameRepository.findById(id), HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -57,29 +57,41 @@ public class ProductRESTController{
 
     @PostMapping("/products/consoles")
     public ResponseEntity<VDConsole> addVConsole(@RequestBody VDConsole vdConsole){
-        if (videoconsoleService.consoleRepository.findAll().contains(vdConsole)){
-            vdConsole.setStock(vdConsole.getStock()+1);
-            vdConsole.setId(vdConsole.getId());
+        List<VDConsole> consoles = videoconsoleService.consoleRepository.findAll();
+        if (consoles.contains(vdConsole)){
+            VDConsole newcon = consoles.get(consoles.indexOf(vdConsole));
+            newcon.addStock();
+            videoconsoleService.consoleRepository.save(newcon);
+            return new ResponseEntity<>(newcon, HttpStatus.CREATED);
         }else{
             videoconsoleService.consoleRepository.save(vdConsole);
+            return new ResponseEntity<>(vdConsole, HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(vdConsole, HttpStatus.CREATED);
     }
 
     @PostMapping("/products/games")
     public ResponseEntity<Videogame> addVideogame(@RequestBody Videogame videogame){
-        if (videogameService.videogameRepository.findAll().contains(videogame)){
-            videogameService.videogameRepository.getById(videogame.getId()).addStock();
+        List<Videogame> games = videogameService.videogameRepository.findAll();
+        if (games.contains(videogame)){
+            Videogame newgame = games.get(games.indexOf(videogame));
+            newgame.addStock();
+            videogameService.videogameRepository.save(newgame);
+            return new ResponseEntity<>(newgame, HttpStatus.CREATED);
+        }else{
+            videogameService.videogameRepository.save(videogame);
+            return new ResponseEntity<>(videogame, HttpStatus.CREATED);
         }
-        videogameService.videogameRepository.save(videogame);
-        return new ResponseEntity<>(videogame, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/products/consoles/{id}")
     public ResponseEntity<VDConsole> deleteVDConsole(@PathVariable long id){
         if (videoconsoleService.consoleRepository.existsById(id)) {
-            VDConsole vdConsole =videoconsoleService.consoleRepository.getById(id);
-            videoconsoleService.consoleRepository.deleteById(id);
+            VDConsole vdConsole =videoconsoleService.consoleRepository.findById(id);
+            vdConsole.removeStock();
+            videoconsoleService.consoleRepository.save(vdConsole);
+            if (!vdConsole.isStock()) {
+                videoconsoleService.consoleRepository.delete(vdConsole);
+            }
             return new ResponseEntity<>(vdConsole, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -88,8 +100,12 @@ public class ProductRESTController{
     @DeleteMapping("/products/games/{id}")
     public ResponseEntity<Videogame> deleteVideogame(@PathVariable long id){
         if (videogameService.videogameRepository.existsById(id)) {
-            Videogame videogame = videogameService.videogameRepository.getById(id);
-            videogameService.videogameRepository.deleteById(id);
+            Videogame videogame = videogameService.videogameRepository.findById(id);
+            videogame.removeStock();
+            videogameService.videogameRepository.save(videogame);
+            if (!videogame.isStock()) {
+                videogameService.videogameRepository.delete(videogame);
+            }
             return new ResponseEntity<>(videogame, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

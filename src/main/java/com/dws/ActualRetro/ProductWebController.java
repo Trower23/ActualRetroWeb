@@ -43,20 +43,20 @@ public class ProductWebController{
 
 
     @PostMapping("/products/consoles/sell")
-    public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String date){
+    public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String date, @RequestParam String description){
         Date newdate = new Date();
         newdate.parseDate(date, "-");
-        VDConsole console = new VDConsole(name, price, maxcon, newdate);
+        VDConsole console = new VDConsole(name, price, maxcon, newdate, description);
         model.addAttribute("console",console);
         prodholder.addProduct(console);
         return "saved_console";
     }
     @PostMapping("/products/videogames/sell")
-    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String date, @RequestParam String genre){
+    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String date, @RequestParam String genre, @RequestParam String description){
         Date newdate = new Date();
         newdate.parseDate(date, "-");
         VDGenre gen = VDGenre.valueOf(genre);
-        Videogame videogame = new Videogame(name, price, pegi, newdate, gen);
+        Videogame videogame = new Videogame(name, price, pegi, newdate, gen, description);
         model.addAttribute("videogame", videogame);
         prodholder.addProduct(videogame);
         return "saved_videogame";

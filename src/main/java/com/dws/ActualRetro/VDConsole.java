@@ -14,12 +14,14 @@ public class VDConsole {
     private int stock = 1;
     private int maxcontrollers;
     private Date date;
+    private String description;
 
-    public VDConsole(String na, float pri, int maxcon, Date date){
+    public VDConsole(String na, float pri, int maxcon, Date date, String description){
         this.name = na;
         this.price = pri;
         this.maxcontrollers = maxcon;
         this.date = date;
+        this.description= description;
     }
 
 

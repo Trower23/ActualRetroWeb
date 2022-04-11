@@ -7,6 +7,15 @@
 
 </head>
 <body>
+<script>
+    CKEDITOR.replace('editor1');
+    CKEDITOR.replace('editor2');
+
+    function getData() {
+        var editor_data = CKEDITOR.instances['editor1'].getData();
+        //Set data in Second Editor which is written in first Editor
+    }
+</script>
 <div class="sell-box">
     <h2>Sell videogame</h2>
     <form action="/products/videogames/sell" method="post">
@@ -56,7 +65,19 @@
                 <option value="TURNBASEDRPG">Turn-Based RPG</option>
                 <option value="VISUALNOVEL">Visual Novel</option>
             </select></div>
-       <div class="dropdown-content"> <input type="submit" value="Submit">
+
+
+            <br >
+            <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+            <textarea name="editor1"></textarea>
+            <script src="Description.js"></script>
+
+
+
+        <div class="dropdown-content"> <input type="submit" value="Submit">
+
+
+
             <span></span>
             <span></span>
             <span></span>

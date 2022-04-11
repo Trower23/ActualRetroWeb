@@ -58,9 +58,11 @@ public class ProductRESTController{
     @PostMapping("/products/consoles")
     public ResponseEntity<VDConsole> addVConsole(@RequestBody VDConsole vdConsole){
         if (videoconsoleService.consoleRepository.findAll().contains(vdConsole)){
-            videoconsoleService.consoleRepository.getById(vdConsole.getId()).addStock();
+            vdConsole.setStock(vdConsole.getStock()+1);
+            vdConsole.setId(vdConsole.getId());
+        }else{
+            videoconsoleService.consoleRepository.save(vdConsole);
         }
-        videoconsoleService.consoleRepository.save(vdConsole);
         return new ResponseEntity<>(vdConsole, HttpStatus.CREATED);
     }
 
@@ -99,6 +101,7 @@ public class ProductRESTController{
         if (videoconsoleService.consoleRepository.existsById(id)){
             vdConsole.setId(id);
             vdConsole.setStock(videoconsoleService.consoleRepository.getById(id).getStock());
+            videoconsoleService.consoleRepository.deleteById(id);
             videoconsoleService.consoleRepository.save(vdConsole);
             return new ResponseEntity<>(vdConsole, HttpStatus.OK);
         }else{

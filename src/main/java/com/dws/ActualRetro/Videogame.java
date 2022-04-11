@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Videogame {

@@ -5,7 +5,6 @@ import lombok.*;
 import java.util.Objects;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class VDConsole {
     private String name;

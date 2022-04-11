@@ -20,6 +20,8 @@ public class ProductWebController{
     VideoconsoleService videoconsoleService;
     @Autowired
     VideogameService videogameService;
+   // @Autowired
+//    UserService userService; //we need to create new methods here to register users and save them on our database.
 
     @GetMapping("/products/consoles")
     public String showVDConsoles(Model model){

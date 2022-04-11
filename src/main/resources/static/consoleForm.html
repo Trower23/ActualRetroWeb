@@ -11,6 +11,7 @@
 <div class="sell-box">
     <h2>Sell product</h2>
     <form action="/products/consoles/sell" method="post">
+        <br>
         <div class="user-box">
             <input type="text"  name="name" required="">
             <label>Name</label>
@@ -25,12 +26,15 @@
         </div>
 
         <br >
-        <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
-        <textarea name="editor1"></textarea>
-        <script src="Description.js"></script>
 
         <div class="user-box"> <input type="date" name="date"> </div>
 
+        <div>
+            <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+            <textarea name="editor1"></textarea>
+            <script src="Description.js"></script>
+        </div>
+        
         <input type="submit" value="Submit">
         <span></span>
         <span></span>

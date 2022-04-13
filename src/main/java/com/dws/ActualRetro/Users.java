@@ -3,10 +3,7 @@ package com.dws.ActualRetro;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -20,6 +17,8 @@ public class Users {
     private String mail;
     private String password;
     private long phone;
+    @OneToOne
+    private ShoppingCart shoppingCart;
 
     public Users(String name, String surname, long id, String mail, String password, long phone){
         this.name=name;

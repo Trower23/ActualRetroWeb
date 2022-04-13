@@ -16,17 +16,16 @@ public class Users {
     private long id;
     private String mail;
     private String password;
-    private long phone;
-    @OneToOne
+    private String phone;
+    @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
-
-    public Users(String name, String surname, long id, String mail, String password, long phone){
+    public Users(String name, String surname, String mail, String password, String phone){
         this.name=name;
         this.surname= surname;
-        this.id=id;
         this.mail=mail;
         this.password= password;
         this.phone= phone;
+        this.shoppingCart=new ShoppingCart();
     }
     public void setId(long id){
         this.id = id;

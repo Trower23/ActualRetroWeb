@@ -17,7 +17,7 @@ public class ShoppingCartController {
 
     ShoppingCart testcart = new ShoppingCart();   //De momento no tenemos usuarios (Fase III) para el carro.
 
-   /* @GetMapping("/products/cart")
+   /*@GetMapping("/products/cart")
     public String showCart(Model model){
         model.addAttribute("consoles", testcart.getConsoleList());
         model.addAttribute("videogames", testcart.getVideogameList());

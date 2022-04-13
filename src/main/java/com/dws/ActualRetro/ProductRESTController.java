@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +15,27 @@ import java.util.List;
 public class ProductRESTController{
     /*@Autowired
     ProductHolder prodholder;*/
+
     @Autowired
     VideogameService videogameService;
     @Autowired
     VideoconsoleService videoconsoleService;
+    @Autowired
+    UserService userService;
+
+    @PostConstruct
+    public void init(){
+        Users user1= new Users("Juan", "Gonzalez", "juangon@gmail.com", "passJuord", "661665553");
+        Videogame videogame= new Videogame("Mario bross", 10, 18, new Date(10,4,2002), VDGenre.ACTION, "description");
+        VDConsole console= new VDConsole("XBOX 360", 10, 2, new Date(10,10,2002), "desc");
+        userService.userRepository.save(user1);
+        videogameService.videogameRepository.save(videogame);
+        videoconsoleService.consoleRepository.save(console);
+        user1.getShoppingCart().addVideogame(videogame);
+        /*user1.getShoppingCart().addConsole(console);*/
+
+    }
+
 
     @GetMapping("/products/consoles")
     public ResponseEntity<List<VDConsole>> showConsoles(){
@@ -135,4 +154,5 @@ public class ProductRESTController{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }

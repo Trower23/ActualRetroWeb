@@ -1,5 +1,6 @@
 package com.dws.ActualRetro;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -11,13 +12,16 @@ import java.util.List;
 
 @Controller
 public class ShoppingCartController {
-    //@Autowired
-    //ProductHolder prodHolder;
-    //CartService cartService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    VideoconsoleService videoconsoleService;
+    @Autowired
+    VideogameService videogameService;
 
-    ShoppingCart testcart = new ShoppingCart();   //De momento no tenemos usuarios (Fase III) para el carro.
+    ShoppingCart testcart = userService.userRepository.getById((long) 1).getShoppingCart();   //We dont have users yet, so user1 is a try user, to show functionality.
 
-   /*@GetMapping("/products/cart")
+    @GetMapping("/products/cart")
     public String showCart(Model model){
         model.addAttribute("consoles", testcart.getConsoleList());
         model.addAttribute("videogames", testcart.getVideogameList());
@@ -27,27 +31,27 @@ public class ShoppingCartController {
 
     @GetMapping("/product/buy/console/{id}")
     public String buyCartConsole( @PathVariable long id){
-        VDConsole console = prodHolder.getConsole(id);
+        VDConsole console = videoconsoleService.consoleRepository.getById(id);
         testcart.addConsole(console);
         return "added_success";
     }
     @GetMapping("/product/buy/videogame/{id}")
     public String buyCartVideogame( @PathVariable long id){
-        Videogame videogame = prodHolder.getVideogame(id);
+        Videogame videogame = videogameService.videogameRepository.getById(id);
         testcart.addVideogame(videogame);
         return "added_success";
     }
 
     @GetMapping("/product/remove/console/{id}")
     public String removeCartConsole(Model model, @PathVariable long id){
-        model.addAttribute("console",prodHolder.getConsole(id));
-        testcart.deleteConsole(prodHolder.getConsole(id));
+        model.addAttribute("console",videoconsoleService.consoleRepository.getById(id));
+        testcart.deleteConsole(videoconsoleService.consoleRepository.getById(id));
         return "deleted_success_cart";
     }
     @GetMapping("/product/remove/videogame/{id}")
     public String removeCartVideoGame(Model model, @PathVariable long id){
-        model.addAttribute("videogame",prodHolder.getVideogame(id));
-        testcart.deleteVideogame(prodHolder.getVideogame(id));
+        model.addAttribute("videogame",videogameService.videogameRepository.getById(id));
+        testcart.deleteVideogame(videogameService.videogameRepository.getById(id));
         return "deleted_success_cart";
     }
     @GetMapping("/product/buy")
@@ -59,14 +63,14 @@ public class ShoppingCartController {
         int size = testcart.getConsoleList().size();
         for (int i = size - 1; i >= 0; i--){
             VDConsole console = testcart.getConsoleList().get(i);
-            prodHolder.delete(console);
+            videoconsoleService.consoleRepository.deleteById(console.getId());
             auxconsolelist.add(console);
             testcart.deleteConsole(console);
         }
         size = testcart.getVideogameList().size();
         for (int i = size - 1; i >= 0; i--){
             Videogame videogame = testcart.getVideogameList().get(i);
-            prodHolder.delete(videogame);
+            videogameService.videogameRepository.deleteById(videogame.getId());
             auxvideogamelist.add(videogame);
             testcart.deleteVideogame(videogame);
         }
@@ -77,5 +81,4 @@ public class ShoppingCartController {
 
 
 
-*/
 }

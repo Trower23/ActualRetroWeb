@@ -31,8 +31,8 @@ public class ProductRESTController{
         userService.userRepository.save(user1);
         videogameService.videogameRepository.save(videogame);
         videoconsoleService.consoleRepository.save(console);
-        user1.getShoppingCart().addVideogame(videogame);
-        /*user1.getShoppingCart().addConsole(console);*/
+        /*user1.getShoppingCart().addVideogame(videogame);
+        user1.getShoppingCart().addConsole(console);   this doesn't work... don't know why. Repare it please :( */
 
     }
 

@@ -18,7 +18,7 @@ public class ShoppingCartController {
     VideoconsoleService videoconsoleService;
     @Autowired
     VideogameService videogameService;
-
+    ////// LINE 22 DOESN'T WORK.
     ShoppingCart testcart = userService.userRepository.getById((long) 1).getShoppingCart();   //We dont have users yet, so user1 is a try user, to show functionality.
 
     @GetMapping("/products/cart")

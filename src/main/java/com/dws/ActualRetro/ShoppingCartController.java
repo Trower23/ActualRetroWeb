@@ -75,7 +75,8 @@ public class ShoppingCartController {
     }
     @GetMapping("/product/buy")
     public String buyCart(Model model){
-        ShoppingCart testcart = userService.userRepository.findById(1).getShoppingCart();
+        Users user1 = userService.userRepository.findById(1);
+        ShoppingCart testcart = user1.getShoppingCart();
         model.addAttribute("totalprod", testcart.getTotalProducts());
         model.addAttribute("totalprice", testcart.getTotalPrice());
         List<VDConsole> auxconsolelist = new ArrayList<>();
@@ -91,6 +92,7 @@ public class ShoppingCartController {
 
             }
             auxconsolelist.add(console);
+            user1.buyConsole(console);
             testcart.deleteConsole(console);
         }
         size = testcart.getVideogameList().size();
@@ -102,6 +104,7 @@ public class ShoppingCartController {
                 videogameService.videogameRepository.deleteById(auxvid.getId());
             }
             auxvideogamelist.add(videogame);
+            user1.buyVideogame(videogame);
             testcart.deleteVideogame(videogame);
         }
         model.addAttribute("consoles", auxconsolelist);

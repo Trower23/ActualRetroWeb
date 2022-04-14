@@ -30,4 +30,7 @@ public class Users {
     public void setId(long id){
         this.id = id;
     }
+    public void setShoppingCart(ShoppingCart shopCa){
+        this.shoppingCart = shopCa;
+    }
 }

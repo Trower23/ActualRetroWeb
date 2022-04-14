@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 
-public class VideoconsoleService {
+public class ConsoleService {
     @Autowired
     ConsoleRepository consoleRepository;
 }

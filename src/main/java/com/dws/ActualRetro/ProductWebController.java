@@ -1,17 +1,10 @@
 package com.dws.ActualRetro;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.Console;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -19,7 +12,7 @@ public class ProductWebController{
     @Autowired
     VideogameService videogameService;
     @Autowired
-    VideoconsoleService videoconsoleService;
+    ConsoleService consoleService;
     @Autowired
     UserService userService;   //we need to create new methods here to register users and save them on our database.
 
@@ -27,7 +20,7 @@ public class ProductWebController{
     @GetMapping("/products/consoles")
     public String showVDConsoles(Model model){
         //List<VDConsole> vdConsoles= new ArrayList<>(prodholder.getConsoles());
-        List<VDConsole> vdConsoles=videoconsoleService.consoleRepository.findAll();
+        List<VDConsole> vdConsoles= consoleService.consoleRepository.findAll();
         model.addAttribute("vdConsoles", vdConsoles);
         return "consoles";
     }
@@ -40,12 +33,12 @@ public class ProductWebController{
     }
     @GetMapping("/products/consoles/{id}")
     public String showVDConsole(Model model, @PathVariable long id){
-        model.addAttribute("vdConsole",videoconsoleService.consoleRepository.getById(id));
+        model.addAttribute("vdConsole", consoleService.consoleRepository.findById(id));
         return "console";
     }
     @GetMapping("/products/videogames/{id}")
     public String showVideogame(Model model, @PathVariable long id) {
-        model.addAttribute("videogame", videogameService.videogameRepository.getById(id));
+        model.addAttribute("videogame", videogameService.videogameRepository.findById(id));
         return "videogame";
     }
 
@@ -55,7 +48,7 @@ public class ProductWebController{
         newdate.parseDate(date, "-");
         VDConsole console = new VDConsole(name, price, maxcon, newdate, description);
         model.addAttribute("console",console);
-        videoconsoleService.consoleRepository.save(console);
+        consoleService.consoleRepository.save(console);
         return "saved_console";
     }
     @PostMapping("/products/videogames/sell")

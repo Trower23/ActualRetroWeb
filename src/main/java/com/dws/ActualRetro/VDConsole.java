@@ -38,11 +38,7 @@ public class VDConsole {
     }
 
     public boolean isStock(){
-        if (stock > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return this.stock > 0;
     }
 
     public void addStock(){

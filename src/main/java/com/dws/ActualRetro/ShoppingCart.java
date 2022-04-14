@@ -13,20 +13,14 @@ import java.util.concurrent.atomic.AtomicLong;
 @Data
 @Entity
 public class ShoppingCart {
-    @Transient
-    @Autowired
-    VideogameService videogameService;
-    @Transient
-    @Autowired
-    VideoconsoleService videoconsoleService;
     private long totalProducts;
     private float totalPrice;
-    @Transient
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<VDConsole> consoleList = new ArrayList<>();
-    @Transient
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Videogame> videogameList = new ArrayList<>();
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idShoppingCart;
 
 
@@ -36,28 +30,22 @@ public class ShoppingCart {
     }
 
     public void addConsole(VDConsole console) {
-        if (videoconsoleService.consoleRepository.findAll().contains(console)) { // check if this product is available (Autowireded service).
+        if (!this.consoleList.contains(console)) {
             consoleList.add(console);
             totalProducts++;
             totalPrice = totalPrice + console.getPrice();
-        }
-        if (videoconsoleService.consoleRepository.getById(console.getId()).getStock()>1){
-            videoconsoleService.consoleRepository.getById(console.getId()).removeStock();
         }else{
-            videoconsoleService.consoleRepository.deleteById(console.getId());
+            System.out.println("Console already added"); //Por si acaso lo necesitamos
         }
     }
 
     public void addVideogame(Videogame videogame) {
-        if (videogameService.videogameRepository.findAll().contains(videogame)) {
+        if (!this.videogameList.contains(videogame)) {
             videogameList.add(videogame);
             totalProducts++;
             totalPrice = totalPrice + videogame.getPrice();
-        }
-        if (videogameService.videogameRepository.getById(videogame.getId()).getStock() > 1) {
-            videogameService.videogameRepository.getById(videogame.getId()).removeStock();
-        } else {
-            videogameService.videogameRepository.deleteById(videogame.getId()); //There's only 1 item, if we sell it we should decrease stock, but, stock==0 == no product.
+        }else{
+            System.out.println("Videogame already added"); //Por si acaso lo necesitamos
         }
     }
 
@@ -66,12 +54,6 @@ public class ShoppingCart {
             consoleList.remove(console);
             totalProducts--;
             totalPrice = totalPrice - console.getPrice();
-            if (videoconsoleService.consoleRepository.existsById(console.getId())) {
-                videoconsoleService.consoleRepository.getById(console.getId()).addStock();
-            } else {
-                videoconsoleService.consoleRepository.save(console);
-            }
-
         }
     }
 
@@ -80,14 +62,7 @@ public class ShoppingCart {
             videogameList.remove(videogame);
             totalProducts--;
             totalPrice = totalPrice - videogame.getPrice();
-            if (videogameService.videogameRepository.existsById(videogame.getId())){
-                videogameService.videogameRepository.getById(videogame.getId()).addStock();
-            }else{
-                videogameService.videogameRepository.save(videogame);
-            }
-
         }
-
     }
 }
 

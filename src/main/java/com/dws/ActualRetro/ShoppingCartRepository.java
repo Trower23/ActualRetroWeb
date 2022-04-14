@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface UserRepository extends JpaRepository<Users, Long> {
-    Users findById(long id);
+public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
+    ShoppingCart findById(long id);
 }

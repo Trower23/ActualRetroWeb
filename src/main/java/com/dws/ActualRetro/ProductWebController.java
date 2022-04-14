@@ -79,4 +79,10 @@ public class ProductWebController {
         return query.setParameter("pricemin", pricemin).setParameter("pricemax", pricemax).getResultList();
     }
 
+    @GetMapping("/products/consoles/{pricemin}/{pricemax}")
+    public List<VDConsole> getConsolesBetweenPrices(@PathVariable int pricemin, @PathVariable int pricemax) {
+        TypedQuery<VDConsole> query = entityManager.createQuery("SELECT VDConsole FROM VDConsole c WHERE c.price BETWEEN :pricemin AND :pricemax", VDConsole.class);
+        return query.setParameter("pricemin", pricemin).setParameter("pricemax", pricemax).getResultList();
+    }
+
 }

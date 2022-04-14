@@ -20,7 +20,7 @@ public class ShoppingCart {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Videogame> videogameList = new ArrayList<>();
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long idShoppingCart;
 
 

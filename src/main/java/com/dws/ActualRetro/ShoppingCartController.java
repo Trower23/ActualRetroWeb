@@ -88,6 +88,7 @@ public class ShoppingCartController {
                                     //Con videojuegos pasa lo mismo
             if (!auxco.isStock()){
                 consoleService.consoleRepository.deleteById(auxco.getId());
+
             }
             auxconsolelist.add(console);
             testcart.deleteConsole(console);
@@ -98,7 +99,7 @@ public class ShoppingCartController {
             Videogame auxvid = videogameService.videogameRepository.findById(videogame.getId());
             auxvid.removeStock();
             if (!auxvid.isStock()){
-                videogameService.videogameRepository.delete(auxvid);
+                videogameService.videogameRepository.deleteById(auxvid.getId());
             }
             auxvideogamelist.add(videogame);
             testcart.deleteVideogame(videogame);

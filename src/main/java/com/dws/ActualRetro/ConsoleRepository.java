@@ -6,9 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 @Component
 public interface ConsoleRepository extends JpaRepository<VDConsole, Long> {
     VDConsole findById(long id);
+
 }

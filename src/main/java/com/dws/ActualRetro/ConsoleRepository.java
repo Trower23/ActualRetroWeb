@@ -16,7 +16,9 @@ import java.util.List;
 public interface ConsoleRepository extends JpaRepository<VDConsole, Long> {
     VDConsole findById(long id);
     @Query(value = "SELECT * FROM VDConsole WHERE price BETWEEN :pricemin AND :pricemax", nativeQuery = true)
-    public List<VDConsole> findConsoleBetweenPrices(@Param("pricemin") int pricemin, @Param("pricemax") int pricemax);
+    List<VDConsole> findConsoleBetweenPrices(@Param("pricemin") float pricemin, @Param("pricemax") float pricemax);
+    @Query(value = "SELECT * FROM VDConsole WHERE maxcontrollers=:maxcon", nativeQuery = true)
+    List<VDConsole> findConsoleWithControllers(@Param("maxcon") int maxcontrollers);
 
 
 }

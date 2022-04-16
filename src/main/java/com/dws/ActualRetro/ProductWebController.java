@@ -5,10 +5,8 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Controller
@@ -73,34 +71,29 @@ public class ProductWebController {
     }
     //-- Queries-- //
 
-    @GetMapping("/products/consoles/{pricemin}/{pricemax}")
-    public String getConsolesBetweenPrices(Model model, @PathVariable int pricemin, @PathVariable int pricemax){
+    @GetMapping("/products/consoles/pricefilter/{pricemin}/{pricemax}")
+    public String getConsolesBetweenPrices(Model model, @PathVariable int pricemin, @PathVariable int pricemax) {
         model.addAttribute("vdConsoles", consoleService.consoleRepository.findConsoleBetweenPrices(pricemin, pricemax));
         return "consoles";
     }
 
-
-    /*@GetMapping("/products/videogames/{pricemin}/{pricemax}")
-    public List<Videogame> getGamesBetweenPrices(@PathVariable int pricemin, @PathVariable int pricemax) {
-        TypedQuery<Videogame> query = entityManager.createQuery("SELECT v FROM Videogame v WHERE v.price BETWEEN :pricemin AND :pricemax", Videogame.class);
-        return query.setParameter("pricemin", pricemin).setParameter("pricemax", pricemax).getResultList();
+    @GetMapping("/products/videogames/pricefilter/{pricemin}/{pricemax}")
+    public String getVideogamesBetweenPrices(Model model, @PathVariable int pricemin, @PathVariable int pricemax) {
+        model.addAttribute("videogames", videogameService.videogameRepository.findVideogameBetweenPrices(pricemin, pricemax));
+        return "videogames";
     }
 
-    @GetMapping("/products/consoles/{pricemin}/{pricemax}")
-    public List<VDConsole> getConsolesBetweenPrices(@PathVariable int pricemin, @PathVariable int pricemax) {
-        TypedQuery<VDConsole> query = entityManager.createQuery("SELECT VDConsole FROM VDConsole c WHERE c.price BETWEEN :pricemin AND :pricemax", VDConsole.class);
-        return query.setParameter("pricemin", pricemin).setParameter("pricemax", pricemax).getResultList();
+    @GetMapping("/products/videogames/pegifilter/{pegi}")
+    public String getVideogamesWhichPegiIs(Model model, @PathVariable int pegi) {
+        model.addAttribute("videogames", videogameService.videogameRepository.findGamesPegi(pegi));
+        return "videogames";
     }
 
-  @GetMapping("/products/videogames/{pegi}")
-    public List<Videogame> getGamesPegi(@PathVariable int pegi){
-        TypedQuery<Videogame> query= entityManager.createQuery("SELECT v FROM Videogame v WHERE v.pegi=:pegi", Videogame.class);
-        return query.setParameter("pegi", pegi).getResultList();
+    @GetMapping("products/consoles/controllersfilter/{maxcon}")
+    public String getConsolesWithControllers(Model model, @PathVariable int maxcon){
+        model.addAttribute("vdConsoles", consoleService.consoleRepository.findConsoleWithControllers(maxcon));
+        return "consoles";
     }
-    @GetMapping("/products/consoles/{maxcon}")
-    public List<VDConsole> getConsolesControllers(@PathVariable int maxcon){
-        TypedQuery<VDConsole> query= entityManager.createQuery("SELECT c FROM VDConsole c WHERE c.maxcontrollers=:maxcon", VDConsole.class);
-        return query.setParameter("maxcon", maxcon).getResultList();
-    }*/
+
 
 }

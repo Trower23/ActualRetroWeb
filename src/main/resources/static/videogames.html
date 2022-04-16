@@ -43,9 +43,7 @@
     <section class="banner"> </section>
 
 
-
-
-    <form action="/products/videogames/pricefilter/{pricemin}/{pricemax}" method="post">
+    <form action="/products/videogames/pricefilter/{{pricemin}}/{{pricemax}}" method="post">
         <p>minimum price</p>
         <input type="number" min="1" name="pricemin" required="">
         <label>€</label>
@@ -60,7 +58,7 @@
     </form>
 
 
-    <form action="/products/videogames/pegifilter/{pegi}" method="post">
+    <form action="/products/videogames/pegifilter/{{pegi}}" method="post">
         <p>PEGI FILTER</p>
         <input type="number" min="1" name="pegi:" required="">
         <label>years</label>

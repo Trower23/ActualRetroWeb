@@ -43,7 +43,7 @@
     </section>
 
     <section class="banner"> </section>
-    <form action="/products/consoles/pricefilter/{pricemin}/{pricemax" method="post">
+    <form action="/products/consoles/pricefilter/{{pricemin}}/{{pricemax}" method="post">
         <p>minimum price</p>
         <input type="number" min="1" name="pricemin" required="">
         <label>€</label>
@@ -60,7 +60,7 @@
     </form>
 
 
-    <form action="products/consoles/controllersfilter/{maxcon}" method="post">
+    <form action="products/consoles/controllersfilter/{{maxcon}}" method="post">
         <p>MAXIMUM OF CONSOLE CONTROLS</p>
         <input type="number" min="1" name="pegi:" required="">
         <label>years</label>

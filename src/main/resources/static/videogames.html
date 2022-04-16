@@ -39,16 +39,40 @@
 
         </font></div>
     </section>
-    <!-- Stats Gallery Section -->
-    <!-- Parallax Section -->
+
     <section class="banner"> </section>
-    <!-- More Info Section -->
-    <footer> </footer>
-    <!-- Footer Section -->
-    <!-- Copyrights Section -->
+
+
+
+    <form action="/products/videogames/pricefilter/{pricemin}/{pricemax}" method="post">
+        <p>minimum price</p>
+        <input type="number" min="1" name="pricemin" required="">
+        <label>€</label>
+
+        <br>
+
+        <p>maximum  price</p>
+        <input type="number" max="200" name="pricemin" required="">
+        <label>€</label>
+
+        <input type="submit" value="Save">
+    </form>
+
+
     <div class="copyright">ACTUALRETRO, BEST SHOP, BEST DISCOUNTS...<br>
     </div>
 </div>
-<!-- Main Container Ends -->
+
+<script>
+    var rangeslider = document.getElementById("sliderRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = rangeslider.value;
+
+    rangeslider.oninput = function() {
+        output.innerHTML = this.value;
+    }
+</script>
+
+
 </body>
 </html>

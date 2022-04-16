@@ -20,7 +20,7 @@
     <h2>Sell videogame</h2>
     <form action="/products/videogames/sell" method="post">
         <div class="user-box">
-            <input type="text" name="name" required="">
+            <input type="text" name="name" required="" pattern="[a-zA-Z\u00f1\u00d1\u00E0-\u00FC]+">
             <label>Name:</label>
         </div>
         <div class="user-box">

@@ -73,7 +73,14 @@ public class ProductWebController {
     }
     //-- Queries-- //
 
-    @GetMapping("/products/videogames/{pricemin}/{pricemax}")
+    @GetMapping("/products/consoles/{pricemin}/{pricemax}")
+    public String getConsolesBetweenPrices(Model model, @PathVariable int pricemin, @PathVariable int pricemax){
+        model.addAttribute("vdConsoles", consoleService.consoleRepository.findConsoleBetweenPrices(pricemin, pricemax));
+        return "consoles";
+    }
+
+
+    /*@GetMapping("/products/videogames/{pricemin}/{pricemax}")
     public List<Videogame> getGamesBetweenPrices(@PathVariable int pricemin, @PathVariable int pricemax) {
         TypedQuery<Videogame> query = entityManager.createQuery("SELECT v FROM Videogame v WHERE v.price BETWEEN :pricemin AND :pricemax", Videogame.class);
         return query.setParameter("pricemin", pricemin).setParameter("pricemax", pricemax).getResultList();
@@ -85,7 +92,7 @@ public class ProductWebController {
         return query.setParameter("pricemin", pricemin).setParameter("pricemax", pricemax).getResultList();
     }
 
-    /*@GetMapping("/products/videogames/{pegi}")
+  @GetMapping("/products/videogames/{pegi}")
     public List<Videogame> getGamesPegi(@PathVariable int pegi){
         TypedQuery<Videogame> query= entityManager.createQuery("SELECT v FROM Videogame v WHERE v.pegi=:pegi", Videogame.class);
         return query.setParameter("pegi", pegi).getResultList();

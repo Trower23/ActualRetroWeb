@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,6 +29,17 @@
     <p><strong> BEST SHOP, BEST DISCOUNT</strong></p>
   </section>
   <!-- About Section -->
+  <script type="text/javascript">
+    function getData() {
+      var pricemin = document.getElementById("pricemin").value;
+      var pricemax = document.getElementById("pricemax").value;
+      url=null;
+      if (pricemin.isNumeric() && pricemax.isNumeric()) {
+        url = "/products/consoles/pricefilter/" + pricemin + "/" + pricemax;
+      }
+      window.location.href(url);
+    }
+  </script>
   <section class="about" id="about">
     <h2 class="hidden">About</h2>
     <div style="text-align: justify;">
@@ -42,6 +53,31 @@
       {{/vdConsoles}}
 
       </div>
+    <form>
+      <p>minimum price</p>
+      <input type="number" min="1" name="pricemin" id="pricemin">
+      <label>€</label>
+
+      <br>
+
+      <p>maximum  price</p>
+      <input type="number" max="200" name="pricemax" id="pricemax">
+      <label>€</label>
+      <br>
+
+      <input type="submit" onclick="getData()" value="ENVIAR">
+    </form>
+
+
+    <form action="products/consoles/controllersfilter/{maxcon}" method="post">
+      <p>MAXIMUM OF CONSOLE CONTROLS</p>
+      <input type="number" min="1" name="pegi:" required="">
+      <label>years</label>
+      <br>
+
+      <input type="submit" value="ENVIAR"/>
+
+    </form>
   </section>
   <!-- Stats Gallery Section -->
   <!-- Parallax Section -->

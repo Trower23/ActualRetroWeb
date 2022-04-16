@@ -39,18 +39,34 @@
             {{/videogames}}
 
         </div>
+        <form action="/products/videogames/pricefilter/{{pricemin}}/{{pricemax}}" method="post">
+            <p>minimum price</p>
+            <input type="number" min="1" name="pricemin" required="">
+            <label>€</label>
+
+            <br>
+
+            <p>maximum  price</p>
+            <input type="number" max="200" name="pricemin" required="">
+            <label>€</label>
+
+            <input type="submit" value="ENVIAR">
+        </form>
+
+
+        <form action="/products/videogames/pegifilter/{{pegi}}" method="post">
+            <p>PEGI FILTER</p>
+            <input type="number" min="1" name="pegi:" required="">
+            <label>years</label>
+            <br>
+
+            <input type="submit" value="ENVIAR"/>
+
+        </form>
 
     </section>
 
-    <form action="/products/videogames/filter" method="post">
 
-        <p>Select your option</p>
-        <br>
-        <input type="range" name="Maximum Game Price" step="1" value="50" min="1" max="100" required>
-        <br>
-
-
-    </form>
 
     <section class="banner"> </section>
 

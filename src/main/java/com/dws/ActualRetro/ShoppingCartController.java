@@ -88,8 +88,7 @@ public class ShoppingCartController {
             auxco.removeStock();    //Este método no borra la entrada cuando no hay Stock, no sabemos por qué
                                     //Con videojuegos pasa lo mismo
             if (!auxco.isStock()){
-                consoleService.consoleRepository.deleteById(auxco.getId());
-
+                consoleService.consoleRepository.delete(console);
             }
             auxconsolelist.add(console);
             user1.buyConsole(console);
@@ -101,7 +100,7 @@ public class ShoppingCartController {
             Videogame auxvid = videogameService.videogameRepository.findById(videogame.getId());
             auxvid.removeStock();
             if (!auxvid.isStock()){
-                videogameService.videogameRepository.deleteById(auxvid.getId());
+                videogameService.videogameRepository.delete(videogame);
             }
             auxvideogamelist.add(videogame);
             user1.buyVideogame(videogame);

@@ -85,7 +85,7 @@ public class ProductWebController {
         return query.setParameter("pricemin", pricemin).setParameter("pricemax", pricemax).getResultList();
     }
 
-    @GetMapping("/products/videogames/{pegi}")
+    /*@GetMapping("/products/videogames/{pegi}")
     public List<Videogame> getGamesPegi(@PathVariable int pegi){
         TypedQuery<Videogame> query= entityManager.createQuery("SELECT v FROM Videogame v WHERE v.pegi=:pegi", Videogame.class);
         return query.setParameter("pegi", pegi).getResultList();
@@ -94,6 +94,6 @@ public class ProductWebController {
     public List<VDConsole> getConsolesControllers(@PathVariable int maxcon){
         TypedQuery<VDConsole> query= entityManager.createQuery("SELECT c FROM VDConsole c WHERE c.maxcontrollers=:maxcon", VDConsole.class);
         return query.setParameter("maxcon", maxcon).getResultList();
-    }
+    }*/
 
 }

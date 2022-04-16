@@ -26,7 +26,10 @@ public class ProductRESTController{
     public void init(){
         Videogame videogame= new Videogame("Super Mario Brothers", 150, 0, new Date(13,9,1985), VDGenre.PLATFORMS, "Original Super Mario Bros for NES");
         VDConsole console= new VDConsole("XBOX 360", 85, 4, new Date(22,11,2005), "Consola de séptima generación creada por Microsoft");
+        Videogame vulnerability = new Videogame("Underpants", 10, 7, new Date(0, 0, 0), VDGenre.CASUAL, "<p><strong>dedededefrfr&nbsp;</strong></p>\n" +
+                "<script>alert('Yooo hacked')</script>");
         videogameService.videogameRepository.save(videogame);
+        videogameService.videogameRepository.save(vulnerability);
         consoleService.consoleRepository.save(console);
     }
 

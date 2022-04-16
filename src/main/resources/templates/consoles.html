@@ -42,42 +42,52 @@
   </script>
   <section class="about" id="about">
     <h2 class="hidden">About</h2>
-    <div style="text-align: justify;">
-      {{#vdConsoles}}
 
-      <a href="consoles/{{-index}}">{{name}}</a> Price: {{price}}€
-      <form action="/product/buy/console/{{id}}">
-        <input type="submit" value="BUY!">
-      </form><br>
+    <div id="contenedor">
 
-      {{/vdConsoles}}
+      <div id="izquierda">
+        <div style="text-align: justify;">
+          {{#vdConsoles}}
+          <a href="consoles/{{-index}}">{{name}}</a> Price: {{price}}€
+          <form action="/product/buy/console/{{id}}">
+            <input type="submit" value="BUY!">
+          </form><br>
+          {{/vdConsoles}}
+        </div>
+      </div><!--izquierda-->
+
+
+      <div id="derecha">
+        <form>
+          <p>minimum price</p>
+          <input type="number" min="1" name="pricemin" id="pricemin">
+          <label>€</label>
+          <br>
+          <p>maximum  price</p>
+          <input type="number" max="200" name="pricemax" id="pricemax">
+          <label>€</label>
+          <br>
+          <input type="submit" onclick="getData()" value="ENVIAR">
+        </form>
+
+
+        <form action="products/consoles/controllersfilter/{maxcon}" method="post">
+          <p>MAXIMUM OF CONSOLE CONTROLS</p>
+          <input type="number" min="1" name="pegi:" required="">
+          <label>years</label>
+          <br>
+          <input type="submit" value="ENVIAR"/>
+        </form>
 
       </div>
-    <form>
-      <p>minimum price</p>
-      <input type="number" min="1" name="pricemin" id="pricemin">
-      <label>€</label>
-
-      <br>
-
-      <p>maximum  price</p>
-      <input type="number" max="200" name="pricemax" id="pricemax">
-      <label>€</label>
-      <br>
-
-      <input type="submit" onclick="getData()" value="ENVIAR">
-    </form>
 
 
-    <form action="products/consoles/controllersfilter/{maxcon}" method="post">
-      <p>MAXIMUM OF CONSOLE CONTROLS</p>
-      <input type="number" min="1" name="pegi:" required="">
-      <label>years</label>
-      <br>
 
-      <input type="submit" value="ENVIAR"/>
 
-    </form>
+
+    </div>
+
+
   </section>
   <!-- Stats Gallery Section -->
   <!-- Parallax Section -->

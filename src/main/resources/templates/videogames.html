@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Videogames Available</title>
-    <link href="../css/videogames.css" rel="stylesheet" type="text/css">
-
+    <link href="http://localhost:9090/css/consoles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container">
@@ -38,20 +37,20 @@
                 </div>
             </div>
             <div id="derecha">
-                <form action="/products/videogames/pricefilter/{{pricemin}}/{{pricemax}}" method="post">
+                <form action="/filter/videogames/pricefilter/" method="get">
                     <p>minimum price</p>
-                    <input type="number" min="1" name="pricemin" required="">
+                    <input type="number" min="1" max="4999" name="pricemin" required="">
                     <label>€</label>
                     <br>
                     <p>maximum  price</p>
-                    <input type="number" max="200" name="pricemin" required="">
+                    <input type="number" min="1" max="4999" name="pricemax" required="">
                     <label>€</label>
                     <input type="submit" value="ENVIAR">
                 </form>
 
-                <form action="/products/videogames/pegifilter/{{pegi}}" method="post">
+                <form action="/filter/videogames/pegifilter/" method="get">
                     <p>PEGI FILTER</p>
-                    <input type="number" min="1" name="pegi:" required="">
+                    <input type="number" min="1" name="pegi" required="">
                     <label>years</label>
                     <br>
                     <input type="submit" value="ENVIAR"/>

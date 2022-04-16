@@ -17,14 +17,19 @@ public class ProductWebController {
     ConsoleService consoleService;
     @Autowired
     UserService userService;   //we need to create new methods here to register users and save them on our database.
+    @Autowired
     @PersistenceContext
-    EntityManager entityManager;
+    EntityManager entityManager; //Deberíamos usar el entityManager
 
 
     @GetMapping("/products/consoles")
     public String showVDConsoles(Model model) {
         //List<VDConsole> vdConsoles= new ArrayList<>(prodholder.getConsoles());
         List<VDConsole> vdConsoles = consoleService.consoleRepository.findAll();
+        /*
+        TypedQuery<VDConsole> q = entityManager.createQuery("SELECT c FROM vdconsole c", VDConsole.class);
+        List<VDConsole> vdConsoles = q.getResultList();
+        */
         model.addAttribute("vdConsoles", vdConsoles);
         return "consoles";
     }
@@ -33,6 +38,10 @@ public class ProductWebController {
     public String showVideogames(Model model) {
         //List<Videogame> videogames= new ArrayList<>(prodholder.getVideogames());
         List<Videogame> videogames = videogameService.videogameRepository.findAll();
+        /*
+        TypedQuery<Videogame> q = entityManager.createQuery("SELECT c FROM videogame c", Videogame.class);
+        List<Videogame> videogames = q.getResultList();
+        */
         model.addAttribute("videogames", videogames);
         return "videogames";
     }
@@ -40,12 +49,22 @@ public class ProductWebController {
     @GetMapping("/products/consoles/{id}")
     public String showVDConsole(Model model, @PathVariable long id) {
         model.addAttribute("vdConsole", consoleService.consoleRepository.findById(id));
+        /*
+        TypedQuery<VDConsole> q = entityManager.createQuery("SELECT c FROM vdconsole WHERE ID = :id", VDConsole.class);
+        q.setParameter("id", id);
+        model.addAttribute("vdConsole", q.getSingleResult());
+        */
         return "console";
     }
 
     @GetMapping("/products/videogames/{id}")
     public String showVideogame(Model model, @PathVariable long id) {
         model.addAttribute("videogame", videogameService.videogameRepository.findById(id));
+        /*
+        TypedQuery<Videogame> q = entityManager.createQuery("SELECT c FROM videogame WHERE ID = :id", Videogame.class);
+        q.setParameter("id", id);
+        model.addAttribute("videogame", q.getSingleResult());
+        */
         return "videogame";
     }
 
@@ -56,6 +75,11 @@ public class ProductWebController {
         VDConsole console = new VDConsole(name, price, maxcon, newdate, description);
         model.addAttribute("console", console);
         consoleService.consoleRepository.save(console);
+        /*
+        TypedQuery<VDConsole> q = entityManager.createQuery("INSERT INTO vdconsole (DESCRIPTION, MAXCONTROLLERS, NAME, PRICE)"
+        + "VALUES (" + description + ", " + maxcon + ", " + name + ", " + price + ")", VDConsole.class);
+        O algo parecido, habría que parametrizarlo*/
+        //No hay que añadir control de Stock? Comparar si el juego es el mismo por el nombre, y demás
         return "saved_console";
     }
 
@@ -67,30 +91,36 @@ public class ProductWebController {
         Videogame videogame = new Videogame(name, price, pegi, newdate, gen, description);
         model.addAttribute("videogame", videogame);
         videogameService.videogameRepository.save(videogame);
+        /*
+        TypedQuery<Videogame> q = entityManager.createQuery("INSERT INTO vdconsole (DESCRIPTION, GENRE, NAME, PEGI, PRICE)"
+        + "VALUES (" + description + ", " + gen.ordinal() + ", " + name + ", " + pegi + ", " + price + ")", Videogame.class);
+        */
+        //Aquí lo mismo con el Stock. Entiendo que quizá las Querys de estos métodos estén mal, ya que no especifico ni
+        //el campo Stock ni el campo ID
         return "saved_videogame";
     }
     //-- Queries-- //
 
-    @GetMapping("/products/consoles/pricefilter/{pricemin}/{pricemax}")
-    public String getConsolesBetweenPrices(Model model, @PathVariable int pricemin, @PathVariable int pricemax) {
+    @GetMapping("/filter/consoles/pricefilter/")
+    public String getConsolesBetweenPrices(Model model, @RequestParam int pricemin, @RequestParam int pricemax) {
         model.addAttribute("vdConsoles", consoleService.consoleRepository.findConsoleBetweenPrices(pricemin, pricemax));
         return "consoles";
     }
 
-    @GetMapping("/products/videogames/pricefilter/{pricemin}/{pricemax}")
-    public String getVideogamesBetweenPrices(Model model, @PathVariable int pricemin, @PathVariable int pricemax) {
+    @GetMapping("/filter/videogames/pricefilter/")
+    public String getVideogamesBetweenPrices(Model model, @RequestParam int pricemin, @RequestParam int pricemax) {
         model.addAttribute("videogames", videogameService.videogameRepository.findVideogameBetweenPrices(pricemin, pricemax));
         return "videogames";
     }
 
-    @GetMapping("/products/videogames/pegifilter/{pegi}")
-    public String getVideogamesWhichPegiIs(Model model, @PathVariable int pegi) {
+    @GetMapping("/filter/videogames/pegifilter/")
+    public String getVideogamesWhichPegiIs(Model model, @RequestParam int pegi) {
         model.addAttribute("videogames", videogameService.videogameRepository.findGamesPegi(pegi));
         return "videogames";
     }
 
-    @GetMapping("products/consoles/controllersfilter/{maxcon}")
-    public String getConsolesWithControllers(Model model, @PathVariable int maxcon){
+    @GetMapping("/filter/consoles/controllersfilter/")
+    public String getConsolesWithControllers(Model model, @RequestParam int maxcon){
         model.addAttribute("vdConsoles", consoleService.consoleRepository.findConsoleWithControllers(maxcon));
         return "consoles";
     }

@@ -31,38 +31,41 @@
     <!-- About Section -->
     <section class="about" id="about">
         <h2 class="hidden">About</h2>
-        <div style="text-align: justify;">
-            {{#videogames}}
 
-            <a href="videogames/{{-index}}">{{name}}</a> Price: {{price}} <form action="/product/buy/videogame/{{id}}"><input type="submit" value="BUY!"></form><br>
+        <div id="contenedor">
 
-            {{/videogames}}
+            <div id="izquierda">
+                <div style="text-align: justify;">
+                    {{#videogames}}
+
+                    <a href="videogames/{{-index}}">{{name}}</a> Price: {{price}} <form action="/product/buy/videogame/{{id}}"><input type="submit" value="BUY!"></form><br>
+                    {{/videogames}}
+                </div>
+            </div>
+            <div id="derecha">
+                <form action="/products/videogames/pricefilter/{{pricemin}}/{{pricemax}}" method="post">
+                    <p>minimum price</p>
+                    <input type="number" min="1" name="pricemin" required="">
+                    <label>€</label>
+                    <br>
+                    <p>maximum  price</p>
+                    <input type="number" max="200" name="pricemin" required="">
+                    <label>€</label>
+                    <input type="submit" value="ENVIAR">
+                </form>
+
+                <form action="/products/videogames/pegifilter/{{pegi}}" method="post">
+                    <p>PEGI FILTER</p>
+                    <input type="number" min="1" name="pegi:" required="">
+                    <label>years</label>
+                    <br>
+                    <input type="submit" value="ENVIAR"/>
+                </form>
+            </div>
 
         </div>
-        <form action="/products/videogames/pricefilter/{{pricemin}}/{{pricemax}}" method="post">
-            <p>minimum price</p>
-            <input type="number" min="1" name="pricemin" required="">
-            <label>€</label>
-
-            <br>
-
-            <p>maximum  price</p>
-            <input type="number" max="200" name="pricemin" required="">
-            <label>€</label>
-
-            <input type="submit" value="ENVIAR">
-        </form>
 
 
-        <form action="/products/videogames/pegifilter/{{pegi}}" method="post">
-            <p>PEGI FILTER</p>
-            <input type="number" min="1" name="pegi:" required="">
-            <label>years</label>
-            <br>
-
-            <input type="submit" value="ENVIAR"/>
-
-        </form>
 
     </section>
 

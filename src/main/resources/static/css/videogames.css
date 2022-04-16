@@ -557,3 +557,26 @@ body {
 }
 
 
+#contenedor{
+    background:#930;
+    padding:10px;
+    overflow: hidden;
+}
+#izquierda{
+    float: left;
+    padding:10px;
+    color:#fff;
+    width:300px;
+    margin:40px;
+    background:#039;
+}
+#derecha{
+    float: right;
+    padding:10px;
+    color:#fff;
+    width:300px;
+    margin:40px;
+    background:#039;
+}
+
+

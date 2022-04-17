@@ -18,7 +18,7 @@
 </script>
 <div class="sell-box">
     <h2>Sell videogame</h2>
-    <form action="/products/videogames/sell" method="post">
+    <form action="/products/videogames/sell" method="post" id="videogame">
         <div class="user-box">
             <input type="text" name="name" required="" pattern="[a-zA-Z\u00f1\u00d1\u00E0-\u00FC]+">
             <label>Name:</label>
@@ -28,7 +28,7 @@
             <label>€</label>
         </div>
         <div class="user-box">
-            <select style="background-color: blue" name="pegi">
+            <select class="selector" name="pegi">
                 <option value="0">NO-PEGI</option>
                 <option value="3">3+</option>
                 <option value="6">6+</option>
@@ -39,7 +39,7 @@
         </div>
         <div class="user-box"> <input type="date" name="date"> </div>
         <div class="user-box">
-            <select style="background-color: blue" name="genre">
+            <select class="selector" name="genre">
                 <option value="ACTION">Action</option>
                 <option value="ADVENTURE">Adventure</option>
                 <option value="CASUAL">Casual</option>
@@ -65,21 +65,8 @@
                 <option value="TURNBASEDRPG">Turn-Based RPG</option>
                 <option value="VISUALNOVEL">Visual Novel</option>
             </select></div>
-
-
             <br>
-            <div>
-                <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
-                <textarea name="description"></textarea>
-                <script src="js/Description.js"></script>
-            </div>
-
-
-
         <div class="dropdown-content"> <input id="getData" onclick="getData()" type="submit" value="Submit"/>
-
-
-
             <span></span>
             <span></span>
             <span></span>
@@ -88,6 +75,13 @@
        </div>
     </form>
 </div>
-
+<div class="left">
+		<div class="desc">
+			<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+			<label style = "color: white;">Description</label>
+			<textarea name="description" form="videogame"></textarea>
+			<script src="js/Description.js"></script>
+		</div>
+	</div>
 </body>
 </html>

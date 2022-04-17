@@ -8,10 +8,78 @@ body {
     background: linear-gradient(#141e30, #243b55);
 }
 
+/* --------- DESCRIPTION RICH TEXT ---------------------------------------------------------------------------------------- */
+
+.left {
+	position: absolute;
+	top: 25%;
+    left: 2.5%;
+    width: 500px;
+}
+
+.desc {
+	
+	
+}
+
+/* --------- EDITOR STYLES  ---------------------------------------------------------------------------------------- */
+
+.editor__editable,
+/* Classic build. */
+main .ck-editor[role='application'] .ck.ck-content,
+/* Decoupled document build. */
+.ck.editor__editable[role='textbox'],
+.ck.ck-editor__editable[role='textbox'],
+/* Inline & Balloon build. */
+.ck.editor[role='textbox'] {
+	width: 100%;
+	background: #fff;
+	font-size: 1em;
+	line-height: 1.6em;
+	min-height: var(--ck-sample-editor-min-height);
+	padding: 1.5em 2em;
+}
+
+main .ck-editor[role='application'] {
+	overflow: auto;
+}
+
+.ck.ck-editor__editable {
+	background: #fff;
+	border: 1px solid hsl(0, 0%, 70%);
+	width: 100%;
+}
+
+/* Because of sidebar `position: relative`, Edge is overriding the outline of a focused editor. */
+.ck.ck-editor__editable {
+	position: relative;
+	z-index: var(--ck-sample-editor-z-index);
+}
+
+.editor-container {
+	display: flex;
+	flex-direction: row;
+    flex-wrap: nowrap;
+    position: relative;
+	width: 100%;
+	justify-content: center;
+}
+
+.selector {
+	background-color: blue;
+	color: white;
+}
+
+.selector option{
+	color: white;
+}
+
+/* --------- FINISHED EDITOR STYLES  ------------------------------------------------------------------ */
+
 .sell-box {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 62.5%;
     width: 400px;
     padding: 40px;
     transform: translate(-50%, -50%);

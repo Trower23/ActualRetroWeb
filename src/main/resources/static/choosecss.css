@@ -21,7 +21,7 @@ h1{
   -webkit-text-fill-color: transparent;
   animation: textclip 3s linear infinite;
   display: inline-block;
-      font-size: 190px;
+      font-size: 100px;
 }
 
 
@@ -35,9 +35,20 @@ body{
   background-color: black;
 }
 .image-container {
+  margin: auto;
   display: flex;
 }
 
-.image-container img:first-child {
-  margin-right: 900px;
+.image-container .videogame{
+  position: absolute;
+  left: 55%;
+  width: auto;
+  height: auto;
+}
+
+.image-container .console{
+  position: absolute;
+  left: 5%;
+  width: auto;
+  height: auto;
 }

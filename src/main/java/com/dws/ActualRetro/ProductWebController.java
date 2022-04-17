@@ -1,5 +1,6 @@
 package com.dws.ActualRetro;
 
+import org.owasp.html.Sanitizers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
@@ -72,7 +73,8 @@ public class ProductWebController {
     public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String date, @RequestParam String description) {
         Date newdate = new Date();
         newdate.parseDate(date, "-");
-        VDConsole console = new VDConsole(name, price, maxcon, newdate, description);
+        String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
+        VDConsole console = new VDConsole(name, price, maxcon, newdate, sanitizedDesc);
         model.addAttribute("console", console);
         consoleService.consoleRepository.save(console);
         /*
@@ -88,7 +90,8 @@ public class ProductWebController {
         Date newdate = new Date();
         newdate.parseDate(date, "-");
         VDGenre gen = VDGenre.valueOf(genre);
-        Videogame videogame = new Videogame(name, price, pegi, newdate, gen, description);
+        String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
+        Videogame videogame = new Videogame(name, price, pegi, newdate, gen, sanitizedDesc);
         model.addAttribute("videogame", videogame);
         videogameService.videogameRepository.save(videogame);
         /*

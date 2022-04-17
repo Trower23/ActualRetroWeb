@@ -23,7 +23,7 @@ public class ProductRESTController{
     @Autowired
     UserService userService;
 
-    @PostConstruct
+    /*@PostConstruct
     public void init(){
         Videogame videogame= new Videogame("Super Mario Brothers", 150, 0, new Date(13,9,1985), VDGenre.PLATFORMS, "Original Super Mario Bros for NES");
         VDConsole console= new VDConsole("XBOX 360", 85, 4, new Date(22,11,2005), "Consola de séptima generación creada por Microsoft");
@@ -36,7 +36,7 @@ public class ProductRESTController{
         consoleService.consoleRepository.save(console1);
         consoleService.consoleRepository.save(console2);
     }
-
+    No usemos el PostConstruct. Si alguien necesita productos de prueba, que cargue la collection de Postman*/
 
     @GetMapping("/products/consoles")
     public ResponseEntity<List<VDConsole>> showConsoles(){
@@ -78,6 +78,7 @@ public class ProductRESTController{
     @PostMapping("/products/consoles")
     public ResponseEntity<VDConsole> addVConsole(@RequestBody VDConsole vdConsole){
         List<VDConsole> consoles = consoleService.consoleRepository.findAll();
+        vdConsole.setDescription(Sanitizers.FORMATTING.sanitize(vdConsole.getDescription()));
         if (consoles.contains(vdConsole)){
             VDConsole newcon = consoles.get(consoles.indexOf(vdConsole));
             newcon.addStock();
@@ -92,6 +93,7 @@ public class ProductRESTController{
     @PostMapping("/products/games")
     public ResponseEntity<Videogame> addVideogame(@RequestBody Videogame videogame){
         List<Videogame> games = videogameService.videogameRepository.findAll();
+        videogame.setDescription(Sanitizers.FORMATTING.sanitize(videogame.getDescription()));
         if (games.contains(videogame)){
             Videogame newgame = games.get(games.indexOf(videogame));
             newgame.addStock();
@@ -137,6 +139,7 @@ public class ProductRESTController{
         if (consoleService.consoleRepository.existsById(id)){
             vdConsole.setId(id);
             vdConsole.setStock(consoleService.consoleRepository.findById(id).getStock());
+            vdConsole.setDescription(Sanitizers.FORMATTING.sanitize(vdConsole.getDescription()));
             consoleService.consoleRepository.deleteById(id);
             consoleService.consoleRepository.save(vdConsole);
             return new ResponseEntity<>(vdConsole, HttpStatus.OK);
@@ -149,6 +152,7 @@ public class ProductRESTController{
         if (videogameService.videogameRepository.existsById(id)){
             videogame.setId(id);
             videogame.setStock(videogameService.videogameRepository.findById(id).getStock());
+            videogame.setDescription(Sanitizers.FORMATTING.sanitize(videogame.getDescription()));
             videogameService.videogameRepository.save(videogame);
             return new ResponseEntity<>(videogame, HttpStatus.OK);
         }else{

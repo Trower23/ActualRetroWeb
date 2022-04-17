@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "9b19c05a-ad6a-4948-937b-3f50382b49a7",
+		"name": "PracticaParte1PostmanCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add SuperMario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"New Super Mario Bros.\",\r\n    \"price\": 14.99,\r\n    \"pegi\": 3,\r\n    \"date\": {\r\n        \"day\": 15,\r\n        \"month\": 5,\r\n        \"year\": 2006\r\n    },\r\n    \"genre\": \"PLATFORMS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/games",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Elden King",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Elden King\",\r\n    \"price\": 59.99,\r\n    \"pegi\": 18,\r\n    \"date\": {\r\n        \"day\": 25,\r\n        \"month\": 2,\r\n        \"year\": 2022\r\n    },\r\n    \"genre\": \"SOULSLIKE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/games",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Undertale",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Undertale\",\r\n    \"price\": 9.99,\r\n    \"pegi\": 12,\r\n    \"date\": {\r\n        \"day\": 15,\r\n        \"month\": 9,\r\n        \"year\": 2015\r\n    },\r\n    \"genre\": \"TURNBASEDRPG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/games",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Famicom",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Famicom\",\r\n    \"price\": 149.99,\r\n    \"maxcontrollers\": 2,\r\n    \"date\": {\r\n        \"day\": 15,\r\n        \"month\": 7,\r\n        \"year\": 1983\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/consoles",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"consoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/products/games",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Consoles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/products/consoles",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"consoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Gamecube",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gamecube\",\r\n    \"price\": 119.99,\r\n    \"maxcontrollers\": 8,\r\n    \"date\": {\r\n        \"day\": 14,\r\n        \"month\": 9,\r\n        \"year\": 2001\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/consoles",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"consoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Elden Ring",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Elden Ring\",\r\n    \"price\": 59.99,\r\n    \"pegi\": 18,\r\n    \"date\": {\r\n        \"day\": 25,\r\n        \"month\": 2,\r\n        \"year\": 2022\r\n    },\r\n    \"genre\": \"SOULSLIKE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/games/2",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put Gamecube",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gamecube\",\r\n    \"price\": 119.99,\r\n    \"maxcontrollers\": 4,\r\n    \"date\": {\r\n        \"day\": 14,\r\n        \"month\": 9,\r\n        \"year\": 2001\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/consoles/2",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"consoles",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete SuperMario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/products/games/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Games Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/products/games",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Famicom",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/products/consoles/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"consoles",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Consoles Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/products/consoles",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"consoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Undertale Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Undertale\",\r\n    \"price\": 9.99,\r\n    \"pegi\": 12,\r\n    \"date\": {\r\n        \"day\": 15,\r\n        \"month\": 9,\r\n        \"year\": 2015\r\n    },\r\n    \"genre\": \"TURNBASEDRPG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/games",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Undertale",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/products/games/3",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"games",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add PS5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"PlayStation 5\",\r\n    \"price\": 599.99,\r\n    \"maxcontrollers\": 4,\r\n    \"date\": {\r\n        \"day\": 12,\r\n        \"month\": 11,\r\n        \"year\": 2020\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/products/consoles",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"consoles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get PS5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/products/consoles/3",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"products",
+						"consoles",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

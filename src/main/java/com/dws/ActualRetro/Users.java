@@ -2,6 +2,7 @@ package com.dws.ActualRetro;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,16 +15,16 @@ public class Users {
     private String name;
     private String surname;
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private String mail;
     private String password;
     private String phone;
     @OneToOne(cascade = CascadeType.ALL)
     private ShoppingCart shoppingCart;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Videogame> videogamesHistory;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VDConsole> consolesHistory;
     public Users(String name, String surname, String mail, String password, String phone){
         this.name=name;
@@ -34,6 +35,7 @@ public class Users {
         this.shoppingCart=new ShoppingCart();
         this.videogamesHistory = new ArrayList<>();
         this.consolesHistory = new ArrayList<>();
+
     }
     public void setId(long id){
         this.id = id;

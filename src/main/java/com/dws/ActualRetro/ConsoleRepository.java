@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -19,6 +17,10 @@ public interface ConsoleRepository extends JpaRepository<VDConsole, Long> {
     List<VDConsole> findConsoleBetweenPrices(@Param("pricemin") float pricemin, @Param("pricemax") float pricemax);
     @Query(value = "SELECT * FROM VDConsole WHERE maxcontrollers=:maxcon", nativeQuery = true)
     List<VDConsole> findConsoleWithControllers(@Param("maxcon") int maxcontrollers);
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM vdconsole WHERE ID=:id", nativeQuery = true)
+    void removeConsole(@Param("id") long id);
 
 
 }

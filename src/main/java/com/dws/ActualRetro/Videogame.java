@@ -57,6 +57,7 @@ public class Videogame {
         return this.genre.toString();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

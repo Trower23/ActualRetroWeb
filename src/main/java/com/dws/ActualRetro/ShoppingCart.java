@@ -1,12 +1,11 @@
 package com.dws.ActualRetro;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+
 
 //THERE WOULD BE ONE SHOPPING CART PER USER.
 
@@ -20,7 +19,7 @@ public class ShoppingCart {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Videogame> videogameList = new ArrayList<>();
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idShoppingCart;
 
 
@@ -35,7 +34,7 @@ public class ShoppingCart {
             totalProducts++;
             totalPrice = totalPrice + console.getPrice();
         }else{
-            System.out.println("Console already added"); //Por si acaso lo necesitamos
+            System.out.println("Console already added");
         }
     }
 
@@ -45,7 +44,7 @@ public class ShoppingCart {
             totalProducts++;
             totalPrice = totalPrice + videogame.getPrice();
         }else{
-            System.out.println("Videogame already added"); //Por si acaso lo necesitamos
+            System.out.println("Videogame already added");
         }
     }
 

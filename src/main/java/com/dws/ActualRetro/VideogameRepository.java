@@ -1,13 +1,14 @@
 package com.dws.ActualRetro;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -17,4 +18,11 @@ public interface VideogameRepository extends JpaRepository<Videogame, Long> {
     List<Videogame> findVideogameBetweenPrices(@Param("pricemin") float pricemin, @Param("pricemax") float pricemax);
     @Query(value = "SELECT * FROM Videogame WHERE pegi=:pegi", nativeQuery = true)
     List<Videogame> findGamesPegi(@Param("pegi") int pegi);
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM videogame WHERE ID=:id", nativeQuery = true)
+    void removeGame(@Param("id") long id);
 }
+
+
+

@@ -13,9 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class ProductRESTController{
-    /*@Autowired
-    ProductHolder prodholder;*/
-
     @Autowired
     VideogameService videogameService;
     @Autowired
@@ -26,17 +23,19 @@ public class ProductRESTController{
     /*@PostConstruct
     public void init(){
         Videogame videogame= new Videogame("Super Mario Brothers", 150, 0, new Date(13,9,1985), VDGenre.PLATFORMS, "Original Super Mario Bros for NES");
+        Videogame videogame1= new Videogame("GTA V", 200, 18, new Date(13,9,2005), VDGenre.ACTION, "THIEVES AND MONEY DREAMS!");
         VDConsole console= new VDConsole("XBOX 360", 85, 4, new Date(22,11,2005), "Consola de séptima generación creada por Microsoft");
         VDConsole console1= new VDConsole("XBOX 45", 100, 1, new Date(22,11,2005), "Consola de séptima generación creada por Microsoft");
         VDConsole console2= new VDConsole("ps2", 200, 2, new Date(22,11,2005), "Consola de séptima generación creada por Microsoft");
-        Videogame vulnerability = new Videogame("Underpants", 10, 7, new Date(0, 0, 0), VDGenre.CASUAL, Sanitizers.FORMATTING.sanitize("<p><strong>dedededefrfr&nbsp;</strong></p><script>alert('Yooo hacked')</script>"));
+       // Videogame vulnerability = new Videogame("Underpants", 10, 7, new Date(0, 0, 0), VDGenre.CASUAL, Sanitizers.FORMATTING.sanitize("<p><strong>dedededefrfr&nbsp;</strong></p><script>alert('Yooo hacked')</script>"));
         videogameService.videogameRepository.save(videogame);
-        videogameService.videogameRepository.save(vulnerability);
+        videogameService.videogameRepository.save(videogame1);
+        //videogameService.videogameRepository.save(vulnerability);
         consoleService.consoleRepository.save(console);
         consoleService.consoleRepository.save(console1);
         consoleService.consoleRepository.save(console2);
     }
-    No usemos el PostConstruct. Si alguien necesita productos de prueba, que cargue la collection de Postman*/
+    */
 
     @GetMapping("/products/consoles")
     public ResponseEntity<List<VDConsole>> showConsoles(){

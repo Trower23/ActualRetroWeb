@@ -23,11 +23,11 @@ public class ShoppingCartController {
 
     //We dont have users yet, so user1 is a try user, to show functionality.
 
-    @PostConstruct
+    /*@PostConstruct
     public void init(){
         Users user1= new Users("Juan", "Gonzalez", "juangon@gmail.com", "passJuord", "661665553");
         userService.userRepository.save(user1);
-    }
+    }*/
 
     @GetMapping("/products/cart")
     public String showCart(Model model){
@@ -85,10 +85,9 @@ public class ShoppingCartController {
         for (int i = size - 1; i >= 0; i--) {
             VDConsole console = testcart.getConsoleList().get(i);
             VDConsole auxco = consoleService.consoleRepository.findById(console.getId());
-            auxco.removeStock();    //Este método no borra la entrada cuando no hay Stock, no sabemos por qué
-                                    //Con videojuegos pasa lo mismo
+            auxco.removeStock();
             if (!auxco.isStock()){
-                consoleService.consoleRepository.delete(console);
+                consoleService.consoleRepository.removeConsole(console.getId());
             }
             auxconsolelist.add(console);
             user1.buyConsole(console);
@@ -100,7 +99,7 @@ public class ShoppingCartController {
             Videogame auxvid = videogameService.videogameRepository.findById(videogame.getId());
             auxvid.removeStock();
             if (!auxvid.isStock()){
-                videogameService.videogameRepository.delete(videogame);
+                videogameService.videogameRepository.removeGame(videogame.getId());
             }
             auxvideogamelist.add(videogame);
             user1.buyVideogame(videogame);

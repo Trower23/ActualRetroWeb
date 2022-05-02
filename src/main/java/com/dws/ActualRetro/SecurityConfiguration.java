@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.security.SecureRandom;
 
 @Configuration
-@Order(1) //Ante dos configuraciones de seguridad o requisitos, un conflicto, elije la que tenga el order más bajo en este caso
+//Ante dos configuraciones de seguridad o requisitos, un conflicto, elije la que tenga el order más bajo en este caso
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 // Public pages
-        http.authorizeRequests().antMatchers("/", "/resources/js/*", "/resources/css/*", "/resources/static/css/*").permitAll();
+        http.authorizeRequests().antMatchers("/", "/js/*", "/css/*").permitAll();
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();

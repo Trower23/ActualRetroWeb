@@ -1,13 +1,18 @@
 package com.dws.ActualRetro;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String index(){
@@ -28,4 +33,10 @@ public class UserController {
     public String logout(){
         return "logout";
     }
+
+    @GetMapping("/register")
+    public String showRegisterForm(){
+        return "register_form";
+    }
+
 }

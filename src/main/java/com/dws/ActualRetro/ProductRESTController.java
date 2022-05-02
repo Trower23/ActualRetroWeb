@@ -34,8 +34,8 @@ public class ProductRESTController{
         consoleService.consoleRepository.save(console);
         consoleService.consoleRepository.save(console1);
         consoleService.consoleRepository.save(console2);
-    }
-    */
+    }*/
+
 
     @GetMapping("/products/consoles")
     public ResponseEntity<List<VDConsole>> showConsoles(){

@@ -28,12 +28,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 // Public pages
-        http.authorizeRequests().antMatchers("/").permitAll();
+        http.authorizeRequests().antMatchers("/", "/resources/js/*", "/resources/css/*", "/resources/static/css/*").permitAll();
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/loginerror").permitAll();
         http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/products/consoles").permitAll();
         http.authorizeRequests().antMatchers("/products/videogames").permitAll();
+        http.authorizeRequests().antMatchers("/register").permitAll();
+
 // Private pages (all other pages)
         http.authorizeRequests().anyRequest().authenticated();
 // Login form
@@ -52,9 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-
         auth.inMemoryAuthentication().withUser("user").password(encoder.encode("pass")).roles("USER");
         auth.inMemoryAuthentication().withUser("admin").password(encoder.encode("adminpass")).roles("USER","ADMIN");
     }

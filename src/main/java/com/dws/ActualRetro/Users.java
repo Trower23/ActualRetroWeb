@@ -14,6 +14,7 @@ import java.util.List;
 public class Users {
     private String name;
     private String surname;
+    private String username;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
@@ -30,9 +31,10 @@ public class Users {
     //Lista de roles que posee el usuario
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
-    public Users(String name, String surname, String mail, String password, String phone){
+    public Users(String name, String surname, String mail, String username, String password, String phone){
         this.name=name;
         this.surname= surname;
+        this.username=username;
         this.mail=mail;
         this.password= password;
         this.phone= phone;

@@ -46,6 +46,8 @@ public class ProductWebController {
         return "videogame";
     }
 
+    //He quitado la parte de Date
+    /*
     @PostMapping("/products/consoles/sell")
     public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String date, @RequestParam String description) {
         Date newdate = new Date();
@@ -61,6 +63,27 @@ public class ProductWebController {
     public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String date, @RequestParam String genre, @RequestParam String description) {
         Date newdate = new Date();
         newdate.parseDate(date, "-");
+        VDGenre gen = VDGenre.valueOf(genre);
+        String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
+        Videogame videogame = new Videogame(name, price, pegi, newdate, gen, sanitizedDesc);
+        model.addAttribute("videogame", videogame);
+        videogameService.videogameRepository.save(videogame);
+
+        return "saved_videogame";
+    }*/
+    @PostMapping("/products/consoles/sell")
+    public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String description) {
+        Date newdate = new Date();
+        String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
+        VDConsole console = new VDConsole(name, price, maxcon, newdate, sanitizedDesc);
+        model.addAttribute("console", console);
+        consoleService.consoleRepository.save(console);
+        return "saved_console";
+    }
+
+    @PostMapping("/products/videogames/sell")
+    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String genre, @RequestParam String description) {
+        Date newdate = new Date();
         VDGenre gen = VDGenre.valueOf(genre);
         String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
         Videogame videogame = new Videogame(name, price, pegi, newdate, gen, sanitizedDesc);

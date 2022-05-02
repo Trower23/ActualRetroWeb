@@ -1,5 +1,6 @@
 package com.dws.ActualRetro;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class Users {
     //Lista de roles que posee el usuario
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
-    public Users(String name, String surname, String mail, String username, String password, String phone){
+    public Users(String name, String surname, String username, String mail, String password, String phone){
         this.name=name;
         this.surname= surname;
         this.username=username;

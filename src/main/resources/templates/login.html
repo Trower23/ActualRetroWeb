@@ -13,15 +13,15 @@
   }
 </script>
 <body>
-<form class="login-form">
+<form class="login-form" method="post" action="/login">
   <p class="login-text">
     <span class="fa-stack fa-lg">
       <i class="fa fa-circle fa-stack-2x"></i>
       <i class="fa fa-lock fa-stack-1x"></i>
     </span>
   </p>
-  <input type="email" id="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
-  <input type="password" class="login-password" required="true" placeholder="Password" />
+  <input id="username" name="username" class="login-username" autofocus required placeholder="Username" />
+  <input type="password" id="password" name="password" class="login-password" required placeholder="Password" />
   <input type="submit"  name="Login" value="Login" class="login-submit" onclick="hello();"/>
 </form>
 <p style="color: white;">No account to login with? Register <a class="reg" href="https://localhost:8443/register">here!</a></p>

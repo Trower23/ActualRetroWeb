@@ -30,6 +30,8 @@ public class UserController {
         return "logout";
     }
 
+
+
     @GetMapping("/register")
     public String showRegisterForm(){
         return "register_form";

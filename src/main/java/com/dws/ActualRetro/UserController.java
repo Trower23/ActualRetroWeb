@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     UserService userService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @GetMapping("/")
     public String index(){
         return "index";

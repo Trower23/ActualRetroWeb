@@ -5,11 +5,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-
 public class ConsoleService {
     @Autowired
     ConsoleRepository consoleRepository;
-
-
-
 }

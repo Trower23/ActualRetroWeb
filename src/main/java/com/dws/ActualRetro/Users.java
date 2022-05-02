@@ -26,6 +26,10 @@ public class Users {
     private List<Videogame> videogamesHistory;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VDConsole> consolesHistory;
+
+    //Lista de roles que posee el usuario
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles;
     public Users(String name, String surname, String mail, String password, String phone){
         this.name=name;
         this.surname= surname;
@@ -35,8 +39,8 @@ public class Users {
         this.shoppingCart=new ShoppingCart();
         this.videogamesHistory = new ArrayList<>();
         this.consolesHistory = new ArrayList<>();
-
     }
+
     public void setId(long id){
         this.id = id;
     }
@@ -49,4 +53,5 @@ public class Users {
     public void buyConsole(VDConsole vdConsole){
         this.consolesHistory.add(vdConsole);
     }
+
 }

@@ -21,6 +21,8 @@ public class Videogame {
     private Date date;
     private VDGenre genre;
     private String description;
+    @ManyToOne
+    private long iduser;
 
     public Videogame(String na, float pri, int pe, Date date, VDGenre gen, String description){
         this.name = na;
@@ -63,7 +65,7 @@ public class Videogame {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Videogame videogame = (Videogame) o;
-        return name.equals(videogame.name);
+        return name.equals(videogame.name) && iduser== videogame.iduser;
     }
 
     @Override

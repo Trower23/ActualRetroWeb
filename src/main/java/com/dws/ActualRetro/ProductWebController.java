@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ProductWebController {
@@ -72,25 +74,42 @@ public class ProductWebController {
         return "saved_videogame";
     }*/
     @PostMapping("/products/consoles/sell")
-    public String addVDConsole(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String description) {
+    public String addVDConsole(Model model, HttpServletRequest request, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String description) {
         Date newdate = new Date();
         String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
         VDConsole console = new VDConsole(name, price, maxcon, newdate, sanitizedDesc);
-        model.addAttribute("console", console);
-        consoleService.consoleRepository.save(console);
-        return "saved_console";
+        String userna = request.getUserPrincipal().getName();
+        Optional<Users> user = userService.userRepository.findByUsername(userna);
+        if (user.isPresent()){
+            console.setIduser(user.get().getId());
+            model.addAttribute("console", console);
+            consoleService.consoleRepository.save(console);
+            user.get().getConsolesUploaded().add(console);
+            userService.userRepository.save(user.get());
+            return "saved_console";
+        }else{
+            return "loginerror";
+        }
     }
 
     @PostMapping("/products/videogames/sell")
-    public String addVideogame(Model model, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String genre, @RequestParam String description) {
+    public String addVideogame(Model model, HttpServletRequest request, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String genre, @RequestParam String description) {
         Date newdate = new Date();
         VDGenre gen = VDGenre.valueOf(genre);
         String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
         Videogame videogame = new Videogame(name, price, pegi, newdate, gen, sanitizedDesc);
-        model.addAttribute("videogame", videogame);
-        videogameService.videogameRepository.save(videogame);
-
-        return "saved_videogame";
+        String userna = request.getUserPrincipal().getName();
+        Optional<Users> user = userService.userRepository.findByUsername(userna);
+        if (user.isPresent()){
+            videogame.setIduser(user.get().getId());
+            model.addAttribute("videogame", videogame);
+            videogameService.videogameRepository.save(videogame);
+            user.get().getVideogamesUploaded().add(videogame);
+            userService.userRepository.save(user.get());
+            return "saved_videogame";
+        }else{
+            return "loginerror";
+        }
     }
     //-- Queries-- //
 

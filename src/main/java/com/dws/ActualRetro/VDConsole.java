@@ -20,6 +20,8 @@ public class VDConsole {
     @Transient
     private Date date;
     private String description;
+    @ManyToOne
+    private long iduser;
 
     public VDConsole(String na, float pri, int maxcon, Date date, String description){
         this.name = na;
@@ -53,7 +55,7 @@ public class VDConsole {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VDConsole vdConsole = (VDConsole) o;
-        return name.equals(vdConsole.name);
+        return name.equals(vdConsole.name) && iduser== vdConsole.iduser;
     }
 
     @Override

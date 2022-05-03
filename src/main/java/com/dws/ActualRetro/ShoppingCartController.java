@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ShoppingCartController {
@@ -30,12 +32,17 @@ public class ShoppingCartController {
     }*/
 
     @GetMapping("/products/cart")
-    public String showCart(Model model){
-        ShoppingCart testcart = userService.userRepository.findById(1).getShoppingCart();
-        model.addAttribute("consoles", testcart.getConsoleList());
-        model.addAttribute("videogames", testcart.getVideogameList());
-        model.addAttribute("totalprice", testcart.getTotalPrice());
+    public String showCart(Model model, HttpServletRequest request){
+        Optional<Users> user = userService.userRepository.findByUsername(request.getUserPrincipal().getName());
+        if (user.isPresent()){
+            ShoppingCart testcart = user.get().getShoppingCart();
+            model.addAttribute("consoles", testcart.getConsoleList());
+            model.addAttribute("videogames", testcart.getVideogameList());
+            model.addAttribute("totalprice", testcart.getTotalPrice());
         return "cart_products";
+        }else{
+            return "loginerror";
+        }
     }
 
     @GetMapping("/product/buy/console/{id}")

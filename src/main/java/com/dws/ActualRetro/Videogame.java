@@ -22,7 +22,7 @@ public class Videogame {
     private VDGenre genre;
     private String description;
     @ManyToOne
-    private long iduser;
+    private Users iduser;
 
     public Videogame(String na, float pri, int pe, Date date, VDGenre gen, String description){
         this.name = na;

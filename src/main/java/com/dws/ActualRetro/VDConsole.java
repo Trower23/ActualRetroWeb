@@ -1,6 +1,7 @@
 package com.dws.ActualRetro;
 
 import lombok.*;
+import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -21,7 +22,7 @@ public class VDConsole {
     private Date date;
     private String description;
     @ManyToOne
-    private long iduser;
+    private Users iduser;
 
     public VDConsole(String na, float pri, int maxcon, Date date, String description){
         this.name = na;

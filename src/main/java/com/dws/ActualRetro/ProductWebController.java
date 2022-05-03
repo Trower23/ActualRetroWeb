@@ -81,7 +81,7 @@ public class ProductWebController {
         String userna = request.getUserPrincipal().getName();
         Optional<Users> user = userService.userRepository.findByUsername(userna);
         if (user.isPresent()){
-            console.setIduser(user.get().getId());
+            console.setIduser(user.get());
             model.addAttribute("console", console);
             consoleService.consoleRepository.save(console);
             user.get().getConsolesUploaded().add(console);
@@ -101,7 +101,7 @@ public class ProductWebController {
         String userna = request.getUserPrincipal().getName();
         Optional<Users> user = userService.userRepository.findByUsername(userna);
         if (user.isPresent()){
-            videogame.setIduser(user.get().getId());
+            videogame.setIduser(user.get());
             model.addAttribute("videogame", videogame);
             videogameService.videogameRepository.save(videogame);
             user.get().getVideogamesUploaded().add(videogame);

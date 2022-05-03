@@ -28,9 +28,9 @@ public class Users {
     private List<Videogame> videogamesHistory;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VDConsole> consolesHistory;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "users")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Videogame> videogamesUploaded;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "users")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<VDConsole> consolesUploaded;
 
     //Lista de roles que posee el usuario

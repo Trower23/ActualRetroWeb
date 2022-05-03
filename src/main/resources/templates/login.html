@@ -5,13 +5,6 @@
     <title>LOGIN</title>
   <link href="https://localhost:8443/css/login.css" rel="stylesheet" type="text/css">
 </head>
-<script type="text/javascript">
-  function hello(){
-    var user=document.getElementById("email");
-    var name=user.value;
-    alert("Login success - Hello " + name +"!!");
-  }
-</script>
 <body>
 <form class="login-form" method="post" action="/login">
   <p class="login-text">
@@ -22,7 +15,7 @@
   </p>
   <input id="username" name="username" class="login-username" autofocus required placeholder="Username" />
   <input type="password" id="password" name="password" class="login-password" required placeholder="Password" />
-  <input type="submit"  name="Login" value="Login" class="login-submit" onclick="hello();"/>
+  <input type="submit"  name="Login" value="Login" class="login-submit"/>
 </form>
 <p style="color: white;">No account to login with? Register <a class="reg" href="https://localhost:8443/register">here!</a></p>
 <div class="underlay-photo"></div>

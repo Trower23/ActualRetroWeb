@@ -32,17 +32,19 @@ public class ShoppingCartController {
     }*/
 
     @GetMapping("/products/cart")
-    public String showCart(Model model, HttpServletRequest request){
+    public String showCart(Model model, HttpServletRequest request) {
         Optional<Users> user = userService.userRepository.findByUsername(request.getUserPrincipal().getName());
-        if (user.isPresent()){
+       // if (user.isPresent()) {
+            String name = request.getUserPrincipal().getName();
             ShoppingCart testcart = user.get().getShoppingCart();
             model.addAttribute("consoles", testcart.getConsoleList());
             model.addAttribute("videogames", testcart.getVideogameList());
             model.addAttribute("totalprice", testcart.getTotalPrice());
             return "cart_products";
-        }else{
-            return "loginerror";
-        }
+        //}
+       // else{
+          //  return "loginerror";
+        //}
     }
 
     @GetMapping("/product/buy/console/{id}")

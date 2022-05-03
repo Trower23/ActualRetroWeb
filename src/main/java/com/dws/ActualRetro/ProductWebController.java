@@ -19,13 +19,24 @@ public class ProductWebController {
     @Autowired
     ConsoleService consoleService;
     @Autowired
-    UserService userService;   //we need to create new methods here to register users and save them on our database.
+    UserService userService;
+
 
 
     @GetMapping("/products/consoles")
-    public String showVDConsoles(Model model) {
+    public String showVDConsoles(Model model, HttpServletRequest request) {
         List<VDConsole> vdConsoles = consoleService.consoleRepository.findAll();
-        model.addAttribute("vdConsoles", vdConsoles);
+        if (request.getUserPrincipal()!=null) {
+            String name = request.getUserPrincipal().getName();
+            Optional<Users> useraux = userService.userRepository.findByUsername(name);
+            if (useraux.isPresent()) {
+                for (int i = 0; i < vdConsoles.size(); i++) {
+                    // model.addAttribute("isPropperty", useraux.get().isProppertyOf(vdConsoles.get(i).getIduser()));
+                }
+            }
+        }
+            model.addAttribute("vdConsoles", vdConsoles);
+
         return "consoles";
     }
 

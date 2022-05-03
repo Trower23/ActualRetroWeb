@@ -3,6 +3,7 @@ package com.dws.ActualRetro;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.checkerframework.common.aliasing.qual.Unique;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Users {
     private String name;
     private String surname;
+    @Unique
     private String username;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -59,6 +61,9 @@ public class Users {
     }
     public void buyConsole(VDConsole vdConsole){
         this.consolesHistory.add(vdConsole);
+    }
+    public boolean isProppertyOf(long id_db){
+        return this.id==id_db;
     }
 
 }

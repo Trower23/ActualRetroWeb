@@ -11,7 +11,27 @@ public class UserController {
     @Autowired
     UserService userService;
     @Autowired
+<<<<<<< Updated upstream
     PasswordEncoder passwordEncoder;
+=======
+    private PasswordEncoder passwordEncoder;
+
+    /*@PostConstruct
+    private void initDatabase(){
+        List<String> auxlist = new ArrayList<>();
+        auxlist.add("USER");
+        Users aux = new Users("Trower","Dostre", "user", "trower12@outlook.com", passwordEncoder.encode("pass"), "655844033");
+        aux.setRoles(auxlist);
+        userService.userRepository.save(aux);
+        aux = new Users("Admin", "Root", "admin", "noemail@gmail.com", passwordEncoder.encode("adminpass"), "111111111");
+        auxlist = new ArrayList<>();
+        auxlist.add("USER");
+        auxlist.add("ADMIN");
+        aux.setRoles(auxlist);
+        userService.userRepository.save(aux);
+    }*/
+
+>>>>>>> Stashed changes
     @GetMapping("/")
     public String index(){
         return "index";

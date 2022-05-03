@@ -6,14 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class UserController {
     @Autowired
     UserService userService;
     @Autowired
-<<<<<<< Updated upstream
-    PasswordEncoder passwordEncoder;
-=======
     private PasswordEncoder passwordEncoder;
 
     /*@PostConstruct
@@ -31,7 +31,6 @@ public class UserController {
         userService.userRepository.save(aux);
     }*/
 
->>>>>>> Stashed changes
     @GetMapping("/")
     public String index(){
         return "index";
@@ -55,6 +54,9 @@ public class UserController {
     @PostMapping("/register")
     public String register(@RequestParam String name, @RequestParam String surname, @RequestParam String username, @RequestParam String mail, @RequestParam String password, @RequestParam String phone){
         Users auxUser=new Users(name, surname, username, mail, passwordEncoder.encode(password), phone);
+        List<String> auxlist = new ArrayList<>();
+        auxlist.add("USER");
+        auxUser.setRoles(auxlist);
         userService.userRepository.save(auxUser);
         return "register_success";
     }

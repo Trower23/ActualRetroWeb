@@ -12,7 +12,7 @@
     <h2>Sell videogame</h2>
     <form action="/products/videogames/sell" method="post" id="videogame">
         <div class="user-box">
-            <input type="text" name="name" required="" pattern="[a-zA-Z\u00f1\u00d1\u00E0-\u00FC]+">
+            <input type="text" name="name" required="" pattern="[a-zA-Z\u00f1\u00d1\u00E0-\u00FC\u0020]+">
             <label>Name:</label>
         </div>
         <div class="user-box">
@@ -20,6 +20,7 @@
             <label>€</label>
         </div>
         <div class="user-box">
+            <label>PEGI:</label>
             <select class="selector" name="pegi">
                 <option value="0">NO-PEGI</option>
                 <option value="3">3+</option>
@@ -30,7 +31,9 @@
             </select>
         </div>
         <!--<div class="user-box"> <input type="date" name="date"> </div>-->
+        <br>
         <div class="user-box">
+            <label>Videogame genre:</label>
             <select class="selector" name="genre">
                 <option value="ACTION">Action</option>
                 <option value="ADVENTURE">Adventure</option>

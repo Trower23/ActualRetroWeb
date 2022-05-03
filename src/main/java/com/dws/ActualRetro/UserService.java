@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = userRepository.findByUsername(username)
+        Users user = userRepository.findByName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         List<GrantedAuthority> roles = new ArrayList<>();
         for (String role : user.getRoles()) {

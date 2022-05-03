@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ public class UserController {
     private void initDatabase(){
         List<String> auxlist = new ArrayList<>();
         auxlist.add("USER");
-        Users aux = new Users("Trower","Dostre", "user", "trower12@outlook.com", passwordEncoder.encode("pass"), "655844033");
+        Users aux = new Users("user", "trower12@outlook.com", passwordEncoder.encode("pass"), "655844033");
         aux.setRoles(auxlist);
         userService.userRepository.save(aux);
-        aux = new Users("Admin", "Root", "admin", "noemail@gmail.com", passwordEncoder.encode("adminpass"), "111111111");
+        aux = new Users("admin", "noemail@gmail.com", passwordEncoder.encode("adminpass"), "111111111");
         auxlist = new ArrayList<>();
         auxlist.add("USER");
         auxlist.add("ADMIN");
@@ -44,7 +45,7 @@ public class UserController {
     }
     @PostMapping("/login")
     public String login(@RequestParam String username, HttpServletRequest request) throws ServletException {
-        request.login(username, userService.userRepository.findByUsername(username).get().getPassword());
+        request.login(username, userService.userRepository.findByName(username).get().getPassword());
         return "loginok";
     }
     @GetMapping("/loginerror")
@@ -58,8 +59,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String name, @RequestParam String surname, @RequestParam String username, @RequestParam String mail, @RequestParam String password, @RequestParam String phone){
-        Users auxUser=new Users(name, surname, username, mail, passwordEncoder.encode(password), phone);
+    public String register(@RequestParam String mail,  @RequestParam String username, @RequestParam String password, @RequestParam String phone){
+        Users auxUser=new Users(username, mail, passwordEncoder.encode(password), phone);
         List<String> auxlist = new ArrayList<>();
         auxlist.add("USER");
         auxUser.setRoles(auxlist);

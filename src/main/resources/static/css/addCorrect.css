@@ -39,7 +39,7 @@ body {
 .c-rainbow__layer {
     --text-color: var(--color-foreground);
     counter-increment: rainbow;
-    font-size: 3rem;
+    font-size: 4rem;
     color: var(--text-color);
     text-shadow: -1px -1px 0 var(--color-black), 1px -1px 0 var(--color-black), -1px 1px 0 var(--color-black), 1px 1px 0 var(--color-black), 4px 4px 0 rgba(0, 0, 0, 0.2);
     animation: rainbow 1.5s ease-in-out infinite;

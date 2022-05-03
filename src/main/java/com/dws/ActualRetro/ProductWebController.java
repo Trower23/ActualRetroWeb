@@ -28,15 +28,14 @@ public class ProductWebController {
         List<VDConsole> vdConsoles = consoleService.consoleRepository.findAll();
         if (request.getUserPrincipal()!=null) {
             String name = request.getUserPrincipal().getName();
-            Optional<Users> useraux = userService.userRepository.findByUsername(name);
+            Optional<Users> useraux = userService.userRepository.findByName(name);
             if (useraux.isPresent()) {
                 for (int i = 0; i < vdConsoles.size(); i++) {
-                    // model.addAttribute("isPropperty", useraux.get().isProppertyOf(vdConsoles.get(i).getIduser()));
+                    model.addAttribute("isPropperty", useraux.get().isProppertyOf(vdConsoles.get(i).getUser().getId()));
                 }
             }
         }
-            model.addAttribute("vdConsoles", vdConsoles);
-
+        model.addAttribute("vdConsoles", vdConsoles);
         return "consoles";
     }
 
@@ -90,9 +89,9 @@ public class ProductWebController {
         String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
         VDConsole console = new VDConsole(name, price, maxcon, newdate, sanitizedDesc);
         String userna = request.getUserPrincipal().getName();
-        Optional<Users> user = userService.userRepository.findByUsername(userna);
+        Optional<Users> user = userService.userRepository.findByName(userna);
         if (user.isPresent()){
-            console.setIduser(user.get());
+            console.setUser(user.get());
             model.addAttribute("console", console);
             consoleService.consoleRepository.save(console);
             user.get().getConsolesUploaded().add(console);
@@ -110,9 +109,9 @@ public class ProductWebController {
         String sanitizedDesc = Sanitizers.FORMATTING.sanitize(description);
         Videogame videogame = new Videogame(name, price, pegi, newdate, gen, sanitizedDesc);
         String userna = request.getUserPrincipal().getName();
-        Optional<Users> user = userService.userRepository.findByUsername(userna);
+        Optional<Users> user = userService.userRepository.findByName(userna);
         if (user.isPresent()){
-            videogame.setIduser(user.get());
+            videogame.setUser(user.get());
             model.addAttribute("videogame", videogame);
             videogameService.videogameRepository.save(videogame);
             user.get().getVideogamesUploaded().add(videogame);

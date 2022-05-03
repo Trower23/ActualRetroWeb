@@ -22,7 +22,7 @@ public class Videogame {
     private VDGenre genre;
     private String description;
     @ManyToOne
-    private Users iduser;
+    private Users user;
 
     public Videogame(String na, float pri, int pe, Date date, VDGenre gen, String description){
         this.name = na;
@@ -65,7 +65,7 @@ public class Videogame {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Videogame videogame = (Videogame) o;
-        return name.equals(videogame.name) && iduser== videogame.iduser;
+        return name.equals(videogame.name) && user.getId()== videogame.getUser().getId();
     }
 
     @Override

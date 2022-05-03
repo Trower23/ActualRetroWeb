@@ -33,23 +33,22 @@ public class ShoppingCartController {
 
     @GetMapping("/products/cart")
     public String showCart(Model model, HttpServletRequest request) {
-        Optional<Users> user = userService.userRepository.findByUsername(request.getUserPrincipal().getName());
-       // if (user.isPresent()) {
-            String name = request.getUserPrincipal().getName();
-            ShoppingCart testcart = user.get().getShoppingCart();
-            model.addAttribute("consoles", testcart.getConsoleList());
-            model.addAttribute("videogames", testcart.getVideogameList());
-            model.addAttribute("totalprice", testcart.getTotalPrice());
-            return "cart_products";
-        //}
-       // else{
-          //  return "loginerror";
-        //}
+        Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
+       if (user.isPresent()) {
+           String name = request.getUserPrincipal().getName();
+           ShoppingCart testcart = user.get().getShoppingCart();
+           model.addAttribute("consoles", testcart.getConsoleList());
+           model.addAttribute("videogames", testcart.getVideogameList());
+           model.addAttribute("totalprice", testcart.getTotalPrice());
+           return "cart_products";
+       }else{
+           return "loginerror";
+       }
     }
 
     @GetMapping("/product/buy/console/{id}")
     public String buyCartConsole(@PathVariable long id, HttpServletRequest request){
-        Optional<Users> user = userService.userRepository.findByUsername(request.getUserPrincipal().getName());
+        Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
         if (user.isPresent()) {
             ShoppingCart testcart = user.get().getShoppingCart();
             VDConsole console = consoleService.consoleRepository.findById(id);
@@ -62,7 +61,7 @@ public class ShoppingCartController {
     }
     @GetMapping("/product/buy/videogame/{id}")
     public String buyCartVideogame(@PathVariable long id, HttpServletRequest request){
-        Optional<Users> user = userService.userRepository.findByUsername(request.getUserPrincipal().getName());
+        Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
         if (user.isPresent()) {
             ShoppingCart testcart = user.get().getShoppingCart();
             Videogame videogame = videogameService.videogameRepository.findById(id);
@@ -76,7 +75,7 @@ public class ShoppingCartController {
 
     @GetMapping("/product/remove/console/{id}")
     public String removeCartConsole(Model model, HttpServletRequest request, @PathVariable long id){
-        Optional<Users> user = userService.userRepository.findByUsername(request.getUserPrincipal().getName());
+        Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
         if (user.isPresent()) {
             ShoppingCart testcart = user.get().getShoppingCart();
             VDConsole console = consoleService.consoleRepository.findById(id);
@@ -91,7 +90,7 @@ public class ShoppingCartController {
     }
     @GetMapping("/product/remove/videogame/{id}")
     public String removeCartVideoGame(Model model, HttpServletRequest request, @PathVariable long id){
-        Optional<Users> user = userService.userRepository.findByUsername(request.getUserPrincipal().getName());
+        Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
         if (user.isPresent()) {
             ShoppingCart testcart = user.get().getShoppingCart();
             Videogame videogame = videogameService.videogameRepository.findById(id);
@@ -105,7 +104,7 @@ public class ShoppingCartController {
     }
     @GetMapping("/product/buy")
     public String buyCart(Model model, HttpServletRequest request){
-        Optional<Users> user = userService.userRepository.findByUsername(request.getUserPrincipal().getName());
+        Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
         if (user.isPresent()) {
             ShoppingCart testcart = user.get().getShoppingCart();
             model.addAttribute("totalprod", testcart.getTotalProducts());

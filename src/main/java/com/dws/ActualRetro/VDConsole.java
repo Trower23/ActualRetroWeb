@@ -22,7 +22,7 @@ public class VDConsole {
     private Date date;
     private String description;
     @ManyToOne
-    private Users iduser;
+    private Users user;
 
     public VDConsole(String na, float pri, int maxcon, Date date, String description){
         this.name = na;
@@ -56,7 +56,7 @@ public class VDConsole {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VDConsole vdConsole = (VDConsole) o;
-        return name.equals(vdConsole.name) && iduser== vdConsole.iduser;
+        return name.equals(vdConsole.name) && user.getId()== vdConsole.getUser().getId();
     }
 
     @Override

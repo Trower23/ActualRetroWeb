@@ -14,10 +14,14 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 public class Users {
-    private String name;
+    //Como HttpServletRequest acoje el atributo/columna "name" y no "username", "name" debería ser Unique.
+    //Pero.. qué sentido tiene que los nombres no puedan repertirse? Voto por quitar name y surname, y poner
+    //username como "name":
+    /*private String name;
     private String surname;
+    Así que ya sabéis, dropead las tablas de mysql que tengáis y a generar to' de nuevo u.u*/
     @Unique
-    private String username;
+    private String name; //Username, lo devuelve request.getUserPrincipal.getName()s
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
@@ -38,16 +42,16 @@ public class Users {
     //Lista de roles que posee el usuario
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
-    public Users(String name, String surname, String username, String mail, String password, String phone){
-        this.name=name;
-        this.surname= surname;
-        this.username=username;
+    public Users(String username, String mail, String password, String phone){
+        this.name= username;
         this.mail=mail;
         this.password= password;
         this.phone= phone;
         this.shoppingCart=new ShoppingCart();
         this.videogamesHistory = new ArrayList<>();
         this.consolesHistory = new ArrayList<>();
+        this.videogamesUploaded = new ArrayList<>();
+        this.consolesUploaded = new ArrayList<>();
     }
 
     public void setId(long id){

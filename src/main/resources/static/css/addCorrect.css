@@ -1,0 +1,18 @@
+.textbox{
+    background-color: #2D9AB7;
+    border: 2px solid black;
+    padding: 15px;
+    text-align: center;
+    margin: 25px auto;
+    width: 400px;
+}
+
+#texto{
+    font: bold 30px Tahoma;
+    width: 100%;
+}
+
+#centro{
+    background-color: red;
+
+}

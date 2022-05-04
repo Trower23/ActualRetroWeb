@@ -21,7 +21,7 @@ public class VDConsole {
     @Transient
     private Date date;
     private String description;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Users user;
 
     public VDConsole(String na, float pri, int maxcon, Date date, String description){

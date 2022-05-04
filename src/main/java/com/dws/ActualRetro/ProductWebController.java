@@ -130,7 +130,9 @@ public class ProductWebController {
         if (user.isPresent()){
             if (user.get().isProppertyOf(consoleService.consoleRepository.findById(id).getUser().getId())){
                 VDConsole console= consoleService.consoleRepository.getById(id);
+                consoleService.consoleRepository.disableForeignKeyChecks();
                 consoleService.consoleRepository.removeConsole(id);
+                consoleService.consoleRepository.reenableForeignKeyChecks();
                 model.addAttribute("console", console);
                 return "delete_success_console";
             }else{
@@ -147,7 +149,9 @@ public class ProductWebController {
         if (user.isPresent()){
             if (user.get().isProppertyOf(videogameService.videogameRepository.findById(id).getUser().getId())){
                 Videogame videogame= videogameService.videogameRepository.getById(id);
+                consoleService.consoleRepository.disableForeignKeyChecks();
                 videogameService.videogameRepository.removeGame(id);
+                consoleService.consoleRepository.reenableForeignKeyChecks();
                 model.addAttribute("videogame", videogame);
                 return "delete_success_videogame";
             }else{

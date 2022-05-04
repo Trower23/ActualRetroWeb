@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{user.name}}'s profile</title>
+</head>
+<body>
+    <h2>{{user.name}}</h2>
+    <p>Email -> {{user.mail}}</p>
+    <br> <p>Phone number -> {{user.phone}}</p>
+    <br> <p>Uploaded or sold consoles:</p>
+    <ul>
+    {{#user.consolesUploaded}}
+        <li>{{name}}, {{price}} €</li>
+    {{/user.consolesUploaded}}
+    </ul>
+    <br> <p>Uploaded or sold videogames:</p>
+    <ul>
+        {{#user.videogamesUploaded}}
+        <li>{{name}}, {{price}} €</li>
+        {{/user.videogamesUploaded}}
+    </ul>
+    {{#isadmin}}
+    <h4>Additional information for users with privileges:</h4>
+    <br><p>Current shopping cart:</p>
+    <ul>
+        {{#consolecart}}
+            <li>{{name}}</li>
+        {{/consolecart}}
+        {{#videogamecart}}
+            <li>{{name}}</li>
+        {{/videogamecart}}
+    </ul>
+    <br> <p>Consoles bought:</p>
+    <ul>
+        {{#user.consolesHistory}}
+        <li>{{name}}, {{price}}</li>
+        {{/user.consolesHistory}}
+    </ul>
+    <br> <p>Videogames bought:</p>
+    <ul>
+        {{#user.videogamesHistory}}
+        <li>{{name}}, {{price}}</li>
+        {{/user.videogamesHistory}}
+    </ul>
+    {{/isadmin}}
+</body>
+</html>

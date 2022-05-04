@@ -20,8 +20,16 @@ public interface VideogameRepository extends JpaRepository<Videogame, Long> {
     List<Videogame> findGamesPegi(@Param("pegi") int pegi);
     @Modifying
     @Transactional
+    @Query(value = "SET FOREIGN_KEY_CHECKS = 0", nativeQuery = true)
+    void disableForeignKeyChecks();
+    @Modifying
+    @Transactional
     @Query(value = "DELETE FROM videogame WHERE ID=:id", nativeQuery = true)
     void removeGame(@Param("id") long id);
+    @Modifying
+    @Transactional
+    @Query(value = "SET FOREIGN_KEY_CHECKS = 1", nativeQuery = true)
+    void reenableForeignKeyChecks();
 }
 
 

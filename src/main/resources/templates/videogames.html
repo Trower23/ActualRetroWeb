@@ -32,9 +32,9 @@
                 <div style="text-align: justify;">
                     {{#videogames}}
 
-                    <a href="videogames/{{-index}}">{{name}}</a> Price: {{price}} <form action="/product/buy/videogame/{{id}}"><input type="submit" value="BUY!"></form>
+                    <a href="videogames/{{id}}">{{name}}</a> Price: {{price}} <form action="/product/buy/videogame/{{id}}"><input type="submit" value="BUY!"></form>
                     {{#isPropperty}}
-                    <form action="/products/videogames/delete/{id}">
+                    <form action="/products/videogames/delete/{{id}}">
                         <input type="submit" value="DELETE">
                     </form>
                     {{/isPropperty}}

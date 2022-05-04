@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios Registrados</title>
+</head>
+<body>
+    <h1>Welcome to the admin page, {{account}}</h1>
+    <h3>These are the currently registered users...</h3>
+
+    {{#users}}
+    <br>
+    <a href="/users/{{id}}">{{name}}</a>
+    <form action="/users/delete/{{id}}" method="post">
+        <input type="submit" value="DELETE">
+    </form>
+    {{/users}}
+</body>
+</html>

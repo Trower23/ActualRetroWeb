@@ -47,12 +47,12 @@
       <div id="izquierda">
         <div style="text-align: justify;">
           {{#vdConsoles}}
-          <a href="consoles/{{-index}}">{{name}}</a> Price: {{price}}€
+          <a href="consoles/{{id}}">{{name}}</a> Price: {{price}}€
           <form action="/product/buy/console/{id}">
             <input type="submit" value="BUY!">
           </form>
             {{#isPropperty}}
-            <form method="get" action="/products/consoles/delete/{id}">
+            <form method="get" action="/products/consoles/delete/{{id}}">
               <input type="submit" value="DELETE">
             </form>
             {{/isPropperty}}

@@ -1,16 +1,20 @@
 package com.dws.ActualRetro;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.HandlerTypePredicate;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -35,7 +39,15 @@ public class UserController {
     }*/
 
     @GetMapping("/")
-    public String index(){
+    public String index(Model model, HttpServletRequest request){
+        model.addAttribute("isadmin", request.isUserInRole("ADMIN"));
+        model.addAttribute("isuser", request.isUserInRole("USER"));
+        if (request.getUserPrincipal() != null) {
+            Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
+            if (user.isPresent()) {
+                model.addAttribute("id", user.get().getId());
+            }
+        }
         return "index";
     }
 
@@ -45,8 +57,13 @@ public class UserController {
     }
     @PostMapping("/login")
     public String login(@RequestParam String username, HttpServletRequest request) throws ServletException {
-        request.login(username, userService.userRepository.findByName(username).get().getPassword());
-        return "loginok";
+        Optional<Users> user = userService.userRepository.findByName(username);
+        if (user.isPresent()) {
+            request.login(username, user.get().getPassword());
+            return "loginok";
+        }else{
+            return "loginerror";
+        }
     }
     @GetMapping("/loginerror")
     public String loginerror(){
@@ -73,4 +90,34 @@ public class UserController {
         return "register_form";
     }
 
+    @GetMapping("/adminpage")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String showUsers(Model model, HttpServletRequest request){
+        List<Users> users = userService.userRepository.findAll();
+        model.addAttribute("users", users);
+        model.addAttribute("account", request.getUserPrincipal().getName());
+        return "users";
+    }
+
+    @GetMapping("/users/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public String showUser(Model model, HttpServletRequest request, @PathVariable long id){
+        Users user = userService.userRepository.findById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("isadmin", request.isUserInRole("ADMIN"));
+        model.addAttribute("consolecart", user.getShoppingCart().getConsoleList());
+        model.addAttribute("videogamecart", user.getShoppingCart().getVideogameList());
+        return "user";
+    }
+
+    @PostMapping("/users/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String deleteUser(Model model, HttpServletRequest request, @PathVariable long id){
+        Users user = userService.userRepository.findById(id);
+        model.addAttribute("user", user);
+        userService.userRepository.disableForeignKeyChecks();
+        userService.userRepository.removeUser(id);
+        userService.userRepository.reenableForeignKeyChecks();
+        return "deleted_success_user";
+    }
 }

@@ -19,9 +19,14 @@ public interface ConsoleRepository extends JpaRepository<VDConsole, Long> {
     List<VDConsole> findConsoleWithControllers(@Param("maxcon") int maxcontrollers);
     @Modifying
     @Transactional
+    @Query(value = "SET FOREIGN_KEY_CHECKS = 0", nativeQuery = true)
+    void disableForeignKeyChecks();
+    @Modifying
+    @Transactional
     @Query(value = "DELETE FROM vdconsole WHERE ID=:id", nativeQuery = true)
     void removeConsole(@Param("id") long id);
-
-
-
+    @Modifying
+    @Transactional
+    @Query(value = "SET FOREIGN_KEY_CHECKS = 1", nativeQuery = true)
+    void reenableForeignKeyChecks();
 }

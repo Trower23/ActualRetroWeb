@@ -2,6 +2,7 @@ package com.dws.ActualRetro;
 
 import org.owasp.html.Sanitizers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -121,6 +122,42 @@ public class ProductWebController {
             return "loginerror";
         }
     }
+
+    @GetMapping("/products/consoles/delete/{id}")
+    public String deleteConsole(@PathVariable long id, HttpServletRequest request, Model model){
+        Optional<Users> user=userService.userRepository.findByName(request.getUserPrincipal().getName());
+        if (user.isPresent()){
+            if (user.get().isProppertyOf(consoleService.consoleRepository.findById(id).getUser().getId())){
+                VDConsole console= consoleService.consoleRepository.getById(id);
+                consoleService.consoleRepository.removeConsole(id);
+                model.addAttribute("console", console);
+                return "delete_success_console";
+            }else{
+                return "not_authorized";
+            }
+        } else {
+            return "loginerror";
+        }
+    }
+
+    @DeleteMapping("/products/videogames/delete/{id}")
+    public String deleteVideogame(@PathVariable long id, HttpServletRequest request, Model model){
+        Optional<Users> user=userService.userRepository.findByName(request.getUserPrincipal().getName());
+        if (user.isPresent()){
+            if (user.get().isProppertyOf(videogameService.videogameRepository.findById(id).getUser().getId())){
+                Videogame videogame= videogameService.videogameRepository.getById(id);
+                videogameService.videogameRepository.removeGame(id);
+                model.addAttribute("videogame", videogame);
+                return "delete_success_videogame";
+            }else{
+                return "not_authorized";
+            }
+        } else {
+            return "loginerror";
+        }
+    }
+
+
     //-- Queries-- //
 
     @GetMapping("/filter/consoles/pricefilter/")

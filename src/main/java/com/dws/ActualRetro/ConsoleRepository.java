@@ -23,4 +23,5 @@ public interface ConsoleRepository extends JpaRepository<VDConsole, Long> {
     void removeConsole(@Param("id") long id);
 
 
+
 }

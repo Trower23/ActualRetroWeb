@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,15 +29,21 @@ public class ProductWebController {
     @GetMapping("/products/consoles")
     public String showVDConsoles(Model model, HttpServletRequest request) {
         List<VDConsole> vdConsoles = consoleService.consoleRepository.findAll();
+        List<VDConsole> inProperty = new ArrayList<>();
         if (request.getUserPrincipal()!=null) {
             String name = request.getUserPrincipal().getName();
             Optional<Users> useraux = userService.userRepository.findByName(name);
             if (useraux.isPresent()) {
-                for (int i = 0; i < vdConsoles.size(); i++) {
-                    model.addAttribute("isPropperty", useraux.get().isProppertyOf(vdConsoles.get(i).getUser().getId()));
+                if (request.isUserInRole("ADMIN")){
+                    model.addAttribute("isadmin", true);
+                }else {
+                    inProperty = useraux.get().getConsolesUploaded();
+                    model.addAttribute("isadmin", false);
                 }
             }
         }
+        model.addAttribute("vdConsolesUploaded", inProperty);
+        vdConsoles.removeAll(inProperty);
         model.addAttribute("vdConsoles", vdConsoles);
         return "consoles";
     }
@@ -44,15 +51,23 @@ public class ProductWebController {
     @GetMapping("/products/videogames")
     public String showVideogames(Model model, HttpServletRequest request) {
         List<Videogame> videogames = videogameService.videogameRepository.findAll();
+        List<Videogame> inProperty = new ArrayList<>();
         if (request.getUserPrincipal()!=null) {
             String name = request.getUserPrincipal().getName();
             Optional<Users> useraux = userService.userRepository.findByName(name);
             if (useraux.isPresent()) {
-                for (int i = 0; i < videogames.size(); i++) {
-                    model.addAttribute("isPropperty", useraux.get().isProppertyOf(videogames.get(i).getUser().getId()));
+                if (request.isUserInRole("ADMIN")){
+                        model.addAttribute("isadmin", true);
+                }else {
+                    for (int i = 0; i < videogames.size(); i++) {
+                        inProperty = useraux.get().getVideogamesUploaded();
+                        model.addAttribute("isadmin", false);
+                    }
                 }
             }
         }
+        model.addAttribute("videogamesUpdated", inProperty);
+        videogames.removeAll(inProperty);
         model.addAttribute("videogames", videogames);
         return "videogames";
     }

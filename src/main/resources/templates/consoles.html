@@ -46,16 +46,24 @@
 
       <div id="izquierda">
         <div style="text-align: justify;">
+          {{#vdConsolesUploaded}}
+          <a href="consoles/{{id}}">{{name}}</a> Price: {{price}}€
+          <br>
+          <form method="get" action="/products/consoles/delete/{{id}}">
+            <input type="submit" value="DELETE">
+          </form>
+          <br>
+          {{/vdConsolesUploaded}}
           {{#vdConsoles}}
           <a href="consoles/{{id}}">{{name}}</a> Price: {{price}}€
-          <form action="/product/buy/console/{id}">
+          <form action="/product/buy/console/{{id}}">
             <input type="submit" value="BUY!">
           </form>
-            {{#isPropperty}}
+            {{#isadmin}}
             <form method="get" action="/products/consoles/delete/{{id}}">
               <input type="submit" value="DELETE">
             </form>
-            {{/isPropperty}}
+            {{/isadmin}}
           </form><br>
           {{/vdConsoles}}
         </div>

@@ -30,14 +30,21 @@
 
             <div id="izquierda">
                 <div style="text-align: justify;">
+                    {{#videogamesUpdated}}
+                    <a href="consoles/{{id}}">{{name}}</a> Price: {{price}}€
+                    <br>
+                    <form method="get" action="/products/consoles/delete/{{id}}">
+                        <input type="submit" value="DELETE">
+                    </form>
+                    <br>
+                    {{/videogamesUpdated}}
                     {{#videogames}}
-
                     <a href="videogames/{{id}}">{{name}}</a> Price: {{price}} <form action="/product/buy/videogame/{{id}}"><input type="submit" value="BUY!"></form>
-                    {{#isPropperty}}
+                    {{#isadmin}}
                     <form action="/products/videogames/delete/{{id}}">
                         <input type="submit" value="DELETE">
                     </form>
-                    {{/isPropperty}}
+                    {{/isadmin}}
                     {{/videogames}}
                 </div>
             </div>

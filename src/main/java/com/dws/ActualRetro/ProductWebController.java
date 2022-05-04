@@ -2,6 +2,7 @@ package com.dws.ActualRetro;
 
 import org.owasp.html.Sanitizers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
@@ -157,7 +158,49 @@ public class ProductWebController {
         }
     }
 
+    @GetMapping("/products/consoles/edit")
+    public String showModifyConsoleForm(){
+        return "modify_console";
+    }
+    @GetMapping("/products/videogames/edit")
+    public String showModifyVideogameForm(){
+        return "modify_console";
+    }
 
+    @GetMapping("/products/consoles/{id}/edit/")
+    public String editConsole(@PathVariable long id, Model model, HttpServletRequest request, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String description) {
+        Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
+        if (user.isPresent()) {
+            if (user.get().isProppertyOf(consoleService.consoleRepository.findById(id).getUser().getId())) {
+            VDConsole newConsole=new VDConsole(name, price,maxcon,new Date(), Sanitizers.FORMATTING.sanitize(description));
+            newConsole.setId(id);
+            consoleService.consoleRepository.save(newConsole);
+            model.addAttribute("console", newConsole);
+            return "saved_console";
+            }else {
+                return "not_authorized";
+            }
+        }else{
+            return "loginerror";
+        }
+    }
+    @GetMapping("/products/videogames/{id}/edit/")
+    public String editVideogame(@PathVariable long id, Model model, HttpServletRequest request, @RequestParam String name, @RequestParam float price, @RequestParam int pegi, @RequestParam String genre, @RequestParam String description) {
+        Optional<Users> user = userService.userRepository.findByName(request.getUserPrincipal().getName());
+        if (user.isPresent()) {
+            if (user.get().isProppertyOf(videogameService.videogameRepository.findById(id).getUser().getId())) {
+                Videogame newVideogame=new Videogame(name,price,pegi,new Date(),VDGenre.valueOf(genre), Sanitizers.FORMATTING.sanitize(description));
+                newVideogame.setId(id);
+                videogameService.videogameRepository.save(newVideogame);
+                model.addAttribute("videogame", newVideogame);
+                return "saved_videogame";
+            }else {
+                return "not_authorized";
+            }
+        }else{
+            return "loginerror";
+        }
+    }
     //-- Queries-- //
 
     @GetMapping("/filter/consoles/pricefilter/")

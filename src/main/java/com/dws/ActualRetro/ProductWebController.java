@@ -42,8 +42,17 @@ public class ProductWebController {
     }
 
     @GetMapping("/products/videogames")
-    public String showVideogames(Model model) {
+    public String showVideogames(Model model, HttpServletRequest request) {
         List<Videogame> videogames = videogameService.videogameRepository.findAll();
+        if (request.getUserPrincipal()!=null) {
+            String name = request.getUserPrincipal().getName();
+            Optional<Users> useraux = userService.userRepository.findByName(name);
+            if (useraux.isPresent()) {
+                for (int i = 0; i < videogames.size(); i++) {
+                    model.addAttribute("isPropperty", useraux.get().isProppertyOf(videogames.get(i).getUser().getId()));
+                }
+            }
+        }
         model.addAttribute("videogames", videogames);
         return "videogames";
     }

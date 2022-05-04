@@ -140,7 +140,7 @@ public class ProductWebController {
         }
     }
 
-    @DeleteMapping("/products/videogames/delete/{id}")
+    @GetMapping("/products/videogames/delete/{id}")
     public String deleteVideogame(@PathVariable long id, HttpServletRequest request, Model model){
         Optional<Users> user=userService.userRepository.findByName(request.getUserPrincipal().getName());
         if (user.isPresent()){

@@ -19,7 +19,7 @@ import java.security.SecureRandom;
 public class RestSecurityConf extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userDetailsService;
-    @Bean
+   // @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10, new SecureRandom());
     }

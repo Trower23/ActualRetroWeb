@@ -15,13 +15,13 @@
     <br> <p><b>Uploaded or sold consoles:</b></p>
     <ul>
         {{#user.consolesUploaded}}
-        <li>{{name}}, {{price}} €</li>
+        <li>{{name}}, {{price}} &#8364;</li>
         {{/user.consolesUploaded}}
     </ul>
     <br> <p><b>Uploaded or sold videogames:</b></p>
     <ul>
         {{#user.videogamesUploaded}}
-        <li>{{name}}, {{price}} €</li>
+        <li>{{name}}, {{price}} &#8364;</li>
         {{/user.videogamesUploaded}}
     </ul>
     {{#isadmin}}
@@ -38,13 +38,13 @@
     <br> <p><b>Consoles bought:</b></p>
     <ul>
         {{#user.consolesHistory}}
-        <li>{{name}}, {{price}}</li>
+        <li>{{name}}, {{price}}&#8364;</li>
         {{/user.consolesHistory}}
     </ul>
     <br> <p><b>Videogames bought:</b></p>
     <ul>
         {{#user.videogamesHistory}}
-        <li>{{name}}, {{price}}</li>
+        <li>{{name}}, {{price}}&#8364;</li>
         {{/user.videogamesHistory}}
     </ul>
     {{/isadmin}}

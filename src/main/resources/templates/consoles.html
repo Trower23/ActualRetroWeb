@@ -50,6 +50,7 @@
           <a href="consoles/{{id}}">{{name}}</a> Price: {{price}}€
           <br>
           <form method="get" action="/products/consoles/delete/{{id}}">
+            <input type="hidden" name="_csrf" value="{{token}}"/>
             <input type="submit" value="DELETE">
           </form>
           <br>
@@ -57,10 +58,12 @@
           {{#vdConsoles}}
           <a href="consoles/{{id}}">{{name}}</a> Price: {{price}}€
           <form action="/product/buy/console/{{id}}">
+            <input type="hidden" name="_csrf" value="{{token}}"/>
             <input type="submit" value="BUY!">
           </form>
             {{#isadmin}}
             <form method="get" action="/products/consoles/delete/{{id}}">
+              <input type="hidden" name="_csrf" value="{{token}}"/>
               <input type="submit" value="DELETE">
             </form>
             {{/isadmin}}
@@ -80,6 +83,7 @@
           <input type="number" min="1" max="4999" name="pricemax" id="pricemax">
           <label>€</label>
           <br>
+          <input type="hidden" name="_csrf" value="{{token}}"/>
           <input type="submit" onclick="getData()" value="ENVIAR">
         </form>
 
@@ -89,6 +93,7 @@
           <input type="number" min="1" name="maxcon" required="">
           <label>years</label>
           <br>
+          <input type="hidden" name="_csrf" value="{{token}}"/>
           <input type="submit" value="ENVIAR"/>
         </form>
 

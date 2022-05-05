@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Selling game</title>
-    <link href="forms.css" rel="stylesheet" type="text/css">
+    <link href="https://localhost:8443/css/forms.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -18,7 +18,7 @@
         </div>
         <div class="user-box">
             <input type="number" min="0" name="price" required="">
-            <label>€</label>
+            <label>&#8364;</label>
         </div>
         <div class="user-box">
             <input type="number" min="0" name="maxcon" required="">
@@ -28,6 +28,7 @@
         <br >
 
         <!--<div class="user-box"> <input type="date" name="date"> </div>-->
+        <input type="hidden" name="_csrf" value="{{token}}"/>
         <input onclick="getData()" type="submit" value="Submit"/>
         <span></span>
         <span></span>

@@ -6,12 +6,12 @@
 </head>
 <body>
 <p>You've payed {{totalprod}} products.</p>
-<p>The price is: {{totalprice}}€</p>
+<p>The price is: {{totalprice}}&#8364;</p>
 <p>YOUR PRODUCTS ARE:</p>
 <p>1. Consoles:</p>
 <ul>
     {{#consoles}}
-<li>{{name}}</li>
+<li>{{name}}, {{price}} &#8364;</li>
     {{/consoles}}
 </ul>
 
@@ -20,7 +20,7 @@
 <p>2. Videogames:</p>
 <ul>
 {{#videogames}}
-<li>{{name}}</li>
+<li>{{name}}, {{price}}&#8364;</li>
 {{/videogames}}
 </ul>
 <br>

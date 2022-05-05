@@ -22,6 +22,8 @@ public class UserController {
     UserService userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private CSRFHandlerConfiguration csrfConf;
 
     /*@PostConstruct
     private void initDatabase(){
@@ -52,7 +54,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model){
         return "login";
     }
     @PostMapping("/login")

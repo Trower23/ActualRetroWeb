@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.security.SecureRandom;
 
 @Configuration
-@Order(2)
 public class RestSecurityConf extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userDetailsService;

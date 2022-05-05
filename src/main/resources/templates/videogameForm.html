@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Selling game</title>
-    <link href="forms.css" rel="stylesheet" type="text/css">
+    <link href="https://localhost:8443/css/forms.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -17,7 +17,7 @@
         </div>
         <div class="user-box">
             <input type="number" min="1" name="price" required="">
-            <label>€</label>
+            <label>&#8364;</label>
         </div>
         <div class="user-box">
             <label>PEGI:</label>
@@ -63,6 +63,7 @@
                 <option value="VISUALNOVEL">Visual Novel</option>
             </select></div>
             <br>
+        <input type="hidden" name="_csrf" value="{{token}}"/>
         <div class="dropdown-content"> <input id="getData" onclick="getData()" type="submit" value="Submit"/>
             <span></span>
             <span></span>

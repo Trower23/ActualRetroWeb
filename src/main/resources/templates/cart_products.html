@@ -19,16 +19,22 @@
 <div>
     <ul>
 {{#consoles}}
-<li>{{name}} {{price}}€ <form action="../product/remove/console/{{id}}" method="get"><input type="submit" value="Delete"></form></li>
+<li>{{name}} {{price}}&#8364; <form action="../product/remove/console/{{id}}" method="get">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+    <input type="submit" value="Delete">
+    </form></li>
     {{/consoles}}
     </ul>
     <ul>
         {{#videogames}}
-<li>{{name}} {{price}}€ <form action="../product/remove/videogame/{{id}}" method="get"><input type="submit" value="Delete"></form></li>
+<li>{{name}} {{price}}&#8364; <form action="../product/remove/videogame/{{id}}" method="get">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+    <input type="submit" value="Delete">
+    </form></li>
 {{/videogames}}
         </ul>
     <ul>
-        <li>TOTAL PRICE: {{totalprice}} €</li>
+        <li>TOTAL PRICE: {{totalprice}} &#8364;</li>
     </ul>
 </div>
 <form action="/product/buy" method="get"> <input type="submit" value="PAY!"></form>

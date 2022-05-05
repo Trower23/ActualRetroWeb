@@ -109,6 +109,16 @@ public class ProductWebController {
 
         return "saved_videogame";
     }*/
+    @GetMapping("/products/consoles/sell")
+    public String console(Model model){
+        return "consoleForm";
+    }
+
+    @GetMapping("/products/videogames/sell")
+    public String videogame(Model model){
+        return "videogameForm";
+    }
+
     @PostMapping("/products/consoles/sell")
     public String addVDConsole(Model model, HttpServletRequest request, @RequestParam String name, @RequestParam float price, @RequestParam int maxcon, @RequestParam String description) {
         Date newdate = new Date();

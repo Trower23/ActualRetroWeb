@@ -14,6 +14,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<Users, Long> {
     Users findById(long id);
     Optional<Users> findByName(String name);
+    Boolean existsByName(String name);
+    Boolean existsByMail(String mail);
     @Modifying
     @Transactional
     @Query(value = "SET FOREIGN_KEY_CHECKS = 0", nativeQuery = true)

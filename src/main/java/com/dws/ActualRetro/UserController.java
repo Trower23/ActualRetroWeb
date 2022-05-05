@@ -79,12 +79,16 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@RequestParam String mail,  @RequestParam String username, @RequestParam String password, @RequestParam String phone){
-        Users auxUser=new Users(username, mail, passwordEncoder.encode(password), phone);
-        List<String> auxlist = new ArrayList<>();
-        auxlist.add("USER");
-        auxUser.setRoles(auxlist);
-        userService.userRepository.save(auxUser);
-        return "register_success";
+        if (!userService.userRepository.existsByName(username)) {
+            Users auxUser = new Users(username, mail, passwordEncoder.encode(password), phone);
+            List<String> auxlist = new ArrayList<>();
+            auxlist.add("USER");
+            auxUser.setRoles(auxlist);
+            userService.userRepository.save(auxUser);
+            return "register_success";
+        }else{
+            return "registererror";
+        }
     }
 
     @GetMapping("/register")

@@ -65,6 +65,8 @@ public class Videogame {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Videogame videogame = (Videogame) o;
+        if (videogame.getUser() == null && this.getUser() == null) return true;
+        if (videogame.getUser() == null) return false;
         return name.equals(videogame.name) && user.getId()== videogame.getUser().getId();
     }
 

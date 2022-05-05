@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -21,7 +22,7 @@ import java.security.SecureRandom;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Order(1)
+@Order(2)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -29,7 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    @Order(1)
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10, new SecureRandom());
     }
@@ -44,7 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/products/consoles").permitAll();
         http.authorizeRequests().antMatchers("/products/videogames").permitAll();
         http.authorizeRequests().antMatchers("/register").permitAll();
-
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/auth/signup").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/api/auth/login").permitAll();
 // Private pages (all other pages)
         http.authorizeRequests().anyRequest().authenticated();
 // Login form

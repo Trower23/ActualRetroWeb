@@ -56,6 +56,8 @@ public class VDConsole {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VDConsole vdConsole = (VDConsole) o;
+        if (vdConsole.getUser() == null && this.getUser() == null) return true;
+        if (vdConsole.getUser() == null) return false;
         return name.equals(vdConsole.name) && user.getId()== vdConsole.getUser().getId();
     }
 

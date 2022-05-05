@@ -6,7 +6,7 @@
     <link href="https://localhost:8443/css/users.css" rel="stylesheet" type="text/css">
 
 </head>
-<body style="background-color: #0ff0b3;">
+<body style="background-color: black;">
 
 <div class="testbox">
 
@@ -15,7 +15,7 @@
 
     {{#users}}
     <br>
-    <a href="/users/{{id}}">{{name}}</a>
+    <h2><b><a href="/users/{{id}}">{{name}}</a></b></h2>
     <form action="/users/delete/{{id}}" method="post">
         <input type="hidden" name="_csrf" value="{{token}}"/>
         <div class="boton">

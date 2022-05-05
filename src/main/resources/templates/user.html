@@ -6,11 +6,13 @@
     <link href="https://localhost:8443/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
-<body style="background-color: #0ff0b3;">
+<body style="background-color: black;">
 <div class="testbox">
-    <h2>{{user.name}}</h2>
-    <p>Email -> {{user.mail}}</p>
-    <br> <p>Phone number -> {{user.phone}}</p>
+    <div class="wrapper">
+        <p class="title">{{user.name}}</p>
+    </div>
+    <p>Email:  <b>{{user.mail}}</b></p>
+    <br> <p>Phone number: <b>{{user.phone}}</b></p>
     <br> <p><b>Uploaded or sold consoles:</b></p>
     <ul>
         {{#user.consolesUploaded}}

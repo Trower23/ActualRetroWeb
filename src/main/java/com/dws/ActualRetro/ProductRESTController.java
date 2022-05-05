@@ -1,14 +1,18 @@
 package com.dws.ActualRetro;
 
+import com.dws.ActualRetro.jwt.JwtUtils;
 import org.owasp.html.Sanitizers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -19,6 +23,10 @@ public class ProductRESTController{
     ConsoleService consoleService;
     @Autowired
     UserService userService;
+    @Autowired
+    JwtUtils jwtUtils;
+    @Autowired
+    Environment environment;
 
     /*@PostConstruct
     public void init(){
@@ -75,85 +83,141 @@ public class ProductRESTController{
     }
 
     @PostMapping("/products/consoles")
-    public ResponseEntity<VDConsole> addVConsole(@RequestBody VDConsole vdConsole){
+    public ResponseEntity<VDConsole> addVConsole(HttpServletRequest request, @RequestBody VDConsole vdConsole){
         List<VDConsole> consoles = consoleService.consoleRepository.findAll();
         vdConsole.setDescription(Sanitizers.FORMATTING.sanitize(vdConsole.getDescription()));
-        if (consoles.contains(vdConsole)){
-            VDConsole newcon = consoles.get(consoles.indexOf(vdConsole));
-            newcon.addStock();
-            consoleService.consoleRepository.save(newcon);
-            return new ResponseEntity<>(newcon, HttpStatus.CREATED);
+        Optional<Users> user = userService.userRepository.findByName(jwtUtils.getUserNameFromJwtToken(request.getHeader(environment.getProperty("Authorization")).substring(7)));
+        System.out.println(jwtUtils.getUserNameFromJwtToken(request.getHeader(environment.getProperty("Authorization")).substring(7)));
+        if (user.isPresent()){
+            vdConsole.setUser(user.get());
+            if (consoles.contains(vdConsole)) {
+                VDConsole newcon = consoles.get(consoles.indexOf(vdConsole));
+                newcon.addStock();
+                consoleService.consoleRepository.save(newcon);
+                return new ResponseEntity<>(newcon, HttpStatus.CREATED);
+            } else {
+                consoleService.consoleRepository.save(vdConsole);
+                return new ResponseEntity<>(vdConsole, HttpStatus.CREATED);
+            }
         }else{
-            consoleService.consoleRepository.save(vdConsole);
-            return new ResponseEntity<>(vdConsole, HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/products/games")
-    public ResponseEntity<Videogame> addVideogame(@RequestBody Videogame videogame){
+    public ResponseEntity<Videogame> addVideogame(HttpServletRequest request, @RequestBody Videogame videogame){
         List<Videogame> games = videogameService.videogameRepository.findAll();
         videogame.setDescription(Sanitizers.FORMATTING.sanitize(videogame.getDescription()));
-        if (games.contains(videogame)){
-            Videogame newgame = games.get(games.indexOf(videogame));
-            newgame.addStock();
-            videogameService.videogameRepository.save(newgame);
-            return new ResponseEntity<>(newgame, HttpStatus.CREATED);
+        Optional<Users> user = userService.userRepository.findByName(jwtUtils.getUserNameFromJwtToken(request.getHeader(environment.getProperty("Authorization")).substring(7)));
+        System.out.println(jwtUtils.getUserNameFromJwtToken(request.getHeader(environment.getProperty("Authorization")).substring(7)));
+        if (user.isPresent()) {
+            videogame.setUser(user.get());
+            if (games.contains(videogame)) {
+                Videogame newgame = games.get(games.indexOf(videogame));
+                newgame.addStock();
+                videogameService.videogameRepository.save(newgame);
+                return new ResponseEntity<>(newgame, HttpStatus.CREATED);
+            } else {
+                videogameService.videogameRepository.save(videogame);
+                return new ResponseEntity<>(videogame, HttpStatus.CREATED);
+            }
         }else{
-            videogameService.videogameRepository.save(videogame);
-            return new ResponseEntity<>(videogame, HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/products/consoles/{id}")
-    public ResponseEntity<VDConsole> deleteVDConsole(@PathVariable long id){
+    public ResponseEntity<VDConsole> deleteVDConsole(@PathVariable long id, HttpServletRequest request){
         if (consoleService.consoleRepository.existsById(id)) {
-            VDConsole vdConsole = consoleService.consoleRepository.findById(id);
-            vdConsole.removeStock();
-            consoleService.consoleRepository.save(vdConsole);
-            if (!vdConsole.isStock()) {
-                consoleService.consoleRepository.delete(vdConsole);
+            Optional<Users> user = userService.userRepository.findByName(jwtUtils.getUserNameFromJwtToken(request.getHeader(environment.getProperty("Authorization")).substring(7)));
+            if (user.isPresent()) {
+                VDConsole vdConsole = consoleService.consoleRepository.findById(id);
+                if (user.get().isProppertyOf(vdConsole.getUser().getId())) {
+                    vdConsole.removeStock();
+                    consoleService.consoleRepository.save(vdConsole);
+                    if (!vdConsole.isStock()) {
+                        consoleService.consoleRepository.delete(vdConsole);
+                    }
+                    return new ResponseEntity<>(vdConsole, HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
+            } else {
+                System.out.println("Authentication requiered");
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
-            return new ResponseEntity<>(vdConsole, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     @DeleteMapping("/products/games/{id}")
-    public ResponseEntity<Videogame> deleteVideogame(@PathVariable long id){
+    public ResponseEntity<Videogame> deleteVideogame(@PathVariable long id, HttpServletRequest request){
         if (videogameService.videogameRepository.existsById(id)) {
-            Videogame videogame = videogameService.videogameRepository.findById(id);
-            videogame.removeStock();
-            videogameService.videogameRepository.save(videogame);
-            if (!videogame.isStock()) {
-                videogameService.videogameRepository.delete(videogame);
+            Optional<Users> user = userService.userRepository.findByName(jwtUtils.getUserNameFromJwtToken(request.getHeader(environment.getProperty("Authorization")).substring(7)));
+            if (user.isPresent()) {
+                Videogame videogame = videogameService.videogameRepository.findById(id);
+                if (user.get().isProppertyOf(videogame.getUser().getId())) {
+                    videogame.removeStock();
+                    videogameService.videogameRepository.save(videogame);
+                    if (!videogame.isStock()) {
+                        videogameService.videogameRepository.delete(videogame);
+                    }
+                    return new ResponseEntity<>(videogame, HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
+            }else{
+                System.out.println("Authentication requiered");
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
-            return new ResponseEntity<>(videogame, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/products/consoles/{id}")
-    public ResponseEntity<VDConsole> putVDConsole(@PathVariable long id, @RequestBody VDConsole vdConsole){
+    public ResponseEntity<VDConsole> putVDConsole(@PathVariable long id, HttpServletRequest request, @RequestBody VDConsole vdConsole){
         if (consoleService.consoleRepository.existsById(id)){
-            vdConsole.setId(id);
-            vdConsole.setStock(consoleService.consoleRepository.findById(id).getStock());
-            vdConsole.setDescription(Sanitizers.FORMATTING.sanitize(vdConsole.getDescription()));
-            consoleService.consoleRepository.deleteById(id);
-            consoleService.consoleRepository.save(vdConsole);
-            return new ResponseEntity<>(vdConsole, HttpStatus.OK);
+            Optional<Users> user = userService.userRepository.findByName(jwtUtils.getUserNameFromJwtToken(request.getHeader(environment.getProperty("Authorization")).substring(7)));
+            if (user.isPresent()) {
+                VDConsole ori = consoleService.consoleRepository.findById(id);
+                if (user.get().isProppertyOf(ori.getUser().getId())) {
+                    vdConsole.setId(id);
+                    vdConsole.setStock(consoleService.consoleRepository.findById(id).getStock());
+                    vdConsole.setDescription(Sanitizers.FORMATTING.sanitize(vdConsole.getDescription()));
+                    consoleService.consoleRepository.deleteById(id);
+                    consoleService.consoleRepository.save(vdConsole);
+                    return new ResponseEntity<>(vdConsole, HttpStatus.OK);
+                }else{
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
+            }else{
+                System.out.println("Authentication requiered");
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     @PutMapping("/products/games/{id}")
-    public ResponseEntity<Videogame> putVideogame(@PathVariable long id, @RequestBody Videogame videogame){
+    public ResponseEntity<Videogame> putVideogame(@PathVariable long id, HttpServletRequest request, @RequestBody Videogame videogame){
         if (videogameService.videogameRepository.existsById(id)){
-            videogame.setId(id);
-            videogame.setStock(videogameService.videogameRepository.findById(id).getStock());
-            videogame.setDescription(Sanitizers.FORMATTING.sanitize(videogame.getDescription()));
-            videogameService.videogameRepository.save(videogame);
-            return new ResponseEntity<>(videogame, HttpStatus.OK);
+            Optional<Users> user = userService.userRepository.findByName(jwtUtils.getUserNameFromJwtToken(request.getHeader(environment.getProperty("Authorization")).substring(7)));
+            if (user.isPresent()) {
+                Videogame ori = videogameService.videogameRepository.findById(id);
+                if (user.get().isProppertyOf(ori.getUser().getId())) {
+                    videogame.setId(id);
+                    videogame.setStock(videogameService.videogameRepository.findById(id).getStock());
+                    videogame.setDescription(Sanitizers.FORMATTING.sanitize(videogame.getDescription()));
+                    videogameService.videogameRepository.save(videogame);
+                    return new ResponseEntity<>(videogame, HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                }
+            }else{
+                System.out.println("Authentication requiered");
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

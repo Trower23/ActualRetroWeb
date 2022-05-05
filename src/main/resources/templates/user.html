@@ -2,47 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{user.name}}'s profile</title>
+    <title><b>{{user.name}}'s profile</>b></title>
+    <link href="https://localhost:8443/css/user.css" rel="stylesheet" type="text/css">
+
 </head>
-<body>
+<body style="background-color: #0ff0b3;">
+
+<div class="testbox">
     <h2>{{user.name}}</h2>
     <p>Email -> {{user.mail}}</p>
     <br> <p>Phone number -> {{user.phone}}</p>
-    <br> <p>Uploaded or sold consoles:</p>
+    <br> <p><b>Uploaded or sold consoles:</b></p>
     <ul>
-    {{#user.consolesUploaded}}
+        {{#user.consolesUploaded}}
         <li>{{name}}, {{price}} €</li>
-    {{/user.consolesUploaded}}
+        {{/user.consolesUploaded}}
     </ul>
-    <br> <p>Uploaded or sold videogames:</p>
+    <br> <p><b>Uploaded or sold videogames:</b></p>
     <ul>
         {{#user.videogamesUploaded}}
         <li>{{name}}, {{price}} €</li>
         {{/user.videogamesUploaded}}
     </ul>
     {{#isadmin}}
-    <h4>Additional information for users with privileges:</h4>
-    <br><p>Current shopping cart:</p>
+    <h4><u>Additional information for users with privileges:</u></h4>
+    <br><p><b>Current shopping cart:</b></p>
     <ul>
         {{#consolecart}}
-            <li>{{name}}</li>
+        <li>{{name}}</li>
         {{/consolecart}}
         {{#videogamecart}}
-            <li>{{name}}</li>
+        <li>{{name}}</li>
         {{/videogamecart}}
     </ul>
-    <br> <p>Consoles bought:</p>
+    <br> <p><b>Consoles bought:</b></p>
     <ul>
         {{#user.consolesHistory}}
         <li>{{name}}, {{price}}</li>
         {{/user.consolesHistory}}
     </ul>
-    <br> <p>Videogames bought:</p>
+    <br> <p><b>Videogames bought:</b></p>
     <ul>
         {{#user.videogamesHistory}}
         <li>{{name}}, {{price}}</li>
         {{/user.videogamesHistory}}
     </ul>
     {{/isadmin}}
+
+</div>
+
 </body>
 </html>
